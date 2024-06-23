@@ -1,0 +1,45 @@
+body {
+    background-color: black;
+    color: gray;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#terminal {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#output {
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+}
+
+.line {
+    white-space: pre-wrap;
+}
+
+.blink {
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.status-ok {
+    color: green;
+}
+
+.status-failed {
+    color: red;
+}
