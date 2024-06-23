@@ -1,3 +1,12 @@
+/*
+ * Service Worker
+ * This is the service worker file that will be registered in the browser.
+ * It will cache the offline page and the dynamically cache the assets.
+ * It will also limit the cache size to 100.
+*/
+
+
+
 /* ----------- EVENT LOGS ----------- */
 self.addEventListener("install", function(event) {
     console.debug("%cService Worker: %cInstalled", "color: lightblue", "color: green");
