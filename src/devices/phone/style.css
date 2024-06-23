@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* COLORS */
+:root {
+    --background: #f4f6f7;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #4b4b4b;
+    }
+}
+
+
+
+body {
+    font-size: 16px;
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+main {
+    background: var(--background);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-height: 100vh;
+    height: 100%;
+    width: 100%;
+}
+
+
+/* ################# PHONE ################# */
+
+.phone {
+    display: flex;
+    flex-direction: row;
+}
+
+.shell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    width: 331px;
+    height: 616px;
+
+    background: #040C0C;
+
+    border-radius: 20px;
+    padding: 6px;
+}
+
+/* ---------- DISPLAY ---------- */
+.display {
+    position: relative;
+
+    width: 328px;
+    height: 600px;
+
+    background-color: #1a1919;
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+iframe {
+    height: 100%;
+    width: 100%;
+    border: 0;
+}
+
+
+
+/* ---------- CAMERA ---------- */
+.camera {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    float: left;
+    
+    left: calc(50% - 5.5px);
+    top: 10px;
+
+    width: 11px;
+    height: 11px;
+
+    background-color: #272626;
+    border-radius: 30px;
+    border: 1px solid #2f2e2e;
+}
+
+.camera .dot {
+    width: 3px;
+    height: 3px;
+    background-color: #212020;
+}
+
+
+/* ---------- SPEAKER ---------- */
+.speaker {
+    position: absolute;
+
+    width: 60px;
+    height: 3px;
+
+    margin: 0px auto 0 auto;
+
+    /* 50% middle of screen */
+    /* 30px = width / 2 */
+    left: calc(50% - 30px);
+    top: 6px;
+
+    background-color: #222222;
+    border-radius: 5px;
+}
+
+/* ---------- BUTTONS ---------- */
+
+.buttons {
+    width: 3px;
+    margin-top: 120px;
+}
+
+.buttons > div {
+    background-color: #333232;
+    border-radius: 45px;
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+}
+
+.buttons > .power {
+    height: 50px;
+}
+
+.buttons > .volume {
+    height: 120px;
+    margin-bottom: 16px;
+}
