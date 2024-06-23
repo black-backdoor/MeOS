@@ -1,0 +1,58 @@
+:root {
+    --bg-color: #0079d8;
+    --text-color: white;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    font-size: 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+h3 {
+    margin: 0;
+}
+
+#skip {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+
+.loading-circle {
+    width: 50px;
+    height: 50px;
+    border: 6px solid var(--text-color);
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
