@@ -1,0 +1,310 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.window {
+    height: 80%;
+    max-height: 800px;
+    width: 90%;
+    max-width: 1000px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-bar {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    margin-left: 10px;
+}
+
+.window > .content {
+    flex: 1;
+    /* Take remaining space */
+    padding: 20px;
+    display: flex;
+    align-items: stretch;
+    /* Stretch items vertically */
+}
+
+.device-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex: 1;
+    /* Take full height of .content */
+}
+
+.device {
+    flex: 1;
+    /* Each device takes full height */
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.device img {
+    width: 100%;
+    height: auto;
+}
+
+.device p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+
+/* DEVICES */
+
+/* smartphone */
+.smartphone {
+    float: left;
+    width: 80px;
+    height: 120px;
+    margin: 40px 0 0 0;
+    border: 5px black solid;
+    border-top-width: 15px;
+    border-bottom-width: 20px;
+    border-radius: 10px;
+}
+
+.smartphone:before {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 3px;
+    margin: -9px auto;
+    background: white;
+    border-radius: 4px;
+}
+
+.smartphone:after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 4px auto;
+    background: white;
+    border-radius: 10px;
+}
+
+.smartphone .content {
+    width: 60px;
+    height: 100px;
+    margin: 15px 0 0 0;
+    padding: 10px;
+    background: white;
+}
+
+/* tablet */
+.tablet {
+    float: left;
+    width: 120px;
+    height: 160px;
+    margin: 0 80px;
+    border: 5px black solid;
+    border-top-width: 15px;
+    border-bottom-width: 20px;
+    border-radius: 10px;
+}
+
+.tablet:before {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 3px;
+    margin: -9px auto;
+    background: white;
+    border-radius: 4px;
+}
+
+.tablet:after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 4px auto;
+    background: white;
+    border-radius: 10px;
+}
+
+.tablet .content {
+    width: 120px;
+    height: 160px;
+    margin: 15px 0 0 0;
+    background: white;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* laptop */
+.laptop {
+    float: left;
+    width: 200px;
+    height: 120px;
+    margin: 56px 0 0 0;
+    border: 5px black solid;
+    border-radius: 2px;
+}
+
+.laptop:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 3px;
+    margin: 126px 0 0 80px;
+    background: white;
+    z-index: 1;
+}
+
+.laptop:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 240px;
+    height: 8px;
+    margin: 6px 0 0 -20px;
+    background: black;
+    border-radius: 2px;
+}
+
+.laptop .content {
+    width: 180px;
+    height: 100px;
+    margin: 0px 0 0 0;
+    padding: 10px;
+    background: white;
+    overflow: hidden;
+}
+
+
+/* computer */
+.computer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.monitor {
+    width: 150px;
+    height: 100px;
+    border: 5px black solid;
+    border-radius: 10px;
+    margin: 0 auto 10px;
+}
+.monitor::after {
+    content: '';
+    display: block;
+    position: absolute;
+    margin-left: 35px;
+    margin-top: 100px;
+    width: 80px;
+    height: 10px;
+    background-color: #000;
+    border-radius: 10px;
+}
+
+.tower {
+    width: 50px;
+    height: 100px;
+    border: 5px black solid;
+    background-color: #000;
+    border-radius: 10px;
+    margin: 0 auto 10px;
+}
+
+.tower::before {
+    content: '';
+    display: block;
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.tower::after {
+    content: '';
+    display: block;
+    position: absolute;
+    margin-left: 17px;
+    margin-top: 10px;
+    width: 30px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.peripherals {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.keyboard {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: black;
+}
+
+.mouse {
+    width: 20px;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: black;
+}
+
+.mouse::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 0%;
+    background-color: white;
+    position: relative;
+    top: 14px;
+}
+
+.mouse::after {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 14px;
+    border-radius: 0%;
+    background-color: white;
+    position: relative;
+    top: 0px;
+    left: 9px;
+}

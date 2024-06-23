@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Selector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="window">
+        <div class="title-bar">
+            <div class="title">Device Selector</div>
+        </div>
+        <div class="content">
+            <div class="device-selector">
+                <div class="device" id="device1" onclick="window.location.href='/devices/phone/'">
+                    <div class="smartphone">
+                        <div class="content"></div>
+                    </div>
+                    <p>Phone</p>
+                </div>
+                <div class="device" id="device2" onclick="window.location.href='/devices/tablet/'">
+                    <div class="tablet">
+                        <div class="content"></div>
+                    </div>
+                    <p>Tablet</p>
+                </div>
+                <div class="device" id="device3" onclick="window.location.href='/devices/computer/'">
+                    <!--
+                    <div class="laptop">
+                        <div class="content"></div>
+                    </div>
+                    -->
+                    <div class="computer">
+                        <div class="monitor"></div>
+                        <div class="tower"></div>
+                    </div>
+                    <div class="peripherals">
+                        <div class="keyboard"></div>
+                        <div class="mouse"></div>
+                    </div>
+                    <p>Computer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
