@@ -1,0 +1,62 @@
+:root {
+    --bg-color: #0079d8;
+    --text-color: white;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+main {
+    height: 70%;
+    width: 70%;
+}
+
+
+/* title: ":(" */
+h1 {
+    margin: 0;
+    font-size: 150px;
+}
+
+h3 {
+    font-weight: normal;
+    font-size: 1.6rem;
+}
+
+a {
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 20px;
+    text-decoration: none;
+}
+
+
+/* MOBILE */
+@media screen and (max-width: 750px) {
+    h1 {
+        font-size: 100px;
+    }
+}
+
+@media screen and (max-width: 380px){
+    main {
+        width: 95%;
+    }
+}
