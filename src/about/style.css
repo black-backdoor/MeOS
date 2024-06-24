@@ -21,6 +21,17 @@ body {
     --primary-color: #3b82f6;
     --secondary-color: #e5e7eb;
 }
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --background: #1a202c;
+        --text-color: #e2e8f0;
+        --text-color-secondary: #cbd5e0;
+        --primary-color: #4299e1;
+        --secondary-color: #2d3748;
+    }
+    
+}
+
 
 /* ############### DEFAULT STYLES ############### */
 
