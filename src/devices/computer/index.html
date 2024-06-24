@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Computer | MeOS</title>
-    <link rel="stylesheet" href="/devices/computer/style.css">
+    <link rel="stylesheet" href="/devices/computer/style.css" type="text/css">
 
     <!-- PWA -->
     <script src="/pwa/register.js"></script>
@@ -24,12 +24,12 @@
         <div class="monitor">
             <div class="top">
                 <div class="screen">
-                    <iframe class="content" src="/">
+                    <iframe class="content" src="" title="Operating System">
                         <p>Your browser does not support iframes.</p>
                     </iframe>
                 </div>
-                <div class="green-light"></div>
-                <div class="btn"></div>
+                <div class="green-light off"></div>
+                <button class="btn" onclick="power_button()"></button>
             </div>
             <div class="base"></div>
         </div>
@@ -38,5 +38,7 @@
             <div class="buttons"></div>
         </div>
     </div>
+
+    <script src="/devices/computer/script.js"></script>
 </body>
 </html>
