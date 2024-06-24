@@ -60,3 +60,9 @@ a {
         width: 95%;
     }
 }
+
+@media screen and (max-height: 500px){
+    main {
+        height: 80%;
+    }
+}
