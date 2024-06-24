@@ -6,16 +6,18 @@
  * @returns {Promise<void>} - A promise that resolves when the sharing process is complete.
  */
 
-async function share(onClipboard = () => {}, onSuccess = () => {}, onError = () => {}) {
+async function share(onClipboard = () => {}, onSuccess = () => {}, onError = () => {}, description = "") {
     /* check if Web Share API is supported */
     if (navigator.canShare) {
         console.debug('[Share] Web Share API is supported');
 
         const shareData = {
-            title: "WebOS",
-            text: "A web-based operating system that looks and feels like a real desktop environment.",
-            url: "https://webos.lima.zone",
+            title: window.document.title,
+            text: description,
+            url: window.location.href
         };
+
+        console.log(shareData);
 
         try {
             await navigator.share(shareData);
@@ -35,7 +37,7 @@ async function share(onClipboard = () => {}, onSuccess = () => {}, onError = () 
             onClipboard();
 
             /* copy to clipboard */
-            await navigator.clipboard.writeText("https://webos.lima.zone");
+            await navigator.clipboard.writeText(window.location.href);
 
             console.debug('[Share] Copied to clipboard');
             onSuccess();
