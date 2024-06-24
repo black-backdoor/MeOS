@@ -4,7 +4,6 @@ html {
 
 /* COLORS */
 :root {
-    --background: #f4f6f7;
     --plastic-color: #c3b79e;
     --plastic-color-2: #a8997b;;
     --plastic-btn-color: #b5a78a;
@@ -16,7 +15,6 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: var(--background);
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
 }
@@ -74,12 +72,20 @@ body {
     bottom: 20px;
     right: 85px;
 }
+.monitor .green-light.off {
+    background-color: var(--plastic-btn-color);
+}
 
 .monitor .btn {
     width: 28px;
     height: 15px;
+    
     background-color: var(--plastic-btn-color);
     border-radius: 5px;
+    border: none;
+
+    cursor: pointer;
+
     position: absolute;
     bottom: 20px;
     right: 45px; 
