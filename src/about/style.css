@@ -1,0 +1,235 @@
+html {
+    font-family: 'Inter', sans-serif;
+    font-size: 100%;
+}
+
+body {
+    font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+:root {
+    --background: #fff;
+    --text-color: #333333;
+    --text-color-secondary: #4b5563;
+    --primary-color: #3b82f6;
+    --secondary-color: #e5e7eb;
+}
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --background: #1a202c;
+        --text-color: #e2e8f0;
+        --text-color-secondary: #cbd5e0;
+        --primary-color: #4299e1;
+        --secondary-color: #2d3748;
+    }
+    
+}
+
+
+/* ############### DEFAULT STYLES ############### */
+
+/* LISTS */
+ul {
+    list-style: square;
+}
+
+
+/* LINKS */
+a {
+    text-decoration: none;
+    color: var(--text-color-secondary);
+}
+
+/* TEXT */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    margin-bottom: 16px;
+    font-weight: inherit;
+}
+
+h1 {
+    font-size: 36px;
+    line-height: 40px;
+}
+
+h3 {
+    font-size: 24px;
+    line-height: 32px;
+    color: var(--text-color-secondary);
+}
+
+
+p {
+    color: var(--text-color-secondary);
+}
+
+
+/* BUTTONS */
+.btn {
+    border-radius: 9999px;
+    border-width: 1px;
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0 8px 8px 8px;
+    padding: 12px 32px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    color: var(--background);
+}
+
+.btn.secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-color-secondary);
+}
+
+
+
+body {
+    background-color: var(--background);
+    color: var(--text-color);
+}
+
+
+/* ############### HEADER ############### */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+
+    height: 65px;
+    box-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+
+    background-color: var(--background);
+
+    position: sticky;
+    top: 0;
+}
+
+
+header .brand a {
+    /* MeOS text in the header (left) */
+    font-size: 18px;
+}
+
+
+
+/* header links */
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header nav li {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+/* remove "irrelevant-links" when on mobile */
+@media (max-width: 700px) {
+    header nav .irrelevant-link {
+        display: none;
+    }
+}
+
+
+
+/* ############### MAIN ############### */
+main {
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 0 16px;
+}
+
+/* TITLE & IMG */
+#head {
+    margin-top: 80px;
+    text-align: center;
+}
+
+#head h3 {
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 16px;
+}
+
+#head img {
+    width: 60%;
+}
+
+
+/* BUTTONS */
+#home-buttons {
+    margin-top: 32px;
+    text-align: center;
+}
+
+/* ############### FEATURES ############### */
+#features {
+    margin: 0;
+    margin-top: 80px;
+}
+
+#features h2 {
+    margin-bottom: 16px;
+}
+
+
+.home-features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.home-features > ul > li {
+    flex: 1 1 0%;
+}
+
+.home-features > ul > li > ul {
+    color: #6b7280;
+    margin: 8px 0 0;
+}
+
+.home-features > ul > li li {
+    margin-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+    .home-features > ul {
+        display: flex;
+    }
+}
+
+
+/* ############### WHY & TECH-STACK ############### */
+section.text {
+    margin: 0;
+    margin-top: 80px;
+}
+
+
+section.text > h2 {
+    margin-bottom: 16px;
+}
+
+section.text a {
+    color: var(--primary-color);
+}
+
+
+main {
+    padding-bottom: 16px;
+}
