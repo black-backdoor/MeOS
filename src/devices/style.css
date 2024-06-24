@@ -72,3 +72,16 @@ body {
     margin-top: 10px;
     text-align: center;
 }
+
+
+@media screen and (max-width: 1175px) {
+    .window {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .window {
+        margin-left: 60px;
+    }
+}
