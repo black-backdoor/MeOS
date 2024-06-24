@@ -1,0 +1,27 @@
+/* ######### SHARE ######### */
+#share {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+
+    height: 50px;
+    width: 50px;
+
+    padding: 10px;
+
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+#share:active {
+    /* background-color: aqua; */
+    transform: scale(0.8);
+}
+
+/* background for share button in light mode */
+@media (prefers-color-scheme: light) {
+    #share {
+        background-color: var(--sidebar-bgcolor);
+    }
+}
