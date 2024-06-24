@@ -7,9 +7,9 @@ window.onload = function() {
         return confirm("Your screen size is too small for this content.");
     }
 
-    if (window.innerWidth < 515) {
+    if (window.innerWidth < 1072) {
         // Redirect to / if screen width is less than specified
-        console.warn(`%c[Warning]%c Screen size is too small for content! min-width is 515px; currently: ${window.innerWidth};`, 'color: red; font-weight: bold;', 'color: inherit;');
+        console.warn(`%c[Warning]%c Screen size is too small for content! min-width is 1072px; currently: ${window.innerWidth};`, 'color: red; font-weight: bold;', 'color: inherit;');
         if(popup() === true) {
             window.location.href = "/";
         }
