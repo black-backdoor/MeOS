@@ -2,12 +2,12 @@ class Notification extends HTMLElement {
     constructor() {
         super();
 
-        this.name = this.getAttribute('name') || 'Notification';
-        this.content = this.getAttribute('content') || 'This is a notification component';
+        this.name = this.getAttribute('name') ?? 'Notification';
+        this.content = this.getAttribute('content') ?? 'This is a notification component';
 
-        this.appname = this.getAttribute('app-name') || undefined;
-        this.appicon = this.getAttribute('app-icon') || undefined;
-        this.icon = this.getAttribute('icon') || undefined;
+        this.appname = this.getAttribute('app-name') ?? undefined;
+        this.appicon = this.getAttribute('app-icon') ?? undefined;
+        this.icon = this.getAttribute('icon') ?? undefined;
 
         this.attachShadow({ mode: 'open' });
         this.render();
