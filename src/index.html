@@ -17,6 +17,11 @@
     <script src="/js/taskbar.js"></script><!-- TASKBAR TIME -->
 
     <!-- COMPONENTS -->
+
+    <!-- windows -->
+    <script src="/components/windows.js" type="module"></script>
+    
+    <!-- notifications -->
     <script src="/components/notifications.js" type="module"></script>
     <link rel="stylesheet" href="/css/push-notifications.css" type="text/css"></link>
     <script src="/js/notifications.js"></script>
@@ -37,7 +42,9 @@
     <!-- Desktop -->
     <div id="desktop">
         <h1>MeOS</h1>
-        
+        <app-window name="Firefox">
+            <iframe src="/about/" frameborder="0"></iframe>
+        </app-window>
         <div id="push-notifications"></div>
     </div>
 
