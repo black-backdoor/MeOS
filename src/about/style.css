@@ -196,6 +196,7 @@ main {
 
 .home-features > ul > li {
     flex: 1 1 0%;
+    margin-bottom: 16px;
 }
 
 .home-features > ul > li > ul {
