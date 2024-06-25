@@ -16,6 +16,10 @@
     <script src="/js/sound.js"></script>
     <script src="/js/taskbar.js"></script><!-- TASKBAR TIME -->
 
+    <!-- COMPONENTS -->
+    <script src="/components/notifications.js" type="module"></script>
+    <link rel="stylesheet" href="/css/push-notifications.css" type="text/css"></link>
+
     <!-- PWA -->
     <script src="/pwa/register.js"></script>
 
@@ -32,6 +36,11 @@
     <!-- Desktop -->
     <div id="desktop">
         <h1>MeOS</h1>
+        
+        <div id="push-notifications">
+            <desktop-notification name="HELLO" content="ABC" icon="/assets/power/battery.svg" app-name="Firefox" app-icon="/assets/sound/speaker.svg"></desktop-notification>
+            <desktop-notification name="HELLO" content="ABC" icon="/assets/power/battery.svg" app-name="Firefox2" app-icon="/assets/sound/speaker.svg"></desktop-notification>
+        </div>
     </div>
 
     <!-- Taskbar -->

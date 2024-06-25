@@ -1,0 +1,9 @@
+#push-notifications {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    position: fixed;
+    right: 10px;
+    bottom: calc(var(--taskbar-height) + 10px);
+}
