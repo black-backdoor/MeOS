@@ -16,17 +16,21 @@
         {
             "icon": "sunny-day.svg",
             "temp": 27,
-            "desc": "Sunny"
+            "desc": "Sunny",
+            "after": 10,
+            "before": 18
         },
         {
             "icon": "sunrise.svg",
             "temp": 20,
-            "desc": "Morning"
+            "desc": "Morning",
+            "before": 10
         },
         {
             "icon": "sunset.svg",
             "temp": 20,
-            "desc": "Evening"
+            "desc": "Evening",
+            "after": 18
         },
         {
             "icon": "thermometer.svg",

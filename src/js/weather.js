@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const weather = document.querySelector('#taskbar > .weather');
     const weatherIcon = weather.querySelector('img');
     const weatherTemp = weather.querySelector('.text > .temp');
@@ -10,9 +10,28 @@ document.addEventListener('DOMContentLoaded', function() {
             const baseURL = data.baseURL;
             const icons = data.icons;
 
-            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
-            weatherIcon.src = baseURL + randomIcon.icon;
-            weatherTemp.textContent = randomIcon.temp + "°C";
-            weatherDesc.textContent = randomIcon.desc;
+            function updateWeatherIcon() {
+                const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+                const hour = new Date().getHours();
+
+                let conditionsMet = true;
+                if (randomIcon?.before && hour >= randomIcon.before) {
+                    conditionsMet = false;
+                }
+                if (randomIcon?.after && hour < randomIcon.after) {
+                    conditionsMet = false;
+                }
+
+                if (conditionsMet) {
+                    weatherIcon.src = baseURL + randomIcon.icon;
+                    weatherTemp.textContent = randomIcon.temp + "°C";
+                    weatherDesc.textContent = randomIcon.desc;
+                } else {
+                    // Generate a new icon until conditions are met
+                    updateWeatherIcon();
+                }
+            }
+
+            updateWeatherIcon();
         });
 });
