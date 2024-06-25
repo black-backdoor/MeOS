@@ -5,8 +5,20 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
 }
+
+
+/* COLORS */
+:root {
+    --background: #f4f6f7;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #4b4b4b;
+    }
+}
+
 
 .window {
     height: 80%;

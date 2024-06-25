@@ -15,13 +15,5 @@
 }
 
 #share:active {
-    /* background-color: aqua; */
     transform: scale(0.8);
-}
-
-/* background for share button in light mode */
-@media (prefers-color-scheme: light) {
-    #share {
-        background-color: var(--sidebar-bgcolor);
-    }
 }
