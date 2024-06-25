@@ -1,0 +1,42 @@
+{
+    "name": "Weather Icons",
+    "description": "This is the list of the weather icons in the taskbar and there corresponding info",
+    "baseURL": "/assets/weather/",
+    "icons": [
+        {
+            "icon": "cloud-thunder.svg",
+            "temp": 20,
+            "desc": "Stormy"
+        },
+        {
+            "icon": "rain-cloud.svg",
+            "temp": 15,
+            "desc": "Rainy"
+        },
+        {
+            "icon": "sunny-day.svg",
+            "temp": 27,
+            "desc": "Sunny"
+        },
+        {
+            "icon": "sunrise.svg",
+            "temp": 20,
+            "desc": "Morning"
+        },
+        {
+            "icon": "sunset.svg",
+            "temp": 20,
+            "desc": "Evening"
+        },
+        {
+            "icon": "thermometer.svg",
+            "temp": 8,
+            "desc": "Cold"
+        },
+        {
+            "icon": "windy.svg",
+            "temp": 18,
+            "desc": "Windy"
+        }
+    ]
+}
