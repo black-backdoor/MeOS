@@ -7,7 +7,7 @@ class Notification extends HTMLElement {
 
         this.appname = this.getAttribute('app-name') || undefined;
         this.appicon = this.getAttribute('app-icon') || undefined;
-        this.icon = this.getAttribute('icon');
+        this.icon = this.getAttribute('icon') || undefined;
 
         this.attachShadow({ mode: 'open' });
         this.render();
@@ -104,13 +104,11 @@ class Notification extends HTMLElement {
     template() {
         return `
             <div class="top">
-                ${this.appname ? `<div class="app"><img src="${this.appicon}" alt="icon"><p class="appname">${this.appname}</p></div>` : `<p class="time">${new Date().getHours()}:${new Date().getMinutes()}</p>`}
+                ${this.appname != "undefined" && this.appicon != "undefined" ? `<div class="app"><img src="${this.appicon}" alt="icon"><p class="appname">${this.appname}</p></div>` : `<p class="time">${new Date().getHours()}:${new Date().getMinutes()}</p>`}
                 <button class="close" title="close">✖</button>
             </div>
             <div class="content">
-                <div class="icon">
-                    <img src="${this.getAttribute('icon')}" alt="icon">
-                </div>
+                ${this.icon != "undefined" ? `<div class="icon"><img src="${this.getAttribute('icon')}" alt="icon"></div>` : ''}
                 <div class="text">
                     <h4>${this.getAttribute('name')}</h4>
                     <p>${this.getAttribute('content')}</p>
@@ -141,6 +139,7 @@ class Notification extends HTMLElement {
 
     
     /* ATTRIBUTES */
+    /* content attributes */
     get name() {
         return this.getAttribute('name');
     }
@@ -155,6 +154,24 @@ class Notification extends HTMLElement {
         this.setAttribute('content', value);
     }
 
+
+    /* app attributes */
+    get appname() {
+        return this.getAttribute('app-name');
+    }
+    set appname(value) {
+        this.setAttribute('app-name', value);
+    }
+
+    get appicon() {
+        return this.getAttribute('app-icon');
+    }
+    set appicon(value) {
+        this.setAttribute('app-icon', value);
+    }
+
+
+    /* icon attributes */
     get icon() {
         return this.getAttribute('icon');
     }
