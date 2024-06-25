@@ -39,6 +39,7 @@
 }
 
 
+/* PAUSED RESPONSIVE since it causes issues with the device simulations
 @media screen and (max-width: 1000px){
     #taskbar {
         display: none;
@@ -48,6 +49,7 @@
         --taskbar-height: 0px;
     }
 }
+*/
 
 
 #taskbar section {
