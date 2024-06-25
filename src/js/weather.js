@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     weatherIcon.src = baseURL + randomIcon.icon;
                     weatherTemp.textContent = randomIcon.temp + "°C";
                     weatherDesc.textContent = randomIcon.desc;
+                    weather.title = `${randomIcon.temp}°C ${randomIcon.desc}`;
                 } else {
                     // Generate a new icon until conditions are met
                     updateWeatherIcon();
