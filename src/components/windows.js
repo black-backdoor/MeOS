@@ -67,19 +67,12 @@ class AppWindow extends HTMLElement {
                 padding: 0 8px;
                 cursor: default;
                 position: absolute;
-                left: 0;
+                right: 0;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 height: 30px;
                 width: 55px;
-            }
-
-            /* left controls */
-            header .controls {
-                right: 0;
-                left: initial;
-                flex-direction: row-reverse;
             }
 
             header .controls button {
@@ -125,31 +118,21 @@ class AppWindow extends HTMLElement {
                 overflow: hidden;
             }
 
-            /* ------- DEFAULT STYLES ------- */
-            /* IFRAME (Webbrowser) */
-            main iframe {
-                height: 100%;
-                width: 100%;
 
-                border: none;
-                background-color: #fdfdfd;
+
+            /* ------- WINDOW OPTIONS ------- */
+
+            /* FULLSCREEN */
+            :host(.fullscreen) {
+                top: 0px !important;
+                left: 0px !important;
+                width: 100% !important;
+                height: calc(100vh - var(--taskbar-height)) !important;
+                z-index: 3900;
             }
 
-            @media (prefers-color-scheme: light) {
-                main iframe {
-                    border: 1px solid #e0e0e0;
-                }
-            }
-
-
-            :host(:has(iframe)) {
-                --body-bg-color: #494949;
-            }
-            
-            @media (prefers-color-scheme: light) {
-                :host(:has(iframe)) {
-                    --body-bg-color: #fdfdfd ;
-                }
+            :host(.fullscreen) > header {
+                border-radius: 0;
             }
         `;
     }
@@ -158,9 +141,9 @@ class AppWindow extends HTMLElement {
         return `
             <header title="${this.name}">
                 <section class="controls">
-                    <button title="close" class="close"></button>
                     <button title="minimize" class="minimize"></button>
                     <button title="maximize" class="maximize"></button>
+                    <button title="close" class="close"></button>                    
                 </section>
                 <h3 class="title">${this.name}</h3>
             </header>
@@ -186,8 +169,9 @@ class AppWindow extends HTMLElement {
             <style>${this.css().trim()}</style>
             ${this.template().trim()}
         `;
-
+        
         this.shadowRoot.querySelector(".close").addEventListener("click", this.close);
+        this.shadowRoot.querySelector(".maximize").addEventListener("click", this.fullscreen);
     }
 
     get name() {
@@ -199,6 +183,10 @@ class AppWindow extends HTMLElement {
 
     close = () => {
         this.remove();
+    }
+
+    fullscreen = () => {
+        this.classList.toggle("fullscreen");
     }
 }
 
