@@ -1,0 +1,126 @@
+:root {
+    --taskbar-color: white;
+    --taskbar-bgcolor: #1c1c1c;
+}
+
+:root {
+    --taskbar-min-height: 40px;
+    --taskbar-height: 50px;
+}
+
+
+
+#taskbar {
+    /* SET POSITION */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 5000;
+
+    min-height: var(--taskbar-min-height);
+    height: var(--taskbar-height);
+    width: 100vw;
+
+    /* COLOR */
+    color: var(--taskbar-color);
+    background-color: var(--taskbar-bgcolor);
+}
+
+
+#taskbar {
+    display: flex;
+    user-select: none;
+    justify-content: space-between;
+    align-items: center;
+
+    /* PADDING */
+    padding: 0 1rem;
+    width: calc(100% - 2rem);
+}
+
+
+/* PAUSED RESPONSIVE since it causes issues with the device simulations
+@media screen and (max-width: 1000px){
+    #taskbar {
+        display: none;
+    }
+
+    :root {
+        --taskbar-height: 0px;
+    }
+}
+*/
+
+
+#taskbar section {
+    z-index: 501;
+    height: 80%;
+}
+
+
+#taskbar > .apps {
+    width: 60vw;
+}
+
+
+
+/* ############### TASKBAR WEATHER ############### */
+#taskbar > .weather {
+    --text-secondary: #5d5d5d;
+}
+
+#taskbar > .weather {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#taskbar > .weather img {
+    height: 100%;
+}
+
+#taskbar > .weather > .text * {
+    margin: 0;
+    font-size: 14px;
+}
+
+#taskbar > .weather > .text > .desc {
+    color: var(--text-secondary);
+}
+
+
+
+/* ############### TASKBAR MENU / ICONS ############### */
+#taskbar > .menu {
+    display: flex;
+}
+
+#taskbar > .menu > .icon {
+    height: 100%;
+}
+
+#taskbar > .menu > .icon img {
+    height: 100%;
+}
+
+/* SPEAKER */
+#taskbar > .menu > .speaker {
+    display: flex;
+    align-items: center;
+}
+
+#taskbar > .menu > .speaker img {
+    height: 80%;
+}
+
+
+
+/* ############### TASKBAR TIME ############### */
+#taskbar > .time {
+    text-align: right;
+    font-size: 14px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

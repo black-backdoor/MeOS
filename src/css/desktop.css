@@ -1,0 +1,53 @@
+:root {
+    /* --desktop-background: url('URL') no-repeat center center / cover; */
+    --desktop-background: linear-gradient(to right, purple, rgb(35, 192, 204));
+    /* --desktop-background: #494949; */
+}
+
+:root {
+    --desktop-height: calc(100vh - var(--taskbar-height));
+}
+
+
+
+body {
+    overflow: hidden;
+}
+
+#desktop {
+    width: 100vw;
+    height: var(--desktop-height);
+    background: var(--desktop-background);
+    overflow: hidden;
+}
+
+
+#desktop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+}
+
+#desktop > h1 {
+    /* TEXT (MeOS) */
+    color: #fff;
+    text-align: center;
+    font-size: 10rem;
+    margin: 0;
+    user-select: none;
+}
+
+
+/* just some media queries to make the text responsive */
+@media screen and (max-width: 560px) {
+    #desktop h1 {
+        font-size: 5rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    #desktop h1 {
+        font-size: 3rem;
+    }
+}

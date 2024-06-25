@@ -63,6 +63,14 @@ body {
     border: none;
 }
 
+iframe.content {
+    /* fit the iframe to the screen (610x450) but scale(0.8) */
+    width: calc(calc(610px / 0.7) + 1px);
+    height: calc(calc(450px / 0.7) + 1px);
+    transform: scale(0.7);
+    transform-origin: 0 0;
+}
+
 .monitor .green-light {
     width: 28px;
     height: 15px;
