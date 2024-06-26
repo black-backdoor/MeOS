@@ -25,6 +25,7 @@ class CalendarWidget extends HTMLElement {
                 border-radius: 8px;
                 overflow: hidden;
                 width: 280px;
+                user-select: none;
             }
             .calendar {
                 display: flex;
@@ -40,6 +41,9 @@ class CalendarWidget extends HTMLElement {
                 box-sizing: border-box;
                 font-size: 1.2em;
                 border-bottom: 1px solid var(--border-color);
+            }
+            .header:hover {
+                color: #383838;
             }
             .nav {
                 display: flex;
@@ -93,7 +97,7 @@ class CalendarWidget extends HTMLElement {
         return `
             <div class="calendar">
                 <div class="header">
-                    <span>${this.getToday()}</span>
+                    <span id="todayDate">${this.getToday()}</span>
                 </div>
                 <div class="nav">
                     <div>${this.getMonthYear()}</div>
@@ -114,6 +118,12 @@ class CalendarWidget extends HTMLElement {
                 </div>
             </div>
         `;
+    }
+    
+    resetToCurrentMonth() {
+        console.debug('resetToCurrentMonth');
+        this.date = new Date(); // Reset to current date
+        this.render();
     }
 
     getToday() {
@@ -171,6 +181,8 @@ class CalendarWidget extends HTMLElement {
 
         this.shadowRoot.getElementById('prevMonth').addEventListener('click', () => this.prevMonth());
         this.shadowRoot.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
+
+        this.shadowRoot.getElementById('todayDate').addEventListener('click', () => this.resetToCurrentMonth());
     }
 
     prevMonth() {
