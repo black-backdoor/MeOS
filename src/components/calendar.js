@@ -15,9 +15,12 @@ class CalendarWidget extends HTMLElement {
         return `
             :host {
                 --text-color: #000;
+                --old-text-color: #999;
                 --bg-color: #fff;
                 --border-color: #ddd;
                 --header-bg-color: #f1f1f1;
+                --header-text-hover-color: #383838;
+                --nav-button-color: #555;
                 --today-color: #007bff; /* Blue color for today's date */
                 font-family: Arial, sans-serif;
                 display: inline-block;
@@ -39,11 +42,11 @@ class CalendarWidget extends HTMLElement {
                 width: 100%;
                 padding: 10px;
                 box-sizing: border-box;
-                font-size: 1.2em;
+                font-size: 18px;
                 border-bottom: 1px solid var(--border-color);
             }
             .header:hover {
-                color: #383838;
+                color: var(--header-text-hover-color);
             }
             .nav {
                 display: flex;
@@ -57,7 +60,7 @@ class CalendarWidget extends HTMLElement {
                 cursor: pointer;
                 background: none;
                 border: none;
-                color: #555;
+                color: var(--nav-button-color);
                 font-size: 1em;
                 padding: 5px 10px;
                 outline: none;
@@ -81,10 +84,10 @@ class CalendarWidget extends HTMLElement {
                 box-sizing: border-box;
             }
             .day.prev-month {
-                color: #999;
+                color: var(--old-text-color);
             }
             .day.next-month {
-                color: #999;
+                color: var(--old-text-color);
             }
             .today {
                 color: var(--today-color);
