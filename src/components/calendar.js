@@ -18,6 +18,7 @@ class CalendarWidget extends HTMLElement {
                 --bg-color: #fff;
                 --border-color: #ddd;
                 --header-bg-color: #f1f1f1;
+                --today-color: #007bff; /* Blue color for today's date */
                 font-family: Arial, sans-serif;
                 display: inline-block;
                 border: 1px solid var(--border-color);
@@ -60,6 +61,10 @@ class CalendarWidget extends HTMLElement {
             .day.next-month {
                 color: #999;
             }
+            .today {
+                color: var(--today-color);
+                font-weight: bold;
+            }
             .nav-button {
                 cursor: pointer;
                 background: none;
@@ -95,6 +100,7 @@ class CalendarWidget extends HTMLElement {
     }
 
     renderDays() {
+        const today = new Date();
         const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         const firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
         const lastDate = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
@@ -111,7 +117,11 @@ class CalendarWidget extends HTMLElement {
 
         // Current month days
         for (let i = 1; i <= lastDate; i++) {
-            dayCells += `<div class="day">${i}</div>`;
+            if (this.date.getFullYear() === today.getFullYear() && this.date.getMonth() === today.getMonth() && i === today.getDate()) {
+                dayCells += `<div class="day today">${i}</div>`;
+            } else {
+                dayCells += `<div class="day">${i}</div>`;
+            }
         }
 
         // Next month days
