@@ -1,0 +1,36 @@
+/* -------------- DRAGGING -------------- */
+/* disable pointer globally */
+body.window-dragging iframe {
+    pointer-events: none;
+}
+
+
+/* ------- DEFAULT STYLES ------- */
+
+/* IFRAME (only website) */
+app-window.website {
+    width: 600px;
+    height: 400px;
+}
+
+app-window.website iframe {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+@media (prefers-color-scheme: light) {
+    app-window.website iframe {
+        border: 1px solid #e0e0e0;
+    }
+}
+
+app-window.website:has(iframe) {
+    --body-bg-color: #494949;
+}
+@media (prefers-color-scheme: light) {
+    app-window.website:has(iframe) {
+        --body-bg-color: #fdfdfd;
+    }
+}
+
+
