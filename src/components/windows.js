@@ -56,10 +56,14 @@ class AppWindow extends HTMLElement {
             }
 
             header .title {
-                width: min-content;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                overflow: hidden;
+
+                height: 100%;
+                width: fit-content;
+                margin: 0;
             }
 
             /* ------- CONTROLS ------- */
@@ -112,10 +116,9 @@ class AppWindow extends HTMLElement {
 
             /* ------- MAIN ------- */
             main {
-                padding: 10px;
-                background-color: var(--body-bg-color);
                 flex: 1;
                 overflow: hidden;
+                background-color: var(--body-bg-color);
             }
 
 
@@ -133,6 +136,16 @@ class AppWindow extends HTMLElement {
 
             :host(.fullscreen) > header {
                 border-radius: 0;
+            }
+
+            /* DRAGGING */
+            :host(.dragging) {
+                z-index: 4000;
+            }
+
+            /* disable pointer events when dragging to avoid any interaction with iframe & etc */
+            :host(.dragging) > main {
+                pointer-events: none;
             }
         `;
     }
@@ -222,9 +235,7 @@ customElements.define('app-window', AppWindow);
 // WINDOW OVERLAP
 let zIndexCounter = 1;
 
-/**
- * Resets the z-index of app windows based on their current order.
- */
+// Resets the z-index of app windows based on their current order.
 function resetZIndex() {
     console.debug('resetting z-index');
 
@@ -248,7 +259,6 @@ function resetZIndex() {
         value.style.zIndex = zIndexCounter++;
     }
 }
-
 
 
 // WINDOW DRAGGING
@@ -345,7 +355,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
 // STORING WINDOWS
 function saveWindows() {
     console.debug('saving windows');
@@ -370,7 +379,6 @@ function saveWindows() {
     // save the windows to local storage
     sessionStorage.setItem('windows', JSON.stringify(windowsStorage));
 }
-
 
 function loadWindows() {
     let windowsStorage = sessionStorage.getItem('windows') || "";
