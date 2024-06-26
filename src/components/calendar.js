@@ -39,7 +39,7 @@ class CalendarWidget extends HTMLElement {
                 align-items: center;
                 background-color: var(--header-bg-color);
                 width: 100%;
-                padding: 10px;
+                padding: 5px;
                 text-align: center;
                 font-size: 1.2em;
                 border-bottom: 1px solid var(--border-color);
@@ -48,6 +48,13 @@ class CalendarWidget extends HTMLElement {
                 display: flex;
                 flex-wrap: wrap;
                 padding: 10px;
+            }
+            .day-label {
+                width: calc(100% / 7);
+                text-align: center;
+                font-weight: bold;
+                padding: 5px 0;
+                color: var(--text-color);
             }
             .day {
                 width: calc(100% / 7);
@@ -87,6 +94,13 @@ class CalendarWidget extends HTMLElement {
                     <button class="nav-button" id="nextMonth">&gt;</button>
                 </div>
                 <div class="days">
+                    <div class="day-label">Mo</div>
+                    <div class="day-label">Tu</div>
+                    <div class="day-label">We</div>
+                    <div class="day-label">Th</div>
+                    <div class="day-label">Fr</div>
+                    <div class="day-label">Sa</div>
+                    <div class="day-label">Su</div>
                     ${this.renderDays()}
                 </div>
             </div>
