@@ -43,8 +43,15 @@
     <!-- Desktop -->
     <div id="desktop">
         <h1>MeOS</h1>
-        <app-window name="Firefox">
+        <app-window name="About">
             <iframe src="/about/" frameborder="0"></iframe>
+        </app-window>
+        <app-window name="web-browser">
+            <div class="address-bar">
+                <input type="text" placeholder="Search or enter website URL">
+                <button>Go</button>
+            </div>
+            <iframe src="https://www.google.com" frameborder="0"></iframe>
         </app-window>
         <div id="push-notifications"></div>
     </div>
