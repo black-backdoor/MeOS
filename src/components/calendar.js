@@ -34,26 +34,40 @@ class CalendarWidget extends HTMLElement {
                 color: var(--text-color);
             }
             .header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
                 background-color: var(--header-bg-color);
                 width: 100%;
-                padding: 5px;
-                text-align: center;
+                padding: 10px;
+                box-sizing: border-box;
                 font-size: 1.2em;
                 border-bottom: 1px solid var(--border-color);
+            }
+            .nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            .nav-button {
+                cursor: pointer;
+                background: none;
+                border: none;
+                color: #555;
+                font-size: 1em;
+                padding: 5px 10px;
+                outline: none;
             }
             .days {
                 display: flex;
                 flex-wrap: wrap;
                 padding: 10px;
+                justify-content: center;
             }
             .day-label {
                 width: calc(100% / 7);
                 text-align: center;
                 font-weight: bold;
-                padding: 5px 0;
                 color: var(--text-color);
             }
             .day {
@@ -72,16 +86,6 @@ class CalendarWidget extends HTMLElement {
                 color: var(--today-color);
                 font-weight: bold;
             }
-            .nav-button {
-                cursor: pointer;
-                background: none;
-                border: none;
-                color: #555;
-                font-size: 1em;
-                padding: 5px 10px;
-                margin: 0 5px;
-                outline: none;
-            }
         `;
     }
 
@@ -89,9 +93,14 @@ class CalendarWidget extends HTMLElement {
         return `
             <div class="calendar">
                 <div class="header">
-                    <button class="nav-button" id="prevMonth">&lt;</button>
+                    <span>${this.getToday()}</span>
+                </div>
+                <div class="nav">
                     <div>${this.getMonthYear()}</div>
-                    <button class="nav-button" id="nextMonth">&gt;</button>
+                    <div class="buttons">
+                        <button class="nav-button" id="prevMonth">&lt;</button>
+                        <button class="nav-button" id="nextMonth">&gt;</button>
+                    </div>
                 </div>
                 <div class="days">
                     <div class="day-label">Mo</div>
@@ -105,6 +114,12 @@ class CalendarWidget extends HTMLElement {
                 </div>
             </div>
         `;
+    }
+
+    getToday() {
+        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        const date = new Date();
+        return date.toLocaleDateString(undefined, options);
     }
 
     getMonthYear() {
