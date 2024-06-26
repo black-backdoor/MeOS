@@ -182,10 +182,12 @@ class AppWindow extends HTMLElement {
         this.setAttribute('name', value);
     }
 
-    get fullscreen() {
+    get window_fullscreen() {
+        console.debug('fullscreen:', this.classList.contains('fullscreen'));
         return this.classList.contains('fullscreen');
     }
-    set fullscreen(value) {
+    set window_fullscreen(value) {
+        console.debug('setting fullscreen:', value);
         if (value) {
             this.classList.add('fullscreen');
         } else {
@@ -209,6 +211,7 @@ class AppWindow extends HTMLElement {
 
     fullscreen = () => {
         this.classList.toggle("fullscreen");
+        saveWindows();
     }
 }
 
@@ -287,6 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             windowElement.style.zIndex = zIndexCounter++;
+            console.debug('z-index:', windowElement.style.zIndex);
             if(zIndexCounter > (windows.length * 2)) {
                 resetZIndex();
             }
@@ -328,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.removeEventListener('touchmove', moveWindow);
                 document.removeEventListener('touchend', stopMoving);
 
-                // TODO: save the position of the window
+                saveWindows();
             }
 
             // Attach the event listeners
@@ -341,3 +345,57 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+// STORING WINDOWS
+function saveWindows() {
+    console.debug('saving windows');
+
+    let windowsStorage = [];
+
+    const windows = document.querySelectorAll('app-window');
+    
+    windows.forEach(function (windowElement) {
+        // save the position and size of each window
+        windowsStorage.push({ 
+            x: windowElement.style.left,
+            y: windowElement.style.top,
+            width: windowElement.style.width,
+            height: windowElement.style.height,
+            fullscreen: windowElement.window_fullscreen,
+            zIndex: windowElement.zIndex
+        });
+        console.debug('Window saved:', windowsStorage[windowsStorage.length - 1]);
+    });
+
+    // save the windows to local storage
+    sessionStorage.setItem('windows', JSON.stringify(windowsStorage));
+}
+
+
+function loadWindows() {
+    let windowsStorage = sessionStorage.getItem('windows') || "";
+    if (windowsStorage == "") { return; }
+
+    windowsStorage = JSON.parse(windowsStorage);
+    if (windowsStorage.length == 0) { return; }
+
+    const windows = document.querySelectorAll('app-window');
+
+    let highestZIndex = 0;
+    windowsStorage.forEach(function (window) {
+        const index = windowsStorage.indexOf(window);
+        windows[index].style.left = window.x;
+        windows[index].style.top = window.y;
+        windows[index].style.width = window.width;
+        windows[index].style.height = window.height;
+        windows[index].window_fullscreen = window.fullscreen;
+        windows[index].zIndex = window.zIndex;
+        highestZIndex = Math.max(highestZIndex, window.zIndex);
+    });
+    console.debug('Highest z-index:', highestZIndex);
+    zIndexCounter = highestZIndex + 1;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadWindows();
+});
