@@ -1,6 +1,6 @@
 :root {
     --taskbar-color: white;
-    --taskbar-bgcolor: #1c1c1c;
+    --taskbar-bg-color: #1c1c1c;
 }
 
 :root {
@@ -23,7 +23,7 @@
 
     /* COLOR */
     color: var(--taskbar-color);
-    background-color: var(--taskbar-bgcolor);
+    background-color: var(--taskbar-bg-color);
 }
 
 
@@ -61,7 +61,6 @@
 #taskbar > .apps {
     width: 60vw;
 }
-
 
 
 /* ############### TASKBAR WEATHER ############### */
