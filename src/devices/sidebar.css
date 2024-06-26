@@ -1,8 +1,8 @@
 :root {
     --background: #f4f6f7;
-    --sidebar-bgcolor: #c5c5c5;
+    --sidebar-bg-color: #c5c5c5;
     --sidebar-text: black;
-    --sidebar-element: var(--sidebar-bgcolor);
+    --sidebar-element: var(--sidebar-bg-color);
     --sidebar-element-hover: #e0e0e0;
     --sidebar-element-active: #ffffff;
 }
@@ -10,7 +10,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #4b4b4b;
-        --sidebar-bgcolor: #fff;
+        --sidebar-bg-color: #fff;
         --sidebar-element-hover: #cdcdcd;
         --sidebar-element-active: #b7b5b5;
     }
@@ -36,7 +36,7 @@ body {
 .menu {
     width: 50px;
     border-radius: 0 10px 10px 0;
-    background-color: var(--sidebar-bgcolor);
+    background-color: var(--sidebar-bg-color);
     padding: 10px 10px 3px;
 }
 
@@ -88,7 +88,7 @@ body {
 
 @media (prefers-color-scheme: light) {
     .side-actions a img {
-        background-color: var(--sidebar-bgcolor);
+        background-color: var(--sidebar-bg-color);
         border-radius: 50%;
     }
 }
