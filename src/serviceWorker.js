@@ -76,6 +76,11 @@ self.addEventListener("activate", function(event) {
 
 
 self.addEventListener("fetch", function(event) {
+    console.debug(`%cService Worker: %cFetch ${event.request.url}`, "color: lightblue", "color: inherit");
+    if (String(event.request.url).indexOf('chrome-extension') > -1) return;
+    if (String(event.request.url).indexOf('serviceWorker.js') > -1) return;
+    if (String(event.request.url).indexOf('site.webmanifest') > -1) return;
+
     event.respondWith(
         /* if the request is in the cache, return the cached response, otherwise fetch the request and cache it in the dynamic cache */
         caches.match(event.request).then(response => {
@@ -86,7 +91,11 @@ self.addEventListener("fetch", function(event) {
                 /* if the request is not in the cache */
                 return caches.open(dynamicCacheName).then(cache => {
                     /* fetch the request and cache it in the dynamic cache */
-                    cache.put(event.request.url, fetchResponse.clone());
+                    try {
+                        cache.put(event.request.url, fetchResponse.clone());
+                    } catch (error) {
+                        console.warning(`%cService Worker: %cFetch ${event.request.url} failed, now returning the offline page`, "color: lightblue", "color: inherit");
+                    }
 
                     // limitCache Size to 100
                     limitCacheSize(dynamicCacheName, 100);
