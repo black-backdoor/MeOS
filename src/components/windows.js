@@ -174,6 +174,7 @@ class AppWindow extends HTMLElement {
         this.shadowRoot.querySelector(".maximize").addEventListener("click", this.fullscreen);
     }
 
+    /* ATTRIBUTES */
     get name() {
         return this.getAttribute('name') ?? 'Window';
     }
@@ -181,6 +182,27 @@ class AppWindow extends HTMLElement {
         this.setAttribute('name', value);
     }
 
+    get fullscreen() {
+        return this.classList.contains('fullscreen');
+    }
+    set fullscreen(value) {
+        if (value) {
+            this.classList.add('fullscreen');
+        } else {
+            this.classList.remove('fullscreen');
+        }
+    }
+
+    get zIndex() {
+        return this.style.zIndex;
+    }
+    set zIndex(value) {
+        this.style.zIndex = value;
+    }
+
+
+
+    /* METHODS */
     close = () => {
         this.remove();
     }
@@ -194,7 +216,39 @@ customElements.define('app-window', AppWindow);
 
 
 
-/* WINDOW DRAGING */
+// WINDOW OVERLAP
+let zIndexCounter = 1;
+
+/**
+ * Resets the z-index of app windows based on their current order.
+ */
+function resetZIndex() {
+    console.debug('resetting z-index');
+
+    const elements = document.querySelectorAll('app-window');
+    zIndexCounter = 0;
+
+    let elementsDict = {};
+    elements.forEach(item => {
+        elementsDict[item.style.zIndex] = item;
+    });
+
+    const sortedElements = Object.entries(elementsDict)
+        .sort((a, b) => b[0] - a[0])
+        .reduce((acc, [key, value]) => {
+            acc[key] = value;
+            return acc;
+        }, {});
+
+
+    for (const [key, value] of Object.entries(sortedElements)) {
+        value.style.zIndex = zIndexCounter++;
+    }
+}
+
+
+
+// WINDOW DRAGGING
 document.addEventListener('DOMContentLoaded', function() {
     const desktop = document.querySelector("#desktop");
     const windows = document.querySelectorAll('app-window');
@@ -230,6 +284,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // ? we need the width of the window in non-fullscreen mode since else the windowElement.offsetWidth will be the width of the screen
                 windowElement.classList.remove('fullscreen');
                 offsetX = (windowElement.offsetWidth / 2);
+            }
+
+            windowElement.style.zIndex = zIndexCounter++;
+            if(zIndexCounter > (windows.length * 2)) {
+                resetZIndex();
             }
 
             // Add a move event listener to update the window position
@@ -280,3 +339,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
