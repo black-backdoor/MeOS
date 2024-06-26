@@ -9,7 +9,7 @@
 -->
 
 <h4 align="center">
-    Online Operating System & Personal Website
+    Online Operating System
 </h4>
 
 <p align="center">
