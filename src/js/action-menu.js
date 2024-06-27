@@ -5,4 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
     taskbarTime.addEventListener('click', function() {
         actionMenu.classList.toggle('open');
     });
+
+    document.addEventListener('click', function(event) {
+        if (!actionMenu.contains(event.target) && !taskbarTime.contains(event.target)) {
+            actionMenu.classList.remove('open');
+        }
+    });
+
+    
 });
