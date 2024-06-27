@@ -15,6 +15,7 @@
     <script src="/js/connection.js"></script>
     <script src="/js/sound.js"></script>
     <script src="/js/taskbar.js"></script><!-- TASKBAR TIME -->
+    <link rel="stylesheet" href="/css/action-menu.css" type="text/css" />
 
     <!-- COMPONENTS -->
 
@@ -50,7 +51,33 @@
             <iframe src="/about/" frameborder="0"></iframe>
         </app-window>
         <div id="push-notifications"></div>
-        <calendar-widget></calendar-widget>
+        <div id="action-menu">
+            <div class="notifications">
+                <header>
+                    <h3>Notifications</h3>
+                    <button class="clear-all">Clear all</button>
+                </header>
+                <div class="notification-list">
+                    <div class="app">
+                        <header>
+                            <img src="logo.svg">
+                            <p>Calendar</p>
+                        </header>
+                        <desktop-notification></desktop-notification>
+                    </div>
+                    <div class="app">
+                        <header>
+                            <img src="logo.svg">
+                            <p>Calendar</p>
+                        </header>
+                        <desktop-notification></desktop-notification>
+                        <desktop-notification></desktop-notification>
+                        <desktop-notification></desktop-notification>
+                    </div>
+                </div>
+            </div>
+            <calendar-widget class="calendar"></calendar-widget>
+        </div>
     </div>
 
     <!-- Taskbar -->
