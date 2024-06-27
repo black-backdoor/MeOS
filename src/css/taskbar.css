@@ -55,6 +55,7 @@
 }
 
 
+
 /* ############### TASKBAR WEATHER ############### */
 #taskbar > .weather {
     --text-secondary: #5d5d5d;
@@ -77,6 +78,16 @@
 
 #taskbar > .weather > .text > .desc {
     color: var(--text-secondary);
+}
+
+
+
+/* ############### TASKBAR APPS ############### */
+#taskbar > .apps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
 }
 
 

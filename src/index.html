@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/css/desktop.css" type="text/css">
     <link rel="stylesheet" href="/css/taskbar.css" type="text/css">
 
+    <!-- MODULES -->
+    <script src="/modules/share.js"></script>
+
     <!-- SCRIPTS -->
     <script src="/js/weather.js"></script>
     
@@ -31,6 +34,10 @@
 
     <!-- calendar widget -->
     <script src="/components/calendar.js" type="module"></script>
+
+    <!-- taskbar apps -->
+    <script src="/components/taskbar-app.js" type="module"></script>
+    <script src="/js/taskbar-apps.js"></script>
 
     <!-- PWA -->
     <script src="/pwa/register.js"></script>
@@ -94,6 +101,16 @@
 
         <section class="apps" style="width: 60vw;">
             <!-- APPS -->
+            <taskbar-app name="About" icon="/assets/apps/about.svg" class="open" onclick="openApp(this); window.open('/about/')"></taskbar-app>
+            <taskbar-app name="Share" icon="/modules/share-white.svg" onclick="openApp(this); 
+            const clipboard = function(element) {
+                console.log(element);
+                element.setAttribute('icon', '/modules/copy-white.svg');
+                setTimeout(() => {
+                    element.setAttribute('icon', '/modules/share-white.svg');
+                }, 1000);
+            };
+            share(clipboard(this), undefined, undefined, description = 'Check out MeOS!');"></taskbar-app>
         </section>
 
         <section class="menu">
