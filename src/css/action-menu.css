@@ -1,0 +1,111 @@
+#action-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    height: calc(var(--desktop-height) - 20px);
+    width: 320px;
+}
+
+#action-menu { display: none; }
+#action-menu.open { display: flex; }
+
+
+
+/* Notifications */
+#action-menu .notifications {
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #292929;
+    max-height: 300px;
+}
+
+#action-menu .notifications > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+#action-menu .notifications h3 {
+    color: #fff;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+}
+#action-menu .notifications button {
+    /* clear all button */
+    background-color: #393939;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+/* notification list */
+#action-menu .notifications .notification-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+
+/* notification app */
+#action-menu .notifications .notification-list .app {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+#action-menu .notifications .notification-list .app header {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    width: 100%;
+}
+#action-menu .notifications .notification-list .app header img {
+    width: 30px;
+    height: 30px;
+}
+#action-menu .notifications .notification-list .app header p {
+    margin: 0;
+}
+
+
+/* notification style */
+#action-menu .notifications desktop-notification {
+    --bg-color: #393939;
+}
+
+#action-menu .notifications .notification-list > desktop-notification {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+#action-menu .calendar {
+    width: 100%;
+    --text-color: #fff;
+    --border-color: none;
+    --bg-color: #393939;
+
+    --header-bg-color: #292929;
+    --header-text-hover-color: #505050;
+
+    --body-bg-color: #292929;
+    --nav-button-color: #888888;
+}

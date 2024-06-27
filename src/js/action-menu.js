@@ -1,0 +1,16 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const taskbarTime = document.querySelector('#taskbar section.time');
+    const actionMenu = document.querySelector('#action-menu');
+
+    taskbarTime.addEventListener('click', function() {
+        actionMenu.classList.toggle('open');
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!actionMenu.contains(event.target) && !taskbarTime.contains(event.target)) {
+            actionMenu.classList.remove('open');
+        }
+    });
+
+    
+});

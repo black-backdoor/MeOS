@@ -104,7 +104,7 @@ class Notification extends HTMLElement {
     template() {
         return `
             <div class="top">
-                ${this.appname != "undefined" && this.appicon != "undefined" ? `<div class="app"><img src="${this.appicon}" alt="icon"><p class="appname">${this.appname}</p></div>` : `<p class="time">${new Date().getHours()}:${new Date().getMinutes()}</p>`}
+                ${this.appname != "undefined" && this.appicon != "undefined" ? `<div class="app"><img src="${this.appicon}" alt="icon"><p class="appname">${this.appname}</p></div>` : `<p class="time">${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}</p>`}
                 <button class="close" title="close">✖</button>
             </div>
             <div class="content">
