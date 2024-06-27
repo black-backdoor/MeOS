@@ -11,6 +11,9 @@
     width: 320px;
 }
 
+#action-menu { display: none; }
+#action-menu.open { display: flex; }
+
 
 
 /* Notifications */
