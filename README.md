@@ -30,10 +30,8 @@
 
 
 ## Screenshots
-<p align="center">
-    <img src="assets/screenshot-1.png" style="width: 80%;" alt="demo img" title="Version 1.0.0">
-    <img src="assets/screenshot-2.png" style="width: 80%;" alt="demo img" title="Version 1.0.0">
-</p>
+[![screenshot](assets/screenshot-1.png)](https://meos.lima.zone/)
+[![screenshot](assets/screenshot-2.png)](https://meos.lima.zone/devices/computer/)
 
 
 
