@@ -2,11 +2,9 @@
     <img src="resources/logo.svg" style="width: 100%" alt="logo">
 </h1>
 
-<!--
 <p align="center">
-    <img src="assets/desktop-windows.png" style="width: 80%;" alt="demo img">
+    <img src="assets/screenshot-1.png" style="width: 80%;" alt="demo img">
 </p>
--->
 
 <h4 align="center">
     Online Operating System
@@ -14,12 +12,11 @@
 
 <p align="center">
     <strong>
-        <a href="https://meos.lima.zone/">Demo</a>
+        <a href="https://meos.lima.zone/">Website</a>
         •
         <a href="https://github.com/black-backdoor/MeOS">GitHub</a>
     </strong>
 </p>
-
 
 
 
@@ -29,6 +26,21 @@
 - **Mobile & Desktop** - Works on both mobile and desktop, with support for touch and mouse input.
 - **Adaptive** - enables & disables features based on supported Browser APIs.
 - **Dark Mode** - Supports dark mode, and changes the theme based on the system's theme.
+
+
+
+## Screenshots
+<p align="center">
+    <img src="assets/screenshot-1.png" style="width: 80%;" alt="demo img" title="Version 1.0.0">
+    <img src="assets/screenshot-2.png" style="width: 80%;" alt="demo img" title="Version 1.0.0">
+</p>
+
+
+
+## Usage
+You can use the online version of MeOS by visiting [meos.lima.zone](https://meos.lima.zone/).
+
+
 
 ## License
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
