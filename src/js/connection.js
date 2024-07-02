@@ -60,11 +60,11 @@ function setWifiStatus(status){
     if(status) {
         wifiIcon.src = yes_src;
         wifi.title = onlineTitle;
-        console.debug("[setWifiStatus] Wifi is connected");
+        console.debug("[setWifiStatus] set Wifi to connected");
     } else {
         wifiIcon.src = no_src;
         wifi.title = offlineTitle;
-        console.debug("[setWifiStatus] Wifi is not connected");
+        console.debug("[setWifiStatus] set Wifi to connected");
     }
     
 }
