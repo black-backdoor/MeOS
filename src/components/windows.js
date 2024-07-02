@@ -196,7 +196,6 @@ class AppWindow extends HTMLElement {
     }
 
     get window_fullscreen() {
-        console.debug('fullscreen:', this.classList.contains('fullscreen'));
         return this.classList.contains('fullscreen');
     }
     set window_fullscreen(value) {
@@ -390,15 +389,22 @@ function loadWindows() {
     const windows = document.querySelectorAll('app-window');
 
     let highestZIndex = 0;
-    windowsStorage.forEach(function (window) {
+    windowsStorage.forEach(function (windowData) {
         const index = windowsStorage.indexOf(window);
-        windows[index].style.left = window.x;
-        windows[index].style.top = window.y;
-        windows[index].style.width = window.width;
-        windows[index].style.height = window.height;
-        windows[index].window_fullscreen = window.fullscreen;
-        windows[index].zIndex = window.zIndex;
-        highestZIndex = Math.max(highestZIndex, window.zIndex);
+
+        if (windows[index] == undefined) { 
+            console.warn(`%c[Windows]%c Window not found in DOM: ${JSON.stringify(windowData)}`, 'color: blue', 'color: inherit');
+            console.debug('Window which was not found:', windowData);
+            return; 
+        }
+
+        windows[index].style.left = windowData.x;
+        windows[index].style.top = windowData.y;
+        windows[index].style.width = windowData.width;
+        windows[index].style.height = windowData.height;
+        windows[index].window_fullscreen = windowData.fullscreen;
+        windows[index].zIndex = windowData.zIndex;
+        highestZIndex = Math.max(highestZIndex, windowData.zIndex);
     });
     console.debug('Highest z-index:', highestZIndex);
     zIndexCounter = highestZIndex + 1;
