@@ -1,5 +1,7 @@
 /* TIME */
 document.addEventListener("DOMContentLoaded", function() {
+    const showSeconds = false;
+
     const dateElement = document.querySelector("#taskbar > .time > .date");
     const timeElement = document.querySelector("#taskbar > .time > .time");
     const timeTitleElement = document.querySelector("#taskbar > .time");
@@ -8,7 +10,15 @@ document.addEventListener("DOMContentLoaded", function() {
         const now = new Date();
         const hours = now.getHours().toString().padStart(2, '0');
         const minutes = now.getMinutes().toString().padStart(2, '0');
-        const time = `${hours}:${minutes}`;
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+
+        let time;
+        if (showSeconds) {
+            time = `${hours}:${minutes}:${seconds}`;
+        } else {
+            time = `${hours}:${minutes}`;
+        }
+
         timeElement.innerText = time;
 
 
