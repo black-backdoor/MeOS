@@ -5,6 +5,7 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
 }
 
 
@@ -78,6 +79,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+@media screen and (max-width: 800px) {
+    .device {
+        padding: 10px;
+    } 
 }
 
 .device p {
