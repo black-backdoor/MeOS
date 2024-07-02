@@ -5,12 +5,8 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-}
-
-
-/* COLORS */
-:root {
-    --background: #f4f6f7;
+    box-sizing: border-box;
+    background-color: var(--background, #f4f6f7);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,10 +16,11 @@ body {
 }
 
 
+
 .window {
     height: 80%;
     max-height: 800px;
-    width: 90%;
+    width: 70%;
     max-width: 1000px;
     background-color: #fff;
     border-radius: 10px;
@@ -32,6 +29,13 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width: 700px) {
+    .window {
+        margin-left: 60px;
+    }
+}
+
 
 .title-bar {
     background-color: #007bff;
@@ -44,17 +48,11 @@ body {
     align-items: center;
 }
 
-.title {
-    margin-left: 10px;
-}
-
 .window > .content {
     flex: 1;
-    /* Take remaining space */
     padding: 20px;
     display: flex;
     align-items: stretch;
-    /* Stretch items vertically */
 }
 
 .device-selector {
@@ -62,22 +60,32 @@ body {
     flex-wrap: wrap;
     gap: 20px;
     flex: 1;
-    /* Take full height of .content */
 }
+
+@media screen and (max-width: 500px) {
+    .device-selector {
+        flex-direction: column;
+    }
+}
+
 
 .device {
     flex: 1;
-    /* Each device takes full height */
     padding: 20px;
     background-color: #f8f9fa;
     border: 2px solid transparent;
     border-radius: 8px;
-    transition: border-color 0.3s;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .device {
+        padding: 10px;
+    }
 }
 
 .device p {
@@ -86,14 +94,3 @@ body {
 }
 
 
-@media screen and (max-width: 1175px) {
-    .window {
-        width: 80%;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .window {
-        margin-left: 60px;
-    }
-}
