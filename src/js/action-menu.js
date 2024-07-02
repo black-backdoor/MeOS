@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         actionMenu.classList.toggle('open');
     });
 
-    document.addEventListener('click', function(event) {
+    document.addEventListener('mousedown', function(event) {
         if (!actionMenu.contains(event.target) && !taskbarTime.contains(event.target)) {
             actionMenu.classList.remove('open');
         }
