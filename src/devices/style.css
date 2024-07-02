@@ -6,12 +6,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     box-sizing: border-box;
-}
-
-
-/* COLORS */
-:root {
-    --background: #f4f6f7;
+    background-color: var(--background, #f4f6f7);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,7 +14,6 @@ body {
         --background: #4b4b4b;
     }
 }
-
 
 .window {
     height: 80%;
@@ -51,11 +45,9 @@ body {
 
 .window > .content {
     flex: 1;
-    /* Take remaining space */
     padding: 20px;
     display: flex;
     align-items: stretch;
-    /* Stretch items vertically */
 }
 
 .device-selector {
@@ -63,12 +55,10 @@ body {
     flex-wrap: wrap;
     gap: 20px;
     flex: 1;
-    /* Take full height of .content */
 }
 
 .device {
     flex: 1;
-    /* Each device takes full height */
     padding: 20px;
     background-color: #f8f9fa;
     border: 2px solid transparent;
@@ -80,17 +70,17 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 @media screen and (max-width: 800px) {
     .device {
         padding: 10px;
-    } 
+    }
 }
 
 .device p {
     margin-top: 10px;
     text-align: center;
 }
-
 
 @media screen and (max-width: 1175px) {
     .window {
