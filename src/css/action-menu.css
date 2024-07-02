@@ -23,6 +23,7 @@
     box-sizing: border-box;
     border-radius: 5px;
     background-color: #292929;
+    height: 40%;
     max-height: 300px;
 }
 
