@@ -39,10 +39,6 @@ body {
     align-items: center;
 }
 
-.title {
-    margin-left: 10px;
-}
-
 .window > .content {
     flex: 1;
     padding: 20px;
