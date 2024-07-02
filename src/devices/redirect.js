@@ -12,6 +12,7 @@ window.onload = function() {
 
     if (checkScreenSize()) {
         // Handle redirection or other actions here
-        window.location.href = "/";
+        // window.location.href = "/";
+        window.history.back();
     }
 };
