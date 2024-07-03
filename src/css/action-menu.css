@@ -52,7 +52,7 @@
 
 
 /* LIST */
-#action-menu .notifications .notification-list {
+#action-menu .notifications .list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
