@@ -88,6 +88,7 @@ class Notification extends HTMLElement {
             .icon {
                 height: 60px;
                 width: 60px;
+                margin-right: 5px;
             }
             .icon > img {
                 width: 100%;
