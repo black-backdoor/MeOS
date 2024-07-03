@@ -162,10 +162,15 @@ class NotificationsApp extends HTMLElement {
     constructor() {
         super();
 
+        this.attachShadow({ mode: 'open' });
+
         this.name = this.getAttribute('name') ?? 'Notification';
         this.icon = this.getAttribute('icon') ?? undefined;
 
-        this.attachShadow({ mode: 'open' });
+        this.render();
+    }
+
+    connectedCallback() {
         this.render();
     }
 
@@ -261,23 +266,7 @@ class NotificationsApp extends HTMLElement {
         this.shadowRoot.querySelector(".close").addEventListener("click", this.close);
         this.shadowRoot.addEventListener("click", this.check_empty);
     }
-
     
-    /* ATTRIBUTES */
-    get name() {
-        return this.getAttribute('name');
-    }
-    set name(value) {
-        this.setAttribute('name', value);
-    }
-
-    get icon() {
-        return this.getAttribute('icon');
-    }
-    set icon(value) {
-        this.setAttribute('icon', value);
-    }
-
 
     /* METHODS */
     close = () => {
