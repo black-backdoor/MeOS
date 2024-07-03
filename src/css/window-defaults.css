@@ -25,12 +25,6 @@ app-window.website iframe {
 }
 
 app-window.website:has(iframe) {
-    --body-bg-color: #494949;
+    --body-bg-color: var(--head-bg-color);
 }
-@media (prefers-color-scheme: light) {
-    app-window.website:has(iframe) {
-        --body-bg-color: #fdfdfd;
-    }
-}
-
 
