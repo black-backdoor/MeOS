@@ -9,6 +9,8 @@ class Notification extends HTMLElement {
         this.appicon = this.getAttribute('app-icon') ?? undefined;
         this.icon = this.getAttribute('icon') ?? undefined;
 
+        this.time_alive = this.getAttribute('time-alive');
+
         this.attachShadow({ mode: 'open' });
         this.render();
     }
@@ -135,6 +137,7 @@ class Notification extends HTMLElement {
         `;
 
         this.shadowRoot.querySelector(".close").addEventListener("click", this.close);
+        if (this.time_alive) { setTimeout(() => { this.close(); }, this.time_alive); }
     }
 
     
