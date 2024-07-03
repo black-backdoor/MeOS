@@ -9,6 +9,8 @@ class Notification extends HTMLElement {
         this.appicon = this.getAttribute('app-icon') ?? undefined;
         this.icon = this.getAttribute('icon') ?? undefined;
 
+        this.time_alive = this.getAttribute('time-alive');
+
         this.attachShadow({ mode: 'open' });
         this.render();
     }
@@ -92,7 +94,6 @@ class Notification extends HTMLElement {
             /* text */
             .text {
                 flex-grow: 1;
-                padding-left: 10px;
             }
             .text * {
                 margin: 0;
@@ -135,6 +136,7 @@ class Notification extends HTMLElement {
         `;
 
         this.shadowRoot.querySelector(".close").addEventListener("click", this.close);
+        if (this.time_alive) { setTimeout(() => { this.close(); }, this.time_alive); }
     }
 
     
@@ -186,3 +188,142 @@ class Notification extends HTMLElement {
 }
 
 customElements.define('desktop-notification', Notification);
+
+
+
+
+/* element for grouping notifications by app */
+class NotificationsApp extends HTMLElement {
+    constructor() {
+        super();
+
+        this.name = this.getAttribute('name') ?? 'Notification';
+        this.icon = this.getAttribute('icon') ?? undefined;
+
+        this.attachShadow({ mode: 'open' });
+        this.render();
+    }
+
+    css() {
+        return `
+            :host {
+                --text-color: #fff;
+            }
+
+            :host {
+                width: 100%;
+                padding: 10px 0;
+                border-radius: 5px;
+                background-color: transparent;
+            }
+
+            /* TEXT + ICON */
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            header * {
+                margin: 0;
+                padding: 0;
+                color: var(--text-color);
+            }
+
+            header img {
+                width: 30px;
+                height: 30px;
+                margin-right: 5px;
+            }
+            
+            header p {
+                margin: 0;
+            }
+
+            header .app {
+                display: flex;
+                align-items: center;
+            }
+
+            /* close button */
+            header button {
+                background-color: inherit;
+                padding: 0;
+                border: none;
+                cursor: pointer;
+            }
+
+            /* NOTIFICATIONS */
+            slot {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
+            }
+        `;
+    }
+
+    template() {
+        return `
+            <header>
+                <div class="app">${this.icon !== undefined && this.icon !== "undefined" ? `<img src="${this.icon}">` : ''}<p>${this.name}</p></div>
+                <button class="close" title="close">✖</button>
+            </header>
+            <slot></slot>
+        `;
+    }
+
+    static get observedAttributes() {
+        return ['name', 'icon'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue !== newValue) {
+            this[name] = newValue;
+        }
+        this.render();
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+            <style>${this.css().trim()}</style>
+            ${this.template().trim()}
+        `;
+
+        this.shadowRoot.querySelector(".close").addEventListener("click", this.close);
+        this.shadowRoot.addEventListener("click", this.check_empty);
+    }
+
+    
+    /* ATTRIBUTES */
+    get name() {
+        return this.getAttribute('name');
+    }
+    set name(value) {
+        this.setAttribute('name', value);
+    }
+
+    get icon() {
+        return this.getAttribute('icon');
+    }
+    set icon(value) {
+        this.setAttribute('icon', value);
+    }
+
+
+    /* METHODS */
+    close = () => {
+        this.remove();
+    }
+
+    check_empty = () => {
+        if (this.shadowRoot.querySelector("slot").assignedElements().length === 0) {
+            this.remove();
+        }
+    }
+}
+
+customElements.define('notifications-app', NotificationsApp);
