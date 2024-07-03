@@ -100,5 +100,13 @@
             </article>
         </section>
     </main>
+
+    <script>
+        // used by the fix-scrollbar.css to change the scrollbar style
+        if (window.self !== window.top) {
+            // add the class in-iframe to the html element
+            document.documentElement.classList.add('in-iframe');
+        }
+    </script>
 </body>
 </html>

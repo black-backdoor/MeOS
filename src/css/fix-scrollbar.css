@@ -1,23 +1,23 @@
-/** DEFAULT SCROLLBAR */
+/** IN IFRAME SCROLLBAR */
 
-*::-webkit-scrollbar {
+.in-iframe > *::-webkit-scrollbar {
     width: 6px;
 }
 
 /* Handle portion of the scrollbar */
-*::-webkit-scrollbar-thumb {
+.in-iframe > *::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 6px;
     border: 2px solid var(--color-background-900);
 }
 
 /* Track (the area on which the handle moves) */
-*::-webkit-scrollbar-track {
+.in-iframe > *::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
 /* Handle on hover */
-*::-webkit-scrollbar-thumb:hover {
+.in-iframe > *::-webkit-scrollbar-thumb:hover {
     background-color: #555;
 }
 
