@@ -2,16 +2,19 @@ class Notification extends HTMLElement {
     constructor() {
         super();
 
+        this.attachShadow({ mode: 'open' });
+
         this.name = this.getAttribute('name') ?? 'Notification';
         this.content = this.getAttribute('content') ?? 'This is a notification component';
-
-        this.appname = this.getAttribute('app-name') ?? undefined;
-        this.appicon = this.getAttribute('app-icon') ?? undefined;
+        this.appName = this.getAttribute('app-name') ?? undefined;
+        this.appIcon = this.getAttribute('app-icon') ?? undefined;
         this.icon = this.getAttribute('icon') ?? undefined;
+        this.timeAlive = this.getAttribute('time-alive');
 
-        this.time_alive = this.getAttribute('time-alive');
+        this.render();
+    }
 
-        this.attachShadow({ mode: 'open' });
+    connectedCallback() {
         this.render();
     }
 
@@ -85,6 +88,7 @@ class Notification extends HTMLElement {
             .icon {
                 height: 60px;
                 width: 60px;
+                margin-right: 5px;
             }
             .icon > img {
                 width: 100%;
@@ -101,32 +105,34 @@ class Notification extends HTMLElement {
             }
         `;
     }
-
+    
     template() {
         return `
             <div class="top">
-                ${this.appname != "undefined" && this.appicon != "undefined" ? `<div class="app"><img src="${this.appicon}" alt="icon"><p class="appname">${this.appname}</p></div>` : `<p class="time">${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}</p>`}
+                ${this.appName && this.appIcon ? `<div class="app"><img src="${this.appIcon}" alt="icon"><p class="appname">${this.appName}</p></div>` : `<p class="time">${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}</p>`}
                 <button class="close" title="close">✖</button>
             </div>
             <div class="content">
-                ${this.icon != "undefined" ? `<div class="icon"><img src="${this.getAttribute('icon')}" alt="icon"></div>` : ''}
+                ${this.icon ? `<div class="icon"><img src="${this.icon}" alt="icon"></div>` : ''}
                 <div class="text">
-                    <h4>${this.getAttribute('name')}</h4>
-                    <p>${this.getAttribute('content')}</p>
+                    <h4>${this.name}</h4>
+                    <p>${this.content}</p>
                 </div>
             </div>
         `;
     }
 
     static get observedAttributes() {
-        return ['name', 'content', 'icon'];
+        return ['name', 'content', 'icon', 'app-name', 'app-icon', 'time-alive'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue !== newValue) {
-            this[name] = newValue;
+            this[name.replace(/-([a-z])/g, g => g[1].toUpperCase())] = newValue;
         }
-        this.render();
+        if (this.isConnected) {
+            this.render();
+        }
     }
 
     render() {
@@ -136,52 +142,11 @@ class Notification extends HTMLElement {
         `;
 
         this.shadowRoot.querySelector(".close").addEventListener("click", this.close);
-        if (this.time_alive) { setTimeout(() => { this.close(); }, this.time_alive); }
+        if (this.timeAlive) {
+            setTimeout(() => { this.close(); }, this.timeAlive);
+        }
     }
 
-    
-    /* ATTRIBUTES */
-    /* content attributes */
-    get name() {
-        return this.getAttribute('name');
-    }
-    set name(value) {
-        this.setAttribute('name', value);
-    }
-
-    get content() {
-        return this.getAttribute('content');
-    }
-    set content(value) {
-        this.setAttribute('content', value);
-    }
-
-
-    /* app attributes */
-    get appname() {
-        return this.getAttribute('app-name');
-    }
-    set appname(value) {
-        this.setAttribute('app-name', value);
-    }
-
-    get appicon() {
-        return this.getAttribute('app-icon');
-    }
-    set appicon(value) {
-        this.setAttribute('app-icon', value);
-    }
-
-
-    /* icon attributes */
-    get icon() {
-        return this.getAttribute('icon');
-    }
-    set icon(value) {
-        this.setAttribute('icon', value);
-    }
-
-    /* METHODS */
     close = () => {
         this.remove();
     }
@@ -197,10 +162,15 @@ class NotificationsApp extends HTMLElement {
     constructor() {
         super();
 
+        this.attachShadow({ mode: 'open' });
+
         this.name = this.getAttribute('name') ?? 'Notification';
         this.icon = this.getAttribute('icon') ?? undefined;
 
-        this.attachShadow({ mode: 'open' });
+        this.render();
+    }
+
+    connectedCallback() {
         this.render();
     }
 
@@ -296,23 +266,7 @@ class NotificationsApp extends HTMLElement {
         this.shadowRoot.querySelector(".close").addEventListener("click", this.close);
         this.shadowRoot.addEventListener("click", this.check_empty);
     }
-
     
-    /* ATTRIBUTES */
-    get name() {
-        return this.getAttribute('name');
-    }
-    set name(value) {
-        this.setAttribute('name', value);
-    }
-
-    get icon() {
-        return this.getAttribute('icon');
-    }
-    set icon(value) {
-        this.setAttribute('icon', value);
-    }
-
 
     /* METHODS */
     close = () => {
