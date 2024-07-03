@@ -1,3 +1,40 @@
+/* UI FUNCTIONALITY */
+
+document.addEventListener("DOMContentLoaded", function() {
+    const clear_all_button = document.querySelector("#action-menu .notifications button.clear-all");
+    const notifications = document.querySelectorAll("#action-menu .notifications .list");
+    
+    clear_all_button.addEventListener("click", function() {
+        notifications.innerHTML = "";
+        saveNotifications();
+    });
+});
+
+
+function saveNotifications() {
+    const notifications = document.querySelector("#action-menu .notifications .list");
+    sessionStorage.setItem("notifications", notifications.innerHTML);
+}
+
+function loadNotifications() {
+    const notifications = document.querySelector("#action-menu .notifications .list");
+    notifications.innerHTML = sessionStorage.getItem("notifications");
+}
+
+document.addEventListener("DOMContentLoaded", loadNotifications);  // load notifications on page load
+document.addEventListener("DOMContentLoaded" , function() { setInterval(saveNotifications, 30000); });  // save notifications every 30 seconds
+
+// save notifications on click (probably when close button is clicked)
+document.addEventListener("DOMContentLoaded", function() {
+    const notifications = document.querySelector("#action-menu .notifications");
+    notifications.addEventListener("click", function() {
+        saveNotifications();
+    });
+});
+
+
+
+
 /*
     @param {string} name - name of the app
     @param {string} icon - icon of the app
@@ -56,18 +93,18 @@ function sendNotification(name, content, icon, appname, appicon, push = false) {
     app_groups.forEach(group => {
         // if app group is found, add notification to the group
         if (group.getAttribute("name") === appname) {
+            console.debug("[NOTIFICATIONS] add notification to app group", appname);
             group.appendChild(notification);
 
             // set icon if not already set
             if (group.getAttribute("icon") === undefined && appicon !== undefined) {
+                console.debug("[NOTIFICATIONS] update icon for app group", appname, appicon);
                 group.setAttribute("icon", appicon);
             }
             found = true;
             return;
         }
     });
-
-    console.debug("notification group found?: ", found);
 
     
     if (!found && appname !== undefined) {
@@ -79,6 +116,7 @@ function sendNotification(name, content, icon, appname, appicon, push = false) {
         app_groups.forEach(group => {
             // if app group is found, add notification to the group
             if (group.getAttribute("name") === appname) {
+                console.debug("[NOTIFICATIONS] add notification to app group", appname);
                 group.appendChild(notification);
                 found = true;
                 return;
@@ -89,5 +127,7 @@ function sendNotification(name, content, icon, appname, appicon, push = false) {
         // if no appname is provided, add to the action menu list directly (without grouping)
         action_menu_list.appendChild(notification);
     }
-    
+
+
+    saveNotifications();
 }

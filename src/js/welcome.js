@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // WELCOME NOTIFICATION (PUSHED TO DESKTOP)
-    if (localStorage && localStorage.getItem("welcome-notification") === null) {
+    if (sessionStorage && sessionStorage.getItem("welcome-notification") === null) {
 
         sendNotification(
             "Welcome to MeOS!",
@@ -12,6 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
             true
         ); 
 
-        localStorage.setItem("welcome-notification", true);
+        sessionStorage.setItem("welcome-notification", true);
     }
 });
