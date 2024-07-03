@@ -188,3 +188,136 @@ class Notification extends HTMLElement {
 }
 
 customElements.define('desktop-notification', Notification);
+
+
+
+
+/* element for grouping notifications by app */
+class NotificationsApp extends HTMLElement {
+    constructor() {
+        super();
+
+        this.name = this.getAttribute('name') ?? 'Notification';
+        this.icon = this.getAttribute('icon') ?? undefined;
+
+        this.attachShadow({ mode: 'open' });
+        this.render();
+    }
+
+    css() {
+        return `
+            :host {
+                --text-color: #fff;
+                --bg-color: #292929;
+            }
+
+            :host {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                gap: 5px;
+                margin-bottom: 10px;
+                background-color: var(--bg-color);
+            }
+
+
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            header * {
+                margin: 0;
+                padding: 0;
+                color: var(--text-color);
+            }
+
+            header img {
+                width: 30px;
+                height: 30px;
+                margin-right: 5px;
+            }
+            
+            header p {
+                margin: 0;
+            }
+
+            header .app {
+                display: flex;
+                align-items: center;
+            }
+
+            /* close button */
+            header button {
+                background-color: inherit;
+                padding: 0;
+                border: none;
+                cursor: pointer;
+            }
+        `;
+    }
+
+    template() {
+        return `
+            <header>
+                <div class="app">${this.icon !== undefined && this.icon !== "undefined" ? `<img src="${this.icon}">` : ''}<p>${this.name}</p></div>
+                <button class="close" title="close">✖</button>
+            </header>
+            <slot></slot>
+        `;
+    }
+
+    static get observedAttributes() {
+        return ['name', 'icon'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue !== newValue) {
+            this[name] = newValue;
+        }
+        this.render();
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+            <style>${this.css().trim()}</style>
+            ${this.template().trim()}
+        `;
+
+        this.shadowRoot.querySelector(".close").addEventListener("click", this.close);
+        this.shadowRoot.addEventListener("click", this.check_empty);
+    }
+
+    
+    /* ATTRIBUTES */
+    get name() {
+        return this.getAttribute('name');
+    }
+    set name(value) {
+        this.setAttribute('name', value);
+    }
+
+    get icon() {
+        return this.getAttribute('icon');
+    }
+    set icon(value) {
+        this.setAttribute('icon', value);
+    }
+
+
+    /* METHODS */
+    close = () => {
+        this.remove();
+    }
+
+    check_empty = () => {
+        if (this.shadowRoot.querySelector("slot").assignedElements().length === 0) {
+            this.remove();
+        }
+    }
+}
+
+customElements.define('notifications-app', NotificationsApp);
