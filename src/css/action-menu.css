@@ -16,7 +16,7 @@
 
 
 
-/* Notifications */
+/* NOTIFICATIONS BOX */
 #action-menu .notifications {
     overflow-y: auto;
     padding: 10px;
@@ -51,38 +51,12 @@
 }
 
 
-/* notification list */
+/* LIST */
 #action-menu .notifications .notification-list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
-
-
-
-/* notification app */
-#action-menu .notifications .notification-list .app {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    gap: 5px;
-    margin-bottom: 10px;
-}
-#action-menu .notifications .notification-list .app header {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    width: 100%;
-}
-#action-menu .notifications .notification-list .app header img {
-    width: 30px;
-    height: 30px;
-}
-#action-menu .notifications .notification-list .app header p {
-    margin: 0;
-}
-
 
 /* notification style */
 #action-menu .notifications desktop-notification {
@@ -97,7 +71,7 @@
 
 
 
-
+/* CALENDAR */
 #action-menu .calendar {
     width: 100%;
     --text-color: #fff;
