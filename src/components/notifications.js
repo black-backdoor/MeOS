@@ -6,11 +6,10 @@ class Notification extends HTMLElement {
 
         this.name = this.getAttribute('name') ?? 'Notification';
         this.content = this.getAttribute('content') ?? 'This is a notification component';
-        this.icon = this.getAttribute('icon') ?? undefined;
-        this.time_alive = this.getAttribute('time-alive');
-
         this.appName = this.getAttribute('app-name') ?? undefined;
-        this.appicon = this.getAttribute('app-icon') ?? undefined;
+        this.appIcon = this.getAttribute('app-icon') ?? undefined;
+        this.icon = this.getAttribute('icon') ?? undefined;
+        this.timeAlive = this.getAttribute('time-alive');
 
         this.render();
     }
@@ -105,15 +104,15 @@ class Notification extends HTMLElement {
             }
         `;
     }
-
+    
     template() {
         return `
             <div class="top">
-                ${this.appName != "undefined" && this.appicon != "undefined" ? `<div class="app"><img src="${this.appicon}" alt="icon"><p class="appname">${this.appName}</p></div>` : `<p class="time">${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}</p>`}
+                ${this.appName && this.appIcon ? `<div class="app"><img src="${this.appIcon}" alt="icon"><p class="appname">${this.appName}</p></div>` : `<p class="time">${new Date().getHours().toString().padStart(2, '0')}:${new Date().getMinutes().toString().padStart(2, '0')}</p>`}
                 <button class="close" title="close">✖</button>
             </div>
             <div class="content">
-                ${this.icon != "undefined" ? `<div class="icon"><img src="${this.icon}" alt="icon"></div>` : ''}
+                ${this.icon ? `<div class="icon"><img src="${this.icon}" alt="icon"></div>` : ''}
                 <div class="text">
                     <h4>${this.name}</h4>
                     <p>${this.content}</p>
@@ -128,9 +127,11 @@ class Notification extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue !== newValue) {
-            this[name] = newValue;
+            this[name.replace(/-([a-z])/g, g => g[1].toUpperCase())] = newValue;
         }
-        this.render();
+        if (this.isConnected) {
+            this.render();
+        }
     }
 
     render() {
@@ -140,52 +141,11 @@ class Notification extends HTMLElement {
         `;
 
         this.shadowRoot.querySelector(".close").addEventListener("click", this.close);
-        if (this.time_alive) { setTimeout(() => { this.close(); }, this.time_alive); }
+        if (this.timeAlive) {
+            setTimeout(() => { this.close(); }, this.timeAlive);
+        }
     }
 
-    
-    /* ATTRIBUTES */
-    /* content attributes */
-    get name() {
-        return this.getAttribute('name');
-    }
-    set name(value) {
-        this.setAttribute('name', value);
-    }
-
-    get content() {
-        return this.getAttribute('content');
-    }
-    set content(value) {
-        this.setAttribute('content', value);
-    }
-
-
-    /* app attributes */
-    get appname() {
-        return this.getAttribute('app-name');
-    }
-    set appname(value) {
-        this.setAttribute('app-name', value);
-    }
-
-    get appicon() {
-        return this.getAttribute('app-icon');
-    }
-    set appicon(value) {
-        this.setAttribute('app-icon', value);
-    }
-
-
-    /* icon attributes */
-    get icon() {
-        return this.getAttribute('icon');
-    }
-    set icon(value) {
-        this.setAttribute('icon', value);
-    }
-
-    /* METHODS */
     close = () => {
         this.remove();
     }
