@@ -208,25 +208,22 @@ class NotificationsApp extends HTMLElement {
         return `
             :host {
                 --text-color: #fff;
-                --bg-color: #292929;
             }
 
             :host {
-                display: flex;
-                align-items: center;
-                flex-direction: column;
                 width: 100%;
-                gap: 5px;
-                margin-bottom: 10px;
-                background-color: var(--bg-color);
+                padding: 10px 0;
+                border-radius: 5px;
+                background-color: transparent;
             }
 
-
+            /* TEXT + ICON */
             header {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 width: 100%;
+                margin-bottom: 5px;
             }
 
             header * {
@@ -256,6 +253,15 @@ class NotificationsApp extends HTMLElement {
                 padding: 0;
                 border: none;
                 cursor: pointer;
+            }
+
+            /* NOTIFICATIONS */
+            slot {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
             }
         `;
     }
