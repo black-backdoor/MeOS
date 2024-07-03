@@ -94,7 +94,6 @@ class Notification extends HTMLElement {
             /* text */
             .text {
                 flex-grow: 1;
-                padding-left: 10px;
             }
             .text * {
                 margin: 0;
