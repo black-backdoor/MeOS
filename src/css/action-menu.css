@@ -39,6 +39,7 @@
     font-size: 1.2em;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 #action-menu .notifications button {
     /* clear all button */
