@@ -35,13 +35,13 @@ const limitCacheSize = (name, size) => {
 
 /* ----------- GET & CACHE OFFLINE PAGE ----------- */
 
-const offlineCacheName = 'site-offline-v0.1.0';
+const offlineCacheName = 'site-offline-v0.2.0';
 const offlineCacheAssets = [
   '/fallback.html'
 ];
 
 
-const dynamicCacheName = 'site-dynamic-v0.1.0';
+const dynamicCacheName = 'site-dynamic-v0.2.0';
 
 
 
