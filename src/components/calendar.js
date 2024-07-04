@@ -155,7 +155,7 @@ class CalendarWidget extends HTMLElement {
 
         const prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0).getDate();
         const daysToShowBefore = firstDay === 0 ? 6 : firstDay - 1;
-        const daysToShowAfter = 42 - daysToShowBefore - lastDate;
+        const daysToShowAfter = 42 - daysToShowBefore - lastDate;  // 42 = 6 rows * 7 days
 
         let dayCells = '';
 
