@@ -72,8 +72,16 @@ document.addEventListener("DOMContentLoaded", function() {
             This is done by checking if the target's offsetParent is the context menu.
         */
         
-        if (e.target.offsetParent !== contextMenu && e.target !== contextMenu && !contextMenu.contains(e.target)) {
-            console.log("clicked outside of the context menu");
+        if (e.target !== contextMenu && !contextMenu.contains(e.target)) {
+            console.debug("clicked outside of the context menu");
+            contextMenu.classList.remove('visible');
+            document.body.classList.remove('context-menu-open');
+        } 
+    });
+
+    contextMenu.addEventListener('click', function(e) {
+        if (contextMenu.contains(e.target) && e.target.tagName === "BUTTON") {
+            console.debug("clicked on a button inside the context menu");
             contextMenu.classList.remove('visible');
             document.body.classList.remove('context-menu-open')
         }
