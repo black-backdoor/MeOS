@@ -185,6 +185,8 @@ class NotificationsApp extends HTMLElement {
                 padding: 10px 0;
                 border-radius: 5px;
                 background-color: transparent;
+
+                user-select: none;
             }
 
             /* TEXT + ICON */

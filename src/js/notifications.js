@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const notifications = document.querySelectorAll("#action-menu .notifications .list");
     
     clear_all_button.addEventListener("click", function() {
-        notifications.innerHTML = "";
+        console.debug("clear all notifications");
+        notifications.forEach(notification => {
+            notification.innerHTML = "";
+        });
         saveNotifications();
     });
 });
@@ -13,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function saveNotifications() {
     const notifications = document.querySelector("#action-menu .notifications .list");
+    console.debug("save notifications", notifications.innerHTML);
     sessionStorage.setItem("notifications", notifications.innerHTML);
 }
 
@@ -27,7 +31,7 @@ document.addEventListener("DOMContentLoaded" , function() { setInterval(saveNoti
 // save notifications on click (probably when close button is clicked)
 document.addEventListener("DOMContentLoaded", function() {
     const notifications = document.querySelector("#action-menu .notifications");
-    notifications.addEventListener("click", function() {
+    notifications.addEventListener("click", function(e) {
         saveNotifications();
     });
 });
