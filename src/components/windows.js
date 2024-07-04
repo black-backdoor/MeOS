@@ -272,6 +272,8 @@ document.addEventListener('DOMContentLoaded', function() {
         windowHead.addEventListener('touchstart', startDragging);
 
         function startDragging(e) {
+            if(e.type === 'mousedown' && e.button !== 0) return;  // only allow primary mouse button (0) to drag the window
+
             // don't drag the window if the user clicks on the controls (close, minimize, maximize)
             if (e.target == windowControls || windowControls.contains(e.target)) {
                 return;
