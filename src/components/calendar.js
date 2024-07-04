@@ -70,18 +70,24 @@ class CalendarWidget extends HTMLElement {
                 flex-wrap: wrap;
                 padding: 10px;
                 justify-content: center;
+                height: 200px;
             }
             .day-label {
                 width: calc(100% / 7);
                 text-align: center;
                 font-weight: bold;
                 color: var(--text-color);
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .day {
                 width: calc(100% / 7);
                 text-align: center;
-                padding: 5px 0;
                 box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .day.prev-month {
                 color: var(--old-text-color);
@@ -149,6 +155,7 @@ class CalendarWidget extends HTMLElement {
 
         const prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0).getDate();
         const daysToShowBefore = firstDay === 0 ? 6 : firstDay - 1;
+        const daysToShowAfter = 42 - daysToShowBefore - lastDate;
 
         let dayCells = '';
 
@@ -167,9 +174,7 @@ class CalendarWidget extends HTMLElement {
         }
 
         // Next month days
-        const totalDays = daysToShowBefore + lastDate;
-        const remainingDays = 42 - totalDays; // 42 = 6 weeks * 7 days
-        for (let i = 1; i <= remainingDays; i++) {
+        for (let i = 1; i <= daysToShowAfter; i++) {
             dayCells += `<div class="day next-month">${i}</div>`;
         }
 
