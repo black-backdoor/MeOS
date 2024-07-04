@@ -1,0 +1,149 @@
+#context-menu {
+    --text-color: #eee;
+    --menu-background: #2c2c2c;
+    --hover-color: #383838;
+    --separator-color: #383838;
+    --icon-fill: var(--text-color);
+}
+
+
+@media (prefers-color-scheme: light) {
+    #context-menu {
+        --text-color: #6b7280;
+        --menu-background: white;
+        --hover-color: #e7e7e7;
+        --separator-color: #d1d5db;
+        --icon-fill: #393939;
+    }
+}
+
+
+/* ! alternative dark theme */
+#context-menu.night {
+    --text-color: #eee;
+    --menu-background: #1b1a1a;
+    --hover-color: #343434;
+    --separator-color: #343434;
+}
+
+
+#context-menu {
+    box-sizing: border-box;
+
+    user-select: none;
+    position: fixed;
+    z-index: 9999;
+    width: 200px;
+
+    border-radius: 4px;
+    box-shadow: #5a5353 0 0 5px 0;
+
+    padding: 6px;
+    background-color: var(--menu-background);
+
+    transform: scale(0);
+    transform-origin: top left;
+}
+
+#context-menu.visible {
+    transform: scale(1);
+    transition: transform 100ms ease-in-out;
+}
+
+
+/* DEFAULT MENU ITEM */
+#context-menu button {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    color: var(--text-color);
+    background-color: inherit;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2px;
+    margin: 0;
+
+    height: 30px;
+    width: 100%;
+}
+
+#context-menu button:hover {
+    background-color: var(--hover-color);
+}
+
+#context-menu button svg {
+    fill: var(--icon-fill);
+    height: 80%;
+}
+
+
+
+/* VERTICAL MENU */
+#context-menu .vertical-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#context-menu .vertical-section button {
+    justify-content: center;
+    width: 25%;
+}
+#context-menu .vertical-section button svg {
+    width: 80%;
+}
+
+
+
+/* SEPARATOR */
+#context-menu .separator {
+    height: 1px;
+    margin: 8px 0;
+    background-color: var(--separator-color);
+}
+
+
+/* ------------- SCROLL BAR ------------- */
+#context-menu.scroll {
+    height: 333px;
+    overflow-y: scroll;
+}
+
+
+
+/* ------ SCROLL BAR FIX FOR CHROME ------ */
+/* ? chrome scrollbar is still the old blocky one */
+/* ? this is a fix for that */
+
+/* width */
+#context-menu::-webkit-scrollbar {
+    cursor: pointer;
+    width: 10px;
+}
+
+/* Track */
+#context-menu::-webkit-scrollbar-track {
+    cursor: pointer;
+    border-radius: 10px;
+    background: var(--menu-background);
+}
+
+/* Handle */
+#context-menu::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background: #888;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+#context-menu::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background: #555;
+}
+
+/* ? the 0.8px of the border makes the scrollbar feel off -> remove it */
+#context-menu {
+    border-right: 0;
+}
