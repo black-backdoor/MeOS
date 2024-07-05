@@ -34,13 +34,13 @@
 
     
     <!-- SCRIPTS -->
-    <script src="/js/weather.js"></script>
-    <script src="/js/connection.js"></script>
-    <script src="/js/sound.js"></script>
-    <script src="/js/taskbar-time.js" rel="preload"></script>
-    <script src="/js/battery.js" defer></script>
+    <script src="/js/taskbar/weather.js"></script>
+    <script src="/js/taskbar/internet-connection.js"></script>
+    <script src="/js/taskbar/sound.js"></script>
+    <script src="/js/taskbar/clock.js" rel="preload"></script>
+    <script src="/js/taskbar/battery.js" defer></script>
     <link rel="stylesheet" href="/css/action-menu.css">
-    <script src="/js/action-menu.js"></script>
+    <script src="/js/taskbar/action-menu.js"></script>
     <script src="/js/welcome.js"></script>
     <script src="/js/context-menu.js"></script>
     <link rel="stylesheet" href="/css/context-menu.css">
@@ -137,24 +137,24 @@
             <!-- MENU -->
             <div class="internet-access icon"
                 title="Winternet&#013No connection"
-                online-title="WiFi-Name&#013Internet access"
-                offline-title="No internet access&#013No connections available"
+                title-online="WiFi-Name&#013Internet access"
+                title-offline="No internet access&#013No connections available"
                 >
                 <!-- 
                     title = default,
-                    online-title = when connected,
-                    offline-title = when not connected
+                    title-online = when connected,
+                    title-offline = when not connected
                 -->
 
 
                 <img alt="Wifi"
                     src="/assets/connection/wifi.svg"
-                    src-yes="/assets/connection/wifi.svg"
-                    src-no="/assets/connection/no-wifi.svg"
+                    src-online="/assets/connection/wifi.svg"
+                    src-offline="/assets/connection/no-wifi.svg"
                 >
                 <!-- src = default,
-                     src-yes = when connected,
-                     src-no = when not connected
+                     src-online = when connected,
+                     src-offline = when not connected
                 -->
             </div>
 

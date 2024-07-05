@@ -36,13 +36,14 @@ function updateBatteryStatus() {
         return `${hours}h ${minutes}m`;
     }
 
+
     const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
     const batteryIMG = document.querySelector('#taskbar > .menu > .battery img');
 
     if (batteryStatus == undefined || batteryIMG == undefined) {
         console.warn('%c[setBatteryStatus]%c the battery icon was not found', 'color: lightgreen', 'color: inherit');
 
-        // if the battery icon is not found, try again in 1 second
+        // if the battery icon is not found, try again in 1 second (could be that the dom hasn't loaded yet | but this should not happen -> script is deferred)
         setTimeout(updateBatteryStatus, 1000);
 
         return;
@@ -99,6 +100,7 @@ function updateBatteryStatus() {
 
             batteryStatus.title = message;
 
+            // DEBUG LOGS
             console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
             console.info(
                 `%c[setBatteryStatus]%c battery level: %c${percent}% %cand battery is %c${charging ? 'charging' : 'discharging'}`,
@@ -115,7 +117,7 @@ function updateBatteryStatus() {
             console.debug("dischargingTime", battery.dischargingTime);
         });
     } else {
-        console.debug('[setBatteryStatus] battery status updated: not supported');
+        console.debug('%c[setBatteryStatus]%c battery status updated: not supported', 'color: lightgreen', 'color: inherit');
         batteryStatus.title = 'Battery status is not supported';
     }
 }

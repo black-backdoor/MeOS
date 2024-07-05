@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
+    /*
+        get the icon from the /assets/weather/data.json file
+        select random entry from the icons array
+        
+        entry:
+        {
+            "icon": "cloud-thunder.svg",
+            "temp": 20,
+            "desc": "Stormy"
+        },
+
+        set the weather icon, temperature and description based on the entry
+    */
+
     const weather = document.querySelector('#taskbar > .weather');
     const weatherIcon = weather.querySelector('img');
     const weatherTemp = weather.querySelector('.text > .temp');
@@ -14,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const randomIcon = icons[Math.floor(Math.random() * icons.length)];
                 const hour = new Date().getHours();
 
+                // Check if the icon should be only displayed only before or after a certain hour
                 let conditionsMet = true;
                 if (randomIcon?.before && hour >= randomIcon.before) {
                     conditionsMet = false;
@@ -22,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     conditionsMet = false;
                 }
 
+                // Update the weather icon if conditions are met
                 if (conditionsMet) {
                     weatherIcon.src = baseURL + randomIcon.icon;
                     weatherTemp.textContent = randomIcon.temp + "°C";
