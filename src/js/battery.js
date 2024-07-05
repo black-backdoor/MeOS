@@ -52,14 +52,34 @@ function updateBatteryStatus() {
         navigator.getBattery().then((battery) => {
             const { level, charging } = battery;
             const percent = Math.round(level * 100);
-            // let message = `${percent}% ${charging ? '⚡' : ''}`;
             
+            /* TWO EXAMPLES OF BATTERY STATUS MESSAGES
+            let message = `Battery status: ${percent}% `;
+
+            if (charging) {
+                if (battery.chargingTime === Infinity) {
+                    // Example: Battery status: 50% (plugged in)
+                    message += 'available (plugged in)';
+                } else {
+                    // Example: Battery status: 50% (2h 30m until full)
+                    message += `(${convertSecondsToTime(battery.chargingTime)} until full)`;
+                }
+            } else {
+                if (battery.dischargingTime === Infinity) {
+                    // Example: Battery status: 50% remaining
+                    message += 'remaining';
+                } else {
+                    // Example: Battery status: 50% (2h 30m left)
+                    message += `(${convertSecondsToTime(battery.dischargingTime)} left)`;
+                }
+            }
+            */
             
             let message;
 
             if (charging) {
                 message = `Charging: ${percent}% `;
-                if (battery.chargingTime !== Infinity) {
+                if (battery.chargingTime === Infinity) {
                     // Example: 50% (plugged in)
                     message += 'available (plugged in)';
                 } else {
@@ -69,13 +89,13 @@ function updateBatteryStatus() {
             } else {
                 message = `Discharging: ${percent}% `;
                 if (battery.dischargingTime === Infinity) {
-                    // Example: Discharging: 50%
+                    // Example: Discharging: 50% remaining
+                    message += 'remaining';
                 } else {
                     // Example: Discharging: 50% (2h 30m left)
                     message += `(${convertSecondsToTime(battery.dischargingTime)} left)`;
                 }
             }
-
 
             batteryStatus.title = message;
 
