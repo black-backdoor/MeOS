@@ -49,6 +49,22 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
 
+    const closeContextMenu = (e) => {
+        /*
+            If the user clicks outside of the context menu, close it.
+            This is done by checking if the target's offsetParent is the context menu.
+        */
+        
+        if (e.target !== contextMenu && !contextMenu.contains(e.target)) {
+            console.debug("clicked outside of the context menu");
+            contextMenu.classList.remove('visible');
+            document.body.classList.remove('context-menu-open');
+
+            // remove the event listener (if the context menu is closed, we don't need it anymore)
+            scope.removeEventListener('click', closeContextMenu);
+        } 
+    };
+
 
     scope.addEventListener('contextmenu', function(event) {
         event.preventDefault();
@@ -62,28 +78,20 @@ document.addEventListener("DOMContentLoaded", function() {
         normalizePosition(mouseX, mouseY);
 
         contextMenu.classList.add('visible');
-        document.body.classList.add('context-menu-open')
-    });
+        document.body.classList.add('context-menu-open');
 
-
-    scope.addEventListener("mousedown", (e) => {
-        /*
-            If the user clicks outside of the context menu, close it.
-            This is done by checking if the target's offsetParent is the context menu.
-        */
-        
-        if (e.target !== contextMenu && !contextMenu.contains(e.target)) {
-            console.debug("clicked outside of the context menu");
-            contextMenu.classList.remove('visible');
-            document.body.classList.remove('context-menu-open');
-        } 
+        // add an event listener to close the context menu when the user clicks outside of it
+        scope.addEventListener('click', closeContextMenu);
     });
 
     contextMenu.addEventListener('click', function(e) {
         if (contextMenu.contains(e.target) && e.target.tagName === "BUTTON") {
             console.debug("clicked on a button inside the context menu");
             contextMenu.classList.remove('visible');
-            document.body.classList.remove('context-menu-open')
+            document.body.classList.remove('context-menu-open');
+
+            // remove the event listener (if the context menu is closed, we don't need it anymore)
+            scope.removeEventListener('click', closeContextMenu);
         }
     });
 });
