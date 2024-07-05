@@ -18,7 +18,13 @@ if ('getBattery' in navigator) {
         battery.addEventListener('dischargingtimechange', updateBatteryStatus);
         battery.addEventListener('levelchange', updateBatteryStatus);
     });
+} else {
+    const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
+    console.info('%c[setBatteryStatus]%c battery status is not supported', 'color: lightgreen', 'color: inherit');
+    batteryStatus.title = 'Battery API is not supported';
 }
+
+
 
 function updateBatteryStatus() {
     const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
@@ -38,7 +44,9 @@ function updateBatteryStatus() {
             const { level, charging } = battery;
             const status = charging ? 'charging' : 'not charging';
             const percent = Math.round(level * 100);
-            const message = `The battery is ${status} and the current level is ${percent}%`;
+            let message = `The battery is ${status} and the current level is ${percent}%`;
+            if (!charging) { message += ` (${battery.dischargingTime} seconds left)`; }
+
             batteryStatus.title = message;
 
             console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
