@@ -100,14 +100,19 @@ function updateBatteryStatus() {
             batteryStatus.title = message;
 
             console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
-            console.debug(
-                `%c[setBatteryStatus]%c battery level: %c${percent}% %cand battery is %c${status}`,
+            console.info(
+                `%c[setBatteryStatus]%c battery level: %c${percent}% %cand battery is %c${charging ? 'charging' : 'discharging'}`,
                 'color: lightgreen',
                 'color: inherit',
                 `color: ${percent <= 20 ? 'red' : percent <= 50 ? 'orange' : 'green'}`,
                 'color: inherit',
-                `color: ${charging ? 'green' : 'red'}`
+                `color: ${charging ? 'green' : 'red'}`,
             );
+
+            console.debug("IsCharging", charging);
+            console.debug("Percentage", percent);
+            console.debug("chargingTime", battery.chargingTime);
+            console.debug("dischargingTime", battery.dischargingTime);
         });
     } else {
         console.debug('[setBatteryStatus] battery status updated: not supported');
