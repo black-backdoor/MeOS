@@ -24,13 +24,15 @@
             "icon": "sunrise.svg",
             "temp": 20,
             "desc": "Morning",
+            "after": 6,
             "before": 10
         },
         {
             "icon": "sunset.svg",
             "temp": 20,
             "desc": "Evening",
-            "after": 18
+            "after": 18,
+            "before": 22
         },
         {
             "icon": "thermometer.svg",
