@@ -27,6 +27,15 @@ if ('getBattery' in navigator) {
 
 
 function updateBatteryStatus() {
+    function convertSecondsToTime(seconds) {
+        if (seconds == Infinity) return '∞';
+
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+    
+        return `${hours}h ${minutes}m`;
+    }
+
     const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
     const batteryIMG = document.querySelector('#taskbar > .menu > .battery img');
 
@@ -42,10 +51,31 @@ function updateBatteryStatus() {
     if ('getBattery' in navigator) {
         navigator.getBattery().then((battery) => {
             const { level, charging } = battery;
-            const status = charging ? 'charging' : 'not charging';
             const percent = Math.round(level * 100);
-            let message = `The battery is ${status} and the current level is ${percent}%`;
-            if (!charging) { message += ` (${battery.dischargingTime} seconds left)`; }
+            // let message = `${percent}% ${charging ? '⚡' : ''}`;
+            
+            
+            let message;
+
+            if (charging) {
+                message = `Charging: ${percent}% `;
+                if (battery.chargingTime !== Infinity) {
+                    // Example: 50% (plugged in)
+                    message += 'available (plugged in)';
+                } else {
+                    // Example: 50% (2h 30m until full)
+                    message += `(${convertSecondsToTime(battery.chargingTime)} until full)`;
+                }
+            } else {
+                message = `Discharging: ${percent}% `;
+                if (battery.dischargingTime === Infinity) {
+                    // Example: Discharging: 50%
+                } else {
+                    // Example: Discharging: 50% (2h 30m left)
+                    message += `(${convertSecondsToTime(battery.dischargingTime)} left)`;
+                }
+            }
+
 
             batteryStatus.title = message;
 
