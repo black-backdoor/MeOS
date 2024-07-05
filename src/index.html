@@ -38,6 +38,7 @@
     <script src="/js/connection.js"></script>
     <script src="/js/sound.js"></script>
     <script src="/js/taskbar-time.js" rel="preload"></script>
+    <script src="/js/battery.js" defer></script>
     <link rel="stylesheet" href="/css/action-menu.css">
     <script src="/js/action-menu.js"></script>
     <script src="/js/welcome.js"></script>
@@ -157,22 +158,25 @@
                 -->
             </div>
 
-            <div class="speaker icon" title="Speakers (RTalk(L) Audio): 0%"><img
-                alt="speaker"
-                src="/assets/sound/speaker.svg"
-                src-no="/assets/sound/speaker-muted.svg"
-                src-1="/assets/sound/speaker-1.svg"
-                src-2="/assets/sound/speaker-2.svg"
-                src-3="/assets/sound/speaker-3.svg"
-                speaker-levels="3">
+            <div class="speaker icon" title="Speakers (RTalk(L) Audio): 0%">
+                <img alt="speaker"
+                    src="/assets/sound/speaker.svg"
+                    src-no="/assets/sound/speaker-muted.svg"
+                    src-1="/assets/sound/speaker-1.svg"
+                    src-2="/assets/sound/speaker-2.svg"
+                    src-3="/assets/sound/speaker-3.svg"
+                    speaker-levels="3"
+                >
                 <!-- if the number of src-n values are changed, the `speaker-levels` attribute must be changed
                      each src-n value is a different volume level -> currently 3 levels
                  -->
             </div>
             
-            <div class="battery-status icon" title="Battery status: 50% remaining">
-                <img src="/assets/power/battery.svg" alt="battery">
-                <!-- TODO: SCRIPT FOR SHOWING PERCENTAGE IN TITLE -->
+            <div class="battery icon" title="Battery status: fetching...">
+                <img alt="battery"
+                    src="/assets/power/battery.svg"
+                    src-no="/assets/power/plug.svg"
+                >
             </div>
         </section>
 
