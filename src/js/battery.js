@@ -41,7 +41,7 @@ function updateBatteryStatus() {
             const message = `The battery is ${status} and the current level is ${percent}%`;
             batteryStatus.title = message;
 
-            console.debug(`%c[setBatteryStatus]%c battery status updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
+            console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
             console.debug(
                 `%c[setBatteryStatus]%c battery level: %c${percent}% %cand battery is %c${status}`,
                 'color: lightgreen',
