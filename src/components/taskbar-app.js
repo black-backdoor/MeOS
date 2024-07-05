@@ -1,8 +1,11 @@
 class taskbarApp extends HTMLElement {
     constructor() {
         super();
+
         this.attachShadow({ mode: 'open' });
-        this.render();
+        
+        this.name = this.getAttribute('name') ?? 'App';
+        this.icon = this.getAttribute('icon') ?? '';
     }
 
     connectedCallback() {
@@ -39,17 +42,14 @@ class taskbarApp extends HTMLElement {
                 background-color: #303030;
             }
 
-
             :host(:active) {
                 transform: scale(0.95);
             }
 
-            
             .icon {
                 width: 32px;
                 height: 32px;
             }
-            
 
             .underline {
                 position: relative;
@@ -58,7 +58,7 @@ class taskbarApp extends HTMLElement {
                 height: 3px;
                 border-radius: 2px;
             }
-            
+
             :host(.open) .underline {
                 background-color: #9e9e9e;
             }
@@ -69,7 +69,6 @@ class taskbarApp extends HTMLElement {
             }
         `;
     }
-    
 
     template() {
         return `
@@ -86,7 +85,6 @@ class taskbarApp extends HTMLElement {
 
         this.title = this.name;
     }
-
 
     static get observedAttributes() {
         return ['name', 'icon'];
