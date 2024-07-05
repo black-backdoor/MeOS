@@ -37,8 +37,7 @@ function updateBatteryStatus() {
         navigator.getBattery().then((battery) => {
             const { level, charging } = battery;
             const status = charging ? 'charging' : 'not charging';
-            // const percent = Math.round(level * 100);
-            const percent = 50;
+            const percent = Math.round(level * 100);
             const message = `The battery is ${status} and the current level is ${percent}%`;
             batteryStatus.title = message;
 
