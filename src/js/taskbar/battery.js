@@ -17,20 +17,23 @@ if ('getBattery' in navigator) {
         battery.addEventListener('levelchange', () => updateBatteryStatus(battery));
     });
 } else {
-    const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
     console.info('%c[setBatteryStatus]%c battery status is not supported', 'color: lightgreen', 'color: inherit');
+
+    const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
     batteryStatus.title = 'Battery API is not supported';
 
     const batteryIconStyle = document.querySelector('#taskbar > .menu > .battery > svg style');
     batteryIconStyle.innerHTML = `
         .fill-1, .fill-2, .fill-3, .fill-4, .fill-5, .fill-6, .fill-7, .fill-8, .fill-9, .fill-10 { display: none; }
-        .cross { display: inline; }
-        .question { display: none; }  
     `;
 
+    const batteryIconText = document.querySelector('#taskbar > .menu > .battery > svg .text');
+    batteryIconText.innerHTML = '⨉';
 }
 
 function updateBatteryStatus(battery) {
+    const text_percent = false;
+
     function convertSecondsToTime(seconds) {
         if (seconds === Infinity) return '∞';
 
@@ -39,15 +42,6 @@ function updateBatteryStatus(battery) {
         return `${hours}h ${minutes}m`;
     }
 
-    const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
-    const batteryIcon = document.querySelector('#taskbar > .menu > .battery > svg');
-    const batteryIconStyle = batteryIcon.querySelector('style');
-
-    if (!batteryStatus || !batteryIcon) {
-        console.warn('%c[setBatteryStatus]%c the battery icon was not found', 'color: lightgreen', 'color: inherit');
-        setTimeout(() => updateBatteryStatus(battery), 1000);
-        return;
-    }
 
     const { level, charging } = battery;
     const percent = Math.round(level * 100);
@@ -67,18 +61,24 @@ function updateBatteryStatus(battery) {
         }
     }
 
+    const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
     batteryStatus.title = message;
+        
+    const batteryIconText = document.querySelector('#taskbar > .menu > .battery > svg .text');
+    const batteryIconStyle = document.querySelector('#taskbar > .menu > .battery > svg style');
 
-    // Set the battery icon fill
-    batteryIconStyle.innerHTML = `
-        .cross { display: none; }
-        .question { display: none; }  
-    `;
+    if(text_percent) {
+        batteryIconText.innerHTML = percent;
+        batteryIconStyle.innerHTML = `[class^="fill-"] { display: none; } `;
+    } else {
+        batteryIconText.innerHTML = '';
+        batteryIconStyle.innerHTML = '';
 
-    const fillLevel = Math.round(level * 10);
-    for (let i = 1; i <= 10; i++) {
-        if (i > fillLevel) {
-            batteryIconStyle.innerHTML += `.fill-${i} { display: none; }`;
+        const fillLevel = Math.round(level * 10);
+        for (let i = 1; i <= 10; i++) {
+            if (i > fillLevel) {
+                batteryIconStyle.innerHTML += `.fill-${i} { display: none; }`;
+            }
         }
     }
 
