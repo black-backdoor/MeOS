@@ -25,10 +25,11 @@ if ('getBattery' in navigator) {
     const batteryIconStyle = document.querySelector('#taskbar > .menu > .battery > svg style');
     batteryIconStyle.innerHTML = `
         .fill-1, .fill-2, .fill-3, .fill-4, .fill-5, .fill-6, .fill-7, .fill-8, .fill-9, .fill-10 { display: none; }
+        .charging { display: none; }
     `;
 
     const batteryIconText = document.querySelector('#taskbar > .menu > .battery > svg .text');
-    batteryIconText.innerHTML = '⨉';
+    batteryIconText.innerHTML = 'X';
 }
 
 function updateBatteryStatus(battery) {
@@ -69,7 +70,7 @@ function updateBatteryStatus(battery) {
 
     if(text_percent) {
         batteryIconText.innerHTML = percent;
-        batteryIconStyle.innerHTML = `[class^="fill-"] { display: none; } `;
+        batteryIconStyle.innerHTML = `[class^="fill-"] { display: none; }`;
     } else {
         batteryIconText.innerHTML = '';
         batteryIconStyle.innerHTML = '';
@@ -81,6 +82,8 @@ function updateBatteryStatus(battery) {
             }
         }
     }
+
+    if (!charging) {  batteryIconStyle.innerHTML += `.charging { display: none; }`; }
 
 
     // Debug logs
