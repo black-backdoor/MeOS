@@ -20,6 +20,14 @@ if ('getBattery' in navigator) {
     const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
     console.info('%c[setBatteryStatus]%c battery status is not supported', 'color: lightgreen', 'color: inherit');
     batteryStatus.title = 'Battery API is not supported';
+
+    const batteryIconStyle = document.querySelector('#taskbar > .menu > .battery > svg style');
+    batteryIconStyle.innerHTML = `
+        .fill-1, .fill-2, .fill-3, .fill-4, .fill-5, .fill-6, .fill-7, .fill-8, .fill-9, .fill-10 { display: none; }
+        .cross { display: inline; }
+        .question { display: none; }  
+    `;
+
 }
 
 function updateBatteryStatus(battery) {
@@ -62,13 +70,18 @@ function updateBatteryStatus(battery) {
     batteryStatus.title = message;
 
     // Set the battery icon fill
-    batteryIconStyle.innerHTML = '';
+    batteryIconStyle.innerHTML = `
+        .cross { display: none; }
+        .question { display: none; }  
+    `;
+
     const fillLevel = Math.round(level * 10);
     for (let i = 1; i <= 10; i++) {
         if (i > fillLevel) {
             batteryIconStyle.innerHTML += `.fill-${i} { display: none; }`;
         }
     }
+
 
     // Debug logs
     console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
