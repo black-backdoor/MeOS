@@ -1,5 +1,5 @@
 /*
-    This script is used to display the battery status in the taskbar.
+    This script displays the battery status in the taskbar.
     Since the battery status is not supported in all browsers, we need to check if it is supported before using it.
     The battery status is updated every time the battery status changes.
 
@@ -7,16 +7,14 @@
     because the updateBatteryStatus function isn't (supposed to be) called by other scripts.
 */
 
-
-
 if ('getBattery' in navigator) {
     navigator.getBattery().then((battery) => {
         console.info('%c[setBatteryStatus]%c battery status is supported', 'color: lightgreen', 'color: inherit');
-        updateBatteryStatus();
-        battery.addEventListener('chargingchange', updateBatteryStatus);
-        battery.addEventListener('chargingtimechange', updateBatteryStatus);
-        battery.addEventListener('dischargingtimechange', updateBatteryStatus);
-        battery.addEventListener('levelchange', updateBatteryStatus);
+        updateBatteryStatus(battery);
+        battery.addEventListener('chargingchange', () => updateBatteryStatus(battery));
+        battery.addEventListener('chargingtimechange', () => updateBatteryStatus(battery));
+        battery.addEventListener('dischargingtimechange', () => updateBatteryStatus(battery));
+        battery.addEventListener('levelchange', () => updateBatteryStatus(battery));
     });
 } else {
     const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
@@ -24,112 +22,67 @@ if ('getBattery' in navigator) {
     batteryStatus.title = 'Battery API is not supported';
 }
 
-
-
-function updateBatteryStatus() {
+function updateBatteryStatus(battery) {
     function convertSecondsToTime(seconds) {
-        if (seconds == Infinity) return '∞';
+        if (seconds === Infinity) return '∞';
 
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
-    
         return `${hours}h ${minutes}m`;
     }
 
-
     const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
-    const batteryIMG = document.querySelector('#taskbar > .menu > .battery > svg');
-    const batterIMGStyle = batteryIMG.querySelector('style');
+    const batteryIcon = document.querySelector('#taskbar > .menu > .battery > svg');
+    const batteryIconStyle = batteryIcon.querySelector('style');
 
-    if (batteryStatus == undefined || batteryIMG == undefined) {
+    if (!batteryStatus || !batteryIcon) {
         console.warn('%c[setBatteryStatus]%c the battery icon was not found', 'color: lightgreen', 'color: inherit');
-
-        // if the battery icon is not found, try again in 1 second (could be that the dom hasn't loaded yet | but this should not happen -> script is deferred)
-        setTimeout(updateBatteryStatus, 1000);
-
+        setTimeout(() => updateBatteryStatus(battery), 1000);
         return;
     }
 
-    if ('getBattery' in navigator) {
-        navigator.getBattery().then((battery) => {
-            const { level, charging } = battery;
-            const percent = Math.round(level * 100);
-            
-            /* TWO EXAMPLES OF BATTERY STATUS MESSAGES
-            let message = `Battery status: ${percent}% `;
+    const { level, charging } = battery;
+    const percent = Math.round(level * 100);
+    let message = `Battery status: ${percent}% `;
 
-            if (charging) {
-                if (battery.chargingTime === Infinity) {
-                    // Example: Battery status: 50% (plugged in)
-                    message += 'available (plugged in)';
-                } else {
-                    // Example: Battery status: 50% (2h 30m until full)
-                    message += `(${convertSecondsToTime(battery.chargingTime)} until full)`;
-                }
-            } else {
-                if (battery.dischargingTime === Infinity) {
-                    // Example: Battery status: 50% remaining
-                    message += 'remaining';
-                } else {
-                    // Example: Battery status: 50% (2h 30m left)
-                    message += `(${convertSecondsToTime(battery.dischargingTime)} left)`;
-                }
-            }
-            */
-            
-            let message;
-
-            if (charging) {
-                message = `Charging: ${percent}% `;
-                if (battery.chargingTime === Infinity) {
-                    // Example: 50% (plugged in)
-                    message += 'available (plugged in)';
-                } else {
-                    // Example: 50% (2h 30m until full)
-                    message += `(${convertSecondsToTime(battery.chargingTime)} until full)`;
-                }
-            } else {
-                message = `Discharging: ${percent}% `;
-                if (battery.dischargingTime === Infinity) {
-                    // Example: Discharging: 50% remaining
-                    message += 'remaining';
-                } else {
-                    // Example: Discharging: 50% (2h 30m left)
-                    message += `(${convertSecondsToTime(battery.dischargingTime)} left)`;
-                }
-            }
-
-            batteryStatus.title = message;
-
-            // set the battery icon fill
-            batterIMGStyle.innerHTML = '';
-            const fillLevel = Math.round(level * 10);  // from 0.1 to 1 convert to 0 to 10
-            for (let i = 1; i <= 10; i++) {
-                if (i <= fillLevel) { continue; }
-                // if the fill level is bigger than the current level, then show the fill
-                batterIMGStyle.innerHTML += `.fill-${i} { display: none; }`;
-            }
-            
-            
-
-            // DEBUG LOGS
-            console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
-            console.info(
-                `%c[setBatteryStatus]%c battery level: %c${percent}% %cand battery is %c${charging ? 'charging' : 'discharging'}`,
-                'color: lightgreen',
-                'color: inherit',
-                `color: ${percent <= 20 ? 'red' : percent <= 50 ? 'orange' : 'green'}`,
-                'color: inherit',
-                `color: ${charging ? 'green' : 'red'}`,
-            );
-
-            console.debug("IsCharging", charging);
-            console.debug("Percentage", percent);
-            console.debug("chargingTime", battery.chargingTime);
-            console.debug("dischargingTime", battery.dischargingTime);
-        });
+    if (charging) {
+        if (battery.chargingTime === Infinity) {
+            message += 'available (plugged in)';
+        } else {
+            message += `(${convertSecondsToTime(battery.chargingTime)} until full)`;
+        }
     } else {
-        console.debug('%c[setBatteryStatus]%c battery status updated: not supported', 'color: lightgreen', 'color: inherit');
-        batteryStatus.title = 'Battery status is not supported';
+        if (battery.dischargingTime === Infinity) {
+            message += 'remaining';
+        } else {
+            message += `(${convertSecondsToTime(battery.dischargingTime)} left)`;
+        }
     }
+
+    batteryStatus.title = message;
+
+    // Set the battery icon fill
+    batteryIconStyle.innerHTML = '';
+    const fillLevel = Math.round(level * 10);
+    for (let i = 1; i <= 10; i++) {
+        if (i > fillLevel) {
+            batteryIconStyle.innerHTML += `.fill-${i} { display: none; }`;
+        }
+    }
+
+    // Debug logs
+    console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
+    console.info(
+        `%c[setBatteryStatus]%c battery level: %c${percent}% %cand battery is %c${charging ? 'charging' : 'discharging'}`,
+        'color: lightgreen',
+        'color: inherit',
+        `color: ${percent <= 20 ? 'red' : percent <= 50 ? 'orange' : 'green'}`,
+        'color: inherit',
+        `color: ${charging ? 'green' : 'red'}`,
+    );
+
+    console.debug("IsCharging", charging);
+    console.debug("Percentage", percent);
+    console.debug("chargingTime", battery.chargingTime);
+    console.debug("dischargingTime", battery.dischargingTime);
 }
