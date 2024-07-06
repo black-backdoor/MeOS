@@ -115,6 +115,14 @@
     height: 80%;
 }
 
+/* BATTERY */
+
+/* SET DEFAULT FILLS = NONE */
+/*
+#taskbar > .menu > .battery > svg [class^="fill-"] {
+    display: none;
+}
+*/
 
 
 /* ############### TASKBAR TIME ############### */

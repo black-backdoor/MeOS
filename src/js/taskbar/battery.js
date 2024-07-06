@@ -38,7 +38,8 @@ function updateBatteryStatus() {
 
 
     const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
-    const batteryIMG = document.querySelector('#taskbar > .menu > .battery img');
+    const batteryIMG = document.querySelector('#taskbar > .menu > .battery > svg');
+    const batterIMGStyle = batteryIMG.querySelector('style');
 
     if (batteryStatus == undefined || batteryIMG == undefined) {
         console.warn('%c[setBatteryStatus]%c the battery icon was not found', 'color: lightgreen', 'color: inherit');
@@ -99,6 +100,17 @@ function updateBatteryStatus() {
             }
 
             batteryStatus.title = message;
+
+            // set the battery icon fill
+            batterIMGStyle.innerHTML = '';
+            const fillLevel = Math.round(level * 10);  // from 0.1 to 1 convert to 0 to 10
+            for (let i = 1; i <= 10; i++) {
+                if (i <= fillLevel) { continue; }
+                // if the fill level is bigger than the current level, then show the fill
+                batterIMGStyle.innerHTML += `.fill-${i} { display: none; }`;
+            }
+            
+            
 
             // DEBUG LOGS
             console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
