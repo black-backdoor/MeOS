@@ -34,9 +34,7 @@
 
     
     <!-- SCRIPTS -->
-    <link rel="preload" href="/assets/weather/data.json" as="fetch" crossorigin="anonymous">
     <script src="/js/taskbar/weather.js"></script>
-    <link rel="preload" href="/assets/connection/no-wifi.svg" as="image">
     <script src="/js/taskbar/internet-connection.js"></script>
     <script src="/js/taskbar/sound.js"></script>
     <script src="/js/taskbar/clock.js" rel="preload"></script>
@@ -62,6 +60,8 @@
 
     <!-- CUSTOM PRELOAD -->
     <script src="/js/idle-resources.js" defer></script>
+
+    <idle-resource src="/assets/connection/no-wifi.svg" type="image"></idle-resource>
 
     <idle-resource src="/assets/sound/speaker-muted.svg" type="image"></idle-resource>
     <idle-resource src="/assets/sound/speaker-1.svg" type="image"></idle-resource>
