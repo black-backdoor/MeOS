@@ -41,7 +41,7 @@ function setSpeakerVolume (volume) {
         img.src = url;
     }
 
-    const speakerImg = document.querySelector("#taskbar > .menu > .speaker img");
+    const speakerImg = document.querySelector("#taskbar > .applets > .speaker img");
     if(speakerImg == undefined) {
         console.warn("the speaker icon was not found");
         return;
@@ -85,7 +85,7 @@ function setSpeakerVolume (volume) {
     }
     
 
-    const speakerHolder = document.querySelector("#taskbar > .menu > .speaker");
+    const speakerHolder = document.querySelector("#taskbar > .applets > .speaker");
     let percentage = volume * 100;
 
     speakerHolder.title = `Speakers (RTalk(L) Audio): ${percentage}%`

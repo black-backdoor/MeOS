@@ -30,8 +30,8 @@ function setWifiStatus(status){
     
     if(typeof status !== 'boolean'){ console.warn("[setWifiStatus] Status should be a boolean  | input", typeof status); return; }
 
-    const wifi = document.querySelector("#taskbar .menu .internet-access");
-    const wifiIcon = document.querySelector("#taskbar .menu .internet-access img");
+    const wifi = document.querySelector("#taskbar .applets .internet-access");
+    const wifiIcon = document.querySelector("#taskbar .applets .internet-access img");
     const yes_src = wifiIcon.getAttribute("src-online");
     const no_src = wifiIcon.getAttribute("src-offline");
 

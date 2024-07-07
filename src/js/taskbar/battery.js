@@ -19,16 +19,16 @@ if ('getBattery' in navigator) {
 } else {
     console.info('%c[setBatteryStatus]%c battery status is not supported', 'color: green', 'color: inherit');
 
-    const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
+    const batteryStatus = document.querySelector('#taskbar > .applets > .battery');
     batteryStatus.title = 'Battery API is not supported';
 
-    const batteryIconStyle = document.querySelector('#taskbar > .menu > .battery > svg style');
+    const batteryIconStyle = document.querySelector('#taskbar > .applets > .battery > svg style');
     batteryIconStyle.innerHTML = `
         .fill-1, .fill-2, .fill-3, .fill-4, .fill-5, .fill-6, .fill-7, .fill-8, .fill-9, .fill-10 { display: none; }
         .charging { display: none; }
     `;
 
-    const batteryIconText = document.querySelector('#taskbar > .menu > .battery > svg .text');
+    const batteryIconText = document.querySelector('#taskbar > .applets > .battery > svg .text');
     batteryIconText.innerHTML = 'X';
 }
 
@@ -62,11 +62,11 @@ function updateBatteryStatus(battery) {
         }
     }
 
-    const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
+    const batteryStatus = document.querySelector('#taskbar > .applets > .battery');
     batteryStatus.title = message;
         
-    const batteryIconText = document.querySelector('#taskbar > .menu > .battery > svg .text');
-    const batteryIconStyle = document.querySelector('#taskbar > .menu > .battery > svg style');
+    const batteryIconText = document.querySelector('#taskbar > .applets > .battery > svg .text');
+    const batteryIconStyle = document.querySelector('#taskbar > .applets > .battery > svg style');
 
     if(text_percent) {
         batteryIconText.innerHTML = percent;
