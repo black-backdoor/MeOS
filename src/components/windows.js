@@ -223,7 +223,6 @@ class AppWindow extends HTMLElement {
 
     fullscreen = () => {
         this.classList.toggle("fullscreen");
-        saveWindows();
     }
 }
 
@@ -268,8 +267,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // DRAGGING WINDOWS (MOUSE) / (TOUCH)
         const windowHead = windowElement.shadowRoot.querySelector('header');
         const windowControls = windowElement.shadowRoot.querySelector('.controls');
-        windowHead.addEventListener('mousedown', startDragging);
-        windowHead.addEventListener('touchstart', startDragging);
+        windowHead.addEventListener('mousedown', startDragging, { passive: true });
+        windowHead.addEventListener('touchstart', startDragging, { passive: true });
 
         function startDragging(e) {
             if(e.type === 'mousedown' && e.button !== 0) return;  // only allow primary mouse button (0) to drag the window
@@ -342,76 +341,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.removeEventListener('mouseup', stopMoving);
                 document.removeEventListener('touchmove', moveWindow);
                 document.removeEventListener('touchend', stopMoving);
-
-                saveWindows();
             }
 
             // Attach the event listeners
-            document.addEventListener('mousemove', moveWindow);
-            document.addEventListener('mouseup', stopMoving);
-            document.addEventListener('touchmove', moveWindow);
-            document.addEventListener('touchend', stopMoving);
+            document.addEventListener('mousemove', moveWindow, { passive: true });
+            document.addEventListener('mouseup', stopMoving, { passive: true });
+            document.addEventListener('touchmove', moveWindow, { passive: true });
+            document.addEventListener('touchend', stopMoving, { passive: true });
         }
     });
-});
-
-
-// STORING WINDOWS
-function saveWindows() {
-    console.debug('saving windows');
-
-    let windowsStorage = [];
-
-    const windows = document.querySelectorAll('app-window');
-    
-    windows.forEach(function (windowElement) {
-        // save the position and size of each window
-        windowsStorage.push({ 
-            x: windowElement.style.left,
-            y: windowElement.style.top,
-            width: windowElement.style.width,
-            height: windowElement.style.height,
-            fullscreen: windowElement.window_fullscreen,
-            zIndex: windowElement.zIndex
-        });
-        console.debug('Window saved:', windowsStorage[windowsStorage.length - 1]);
-    });
-
-    // save the windows to local storage
-    sessionStorage.setItem('windows', JSON.stringify(windowsStorage));
-}
-
-function loadWindows() {
-    let windowsStorage = sessionStorage.getItem('windows') || "";
-    if (windowsStorage == "") { return; }
-
-    windowsStorage = JSON.parse(windowsStorage);
-    if (windowsStorage.length == 0) { return; }
-
-    const windows = document.querySelectorAll('app-window');
-
-    let highestZIndex = 0;
-    windowsStorage.forEach(function (windowData) {
-        const index = windowsStorage.indexOf(window);
-
-        if (windows[index] == undefined) { 
-            console.warn(`%c[Windows]%c Window not found in DOM: ${JSON.stringify(windowData)}`, 'color: blue', 'color: inherit');
-            console.debug('Window which was not found:', windowData);
-            return; 
-        }
-
-        windows[index].style.left = windowData.x;
-        windows[index].style.top = windowData.y;
-        windows[index].style.width = windowData.width;
-        windows[index].style.height = windowData.height;
-        windows[index].window_fullscreen = windowData.fullscreen;
-        windows[index].zIndex = windowData.zIndex;
-        highestZIndex = Math.max(highestZIndex, windowData.zIndex);
-    });
-    console.debug('Highest z-index:', highestZIndex);
-    zIndexCounter = highestZIndex + 1;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    loadWindows();
 });
