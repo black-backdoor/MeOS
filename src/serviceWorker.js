@@ -1,22 +1,16 @@
 /*
- * Service Worker
- * This is the service worker file that will be registered in the browser.
- * It will cache the offline page and the dynamically cache the assets.
- * It will also limit the cache size to 100.
+    serviceWorker.js
+    This serviceWorker is used to dynamically cache assets, as well as serve an offline fallback page.
+    Cache is limited to 100 items.
 */
 
 
+const CACHE_NAME_OFFLINE = 'site-offline-v0.2.0';
+const CACHE_NAME_DYNAMIC = 'site-dynamic-v0.2.0';
 
-/* ----------- EVENT LOGS ----------- */
-self.addEventListener("install", function(event) {
-    console.debug("%cService Worker: %cInstalled", "color: lightblue", "color: green");
-});
-
-self.addEventListener("activate", function(event) {
-    console.log("%cService Worker: %cActivated", "color: lightblue", "color: inherit");
-});
-
-
+const urlsToCache = [
+    '/fallback.html',
+];
 
 
 /* ----------- LIMIT CACHE ----------- */
@@ -24,90 +18,88 @@ const limitCacheSize = (name, size) => {
     caches.open(name).then(cache => {
         cache.keys().then(keys => {
             if(keys.length > size) {
-                console.debug(`%cService Worker: %cCache Size ${keys.length} now removing, max ${size}`, "color: lightblue", "color: inherit");
+                console.debug(`%cService Worker: %cCache Size ${keys.length} now removing, max ${size}`, "color: DodgerBlue", "color: inherit");
                 cache.delete(keys[0]).then(limitCacheSize(name, size));
             }
         });
     });
-}
+};
 
 
+// Install service worker and cache static assets
+self.addEventListener('install', (event) => {
+    console.debug("%cService Worker: %cInstalled", "color: DodgerBlue", "color: green");
 
-/* ----------- GET & CACHE OFFLINE PAGE ----------- */
-
-const offlineCacheName = 'site-offline-v0.2.0';
-const offlineCacheAssets = [
-  '/fallback.html'
-];
-
-
-const dynamicCacheName = 'site-dynamic-v0.2.0';
-
-
-
-/* Cache the offline page assets when the service worker is installed */
-self.addEventListener("install", function(event) {
-    console.debug(`%cService Worker: %cCache Offline Page to ${offlineCacheName} started`, "color: lightblue", "color: inherit");
     event.waitUntil(
-        /* wait until the cache is open and add all the offline page assets */
-        caches.open(offlineCacheName).then(cache => {
-            cache.addAll(offlineCacheAssets);
-        })
+        caches.open(CACHE_NAME_OFFLINE)
+            .then((cache) => {
+                console.log('Opened cache');
+                return cache.addAll(urlsToCache);
+            })
     );
-
-    console.info(`%cService Worker: %cCache Offline Page to ${offlineCacheName} finished`, "color: lightblue", "color: inherit");
 });
 
+// Activate service worker and clean up old caches
+self.addEventListener('activate', (event) => {
+    console.log("%cService Worker: %cActivated", "color: DodgerBlue", "color: inherit");
 
-self.addEventListener("activate", function(event) {
-    /* Delete all the old caches except the offline cache and the dynamic cache */
+    const cacheWhiteList = [CACHE_NAME_OFFLINE, CACHE_NAME_DYNAMIC];
     event.waitUntil(
-        caches.keys().then(keys => {
-            return Promise.all(keys
-                .filter(key => key !== offlineCacheName && key !== dynamicCacheName)
-                .map(key => caches.delete(key))
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cacheName) => {
+                    if (!cacheWhiteList.includes(cacheName)) {
+                        console.debug(`%cService Worker: %cDeleting cache ${cacheName}`, "color: DodgerBlue", "color: red");
+                        return caches.delete(cacheName);
+                    }
+                })
             );
         })
     );
-
-    console.info(`%cService Worker: %cDelete Old Caches except ${offlineCacheName} and ${dynamicCacheName} finished`, "color: lightblue", "color: inherit");
 });
 
-
-
-self.addEventListener("fetch", function(event) {
-    console.debug(`%cService Worker: %cFetch ${event.request.url}`, "color: lightblue", "color: inherit");
-    if (String(event.request.url).indexOf('chrome-extension') > -1) return;
-    if (String(event.request.url).indexOf('serviceWorker.js') > -1) return;
-    if (String(event.request.url).indexOf('site.webmanifest') > -1) return;
-
+// Fetch event: Serve from cache or fetch from network
+self.addEventListener('fetch', (event) => {
     event.respondWith(
-        /* if the request is in the cache, return the cached response, otherwise fetch the request and cache it in the dynamic cache */
-        caches.match(event.request).then(response => {
+        caches.match(event.request)
+            .then((response) => {
+                // Cache hit - return response
+                if (response) {
+                    return response;
+                }
 
-            /* if the request is in the cache, return the cached response */
-            return response || fetch(event.request).then(fetchResponse => {
+                // Do not cache service worker
+                if(event.request.url.includes('serviceWorker.js')) { return; }
 
-                /* if the request is not in the cache */
-                return caches.open(dynamicCacheName).then(cache => {
-                    /* fetch the request and cache it in the dynamic cache */
-                    try {
-                        cache.put(event.request.url, fetchResponse.clone());
-                    } catch (error) {
-                        console.warning(`%cService Worker: %cFetch ${event.request.url} failed, now returning the offline page`, "color: lightblue", "color: inherit");
-                    }
+                // Clone the request for fetch and cache separately
+                const fetchRequest = event.request.clone();
 
-                    // limitCache Size to 100
-                    limitCacheSize(dynamicCacheName, 100);
+                return fetch(fetchRequest)
+                    .then((response) => {
+                        // Check if valid response received
+                        if (!response || response.status !== 200 || response.type !== 'basic') {
+                            return response;
+                        }
 
-                    return fetchResponse;
-                });
+                        // Clone the response for caching
+                        const responseToCache = response.clone();
+
+                        caches.open(CACHE_NAME_DYNAMIC)
+                            .then((cache) => {
+                                cache.put(event.request, responseToCache);
+                            });
+
+                        // Limit the cache size
+                        limitCacheSize(CACHE_NAME_DYNAMIC, 100);
+                        return response;
+                    })
+                    .catch(() => {
+                        // Offline fallback
+                        return caches.open(CACHE_NAME_OFFLINE)
+                            .then((cache) => {
+                                return cache.match('/fallback.html');
+                            });
+                    });
             })
-        }).catch(() => {
-            if(event.request.url.indexOf('/') > -1) {
-                console.debug(`%cService Worker: %cFetch ${event.request.url} failed, now returning the offline page`, "color: lightblue", "color: inherit");
-                return caches.match('/fallback.html');
-            } 
-        })
-    )
+    );
 });

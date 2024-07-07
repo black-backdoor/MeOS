@@ -30,6 +30,17 @@ function setSpeakerVolume (volume) {
      * @return {void}
      */
 
+    function preloadImage(url, successCallback, errorCallback) {
+        var img = new Image();
+        img.onload = function() {
+            successCallback();
+        };
+        img.onerror = function() {
+            errorCallback();
+        };
+        img.src = url;
+    }
+
     const speakerImg = document.querySelector("#taskbar > .menu > .speaker img");
     if(speakerImg == undefined) {
         console.warn("the speaker icon was not found");
@@ -54,11 +65,23 @@ function setSpeakerVolume (volume) {
     var level = Math.ceil(volume * speakerLevels);
 
     if (volume == 0) {
-        speakerImg.src = speakerImg.getAttribute("src-no");
+        const imgSrc = speakerImg.getAttribute("src-no");
+        preloadImage(imgSrc, function() {
+            speakerImg.src = imgSrc;
+        }, function() {
+            console.debug(`[setSpeakerVolume] image could not be loaded: ${imgSrc} setting src-error`);
+            speakerImg.src = speakerImg.getAttribute("src-error");
+        });
     }
     
     else {
-        speakerImg.src = speakerImg.getAttribute(`src-${level}`);
+        const imgSrc = speakerImg.getAttribute(`src-${level}`);
+        preloadImage(imgSrc, function() {
+            speakerImg.src = imgSrc;
+        }, function() {
+            console.debug(`[setSpeakerVolume] image could not be loaded: ${imgSrc} setting src-error`);
+            speakerImg.src = speakerImg.getAttribute("src-error");
+        });
     }
     
 

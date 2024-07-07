@@ -13,6 +13,16 @@ document.addEventListener('DOMContentLoaded', function () {
         set the weather icon, temperature and description based on the entry
     */
 
+    function preloadImage(url, successCallback) {
+        var img = new Image();
+        img.onload = function() {
+            successCallback();
+        };
+        img.onerror = function() {};
+        img.src = url;
+    }
+        
+
     const weather = document.querySelector('#taskbar > .weather');
     const weatherIcon = weather.querySelector('img');
     const weatherTemp = weather.querySelector('.text > .temp');
@@ -39,10 +49,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Update the weather icon if conditions are met
                 if (conditionsMet) {
-                    weatherIcon.src = baseURL + randomIcon.icon;
-                    weatherTemp.textContent = randomIcon.temp + "°C";
-                    weatherDesc.textContent = randomIcon.desc;
-                    weather.title = `${randomIcon.temp}°C ${randomIcon.desc}`;
+                    const imageUrl = baseURL + randomIcon.icon;
+                    preloadImage(imageUrl, function() {
+                        weatherIcon.src = imageUrl;
+                        weatherTemp.textContent = randomIcon.temp + "°C";
+                        weatherDesc.textContent = randomIcon.desc;
+                        weather.title = `${randomIcon.temp}°C ${randomIcon.desc}`;
+                    });
                 } else {
                     // Generate a new icon until conditions are met
                     updateWeatherIcon();

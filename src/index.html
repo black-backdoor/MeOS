@@ -45,9 +45,9 @@
     <script src="/js/context-menu.js"></script>
     <link rel="stylesheet" href="/css/context-menu.css">
 
-
+    
     <!-- PWA -->
-    <script src="/pwa/register.js"></script>
+    <script src="/pwa/register.js" async></script>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -57,6 +57,17 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#191919">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
+
+    <!-- CUSTOM PRELOAD -->
+    <script src="/js/idle-resources.js" defer></script>
+
+    <idle-resource src="/assets/connection/no-wifi.svg" type="image"></idle-resource>
+
+    <idle-resource src="/assets/sound/speaker-muted.svg" type="image"></idle-resource>
+    <idle-resource src="/assets/sound/speaker-1.svg" type="image"></idle-resource>
+    <idle-resource src="/assets/sound/speaker-2.svg" type="image"></idle-resource>
+    <idle-resource src="/assets/sound/speaker-3.svg" type="image"></idle-resource>
+    <idle-resource src="/assets/sound/speaker.svg" type="image"></idle-resource>
 </head>
 <body>
     <div id="context-menu">
@@ -165,6 +176,7 @@
                     src-1="/assets/sound/speaker-1.svg"
                     src-2="/assets/sound/speaker-2.svg"
                     src-3="/assets/sound/speaker-3.svg"
+                    src-error="/assets/sound/speaker.svg"
                     speaker-levels="3"
                 >
                 <!-- if the number of src-n values are changed, the `speaker-levels` attribute must be changed
