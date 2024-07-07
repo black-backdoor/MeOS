@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /404/
+Disallow: /501/
+Disallow: /520/
+
+# Sitemap needs to be full URL
+# Sitemap: https://www.example.com/sitemap.xml
