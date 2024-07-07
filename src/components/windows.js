@@ -356,6 +356,53 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// WINDOW RESIZING
+document.addEventListener('DOMContentLoaded', function() {
+    const windows = document.querySelectorAll('app-window');
+
+    let locked;
+
+    windows.forEach(function (windowElement) {
+        document.addEventListener('mousemove', function (e) {
+            const rect = windowElement.getBoundingClientRect();
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            const borderSize = 15;
+
+            if (locked && locked !== windowElement) return;
+
+            const leftSide = mouseX > (rect.left - borderSize) && mouseX < rect.left && mouseY > rect.top - borderSize && mouseY < rect.bottom + borderSize;
+            const rightSide = mouseX < (rect.right + borderSize) && mouseX > rect.right && mouseY > rect.top - borderSize && mouseY < rect.bottom + borderSize;
+            const topSide = mouseY > (rect.top - borderSize) && mouseY < rect.top && mouseX > rect.left - borderSize && mouseX < rect.right + borderSize;
+            const bottomSide = mouseY < (rect.bottom + borderSize) && mouseY > rect.bottom && mouseX > rect.left - borderSize && mouseX < rect.right + borderSize;
+
+            if(leftSide || rightSide || topSide || bottomSide) {
+                locked = windowElement;
+            }
+
+            if (topSide || bottomSide) {
+                document.body.style.cursor = 'ns-resize';
+            } 
+            if (leftSide || rightSide) {
+                document.body.style.cursor = 'ew-resize'
+            } 
+            if (leftSide && topSide || rightSide && bottomSide) {
+                document.body.style.cursor = 'nwse-resize';
+            }
+            if (leftSide && bottomSide || rightSide && topSide) {
+                document.body.style.cursor = 'nesw-resize';
+            }
+
+            if (!leftSide && !rightSide && !topSide && !bottomSide) {
+                document.body.style.cursor = 'default';
+                locked = undefined;
+            }
+        });
+    });
+});
+
+
+
 // STORING WINDOWS
 function saveWindows() {
     console.debug('saving windows');
