@@ -9,7 +9,7 @@
 
 if ('getBattery' in navigator) {
     navigator.getBattery().then((battery) => {
-        console.info('%c[setBatteryStatus]%c battery status is supported', 'color: lightgreen', 'color: inherit');
+        console.info('%c[setBatteryStatus]%c battery status is supported', 'color: green', 'color: inherit');
         updateBatteryStatus(battery);
         battery.addEventListener('chargingchange', () => updateBatteryStatus(battery));
         battery.addEventListener('chargingtimechange', () => updateBatteryStatus(battery));
@@ -17,7 +17,7 @@ if ('getBattery' in navigator) {
         battery.addEventListener('levelchange', () => updateBatteryStatus(battery));
     });
 } else {
-    console.info('%c[setBatteryStatus]%c battery status is not supported', 'color: lightgreen', 'color: inherit');
+    console.info('%c[setBatteryStatus]%c battery status is not supported', 'color: green', 'color: inherit');
 
     const batteryStatus = document.querySelector('#taskbar > .menu > .battery');
     batteryStatus.title = 'Battery API is not supported';
@@ -87,10 +87,10 @@ function updateBatteryStatus(battery) {
 
 
     // Debug logs
-    console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: lightgreen', 'color: inherit');
+    console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: green', 'color: inherit');
     console.info(
         `%c[setBatteryStatus]%c battery level: %c${percent}% %cand battery is %c${charging ? 'charging' : 'discharging'}`,
-        'color: lightgreen',
+        'color: green',
         'color: inherit',
         `color: ${percent <= 20 ? 'red' : percent <= 50 ? 'orange' : 'green'}`,
         'color: inherit',
