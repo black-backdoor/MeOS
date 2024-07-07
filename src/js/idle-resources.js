@@ -14,7 +14,7 @@ function loadResource(src, type) {
 }
 
 function loadIdleResources() {
-    console.debug('%c[idle-resource]%c Loading idle resources', 'color: magenta;', 'color: inherit;');
+    console.log('%c[idle-resource]%c Loading idle resources', 'color: magenta;', 'color: inherit;');
     const resources = document.querySelectorAll('idle-resource');
     resources.forEach(
         function(resource) {
