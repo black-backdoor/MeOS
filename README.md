@@ -21,11 +21,15 @@
 
 
 ## Features
-- **Static** - No server-side code, only client-side JavaScript, HTML, and CSS.
-- **Progressive Web App** - Can be installed on your device and used offline.
-- **Mobile & Desktop** - Works on both mobile and desktop, with support for touch and mouse input.
-- **Adaptive** - enables & disables features based on supported Browser APIs.
-- **Dark Mode** - Supports dark mode, and changes the theme based on the system's theme.
+- **Static**: Built entirely with client-side technologies—JavaScript, HTML, and CSS without external dependencies.
+- **Progressive Web App (PWA)**: Installable on devices and functions offline, leveraging service workers for caching.
+- **Cross-Platform**: Optimized for both mobile and desktop environments, supporting touch and mouse inputs seamlessly.
+- **Adaptive**: Adjusts features dynamically based on browser capabilities and supported APIs.
+- **Battery Status**: Displays real-time battery information conveniently in the taskbar.
+- **Network Status**: visibility into the current network connection status via the taskbar
+- **Caching**: Utilizes service workers to cache the website, enabling offline access with approximately 16MB of cached content.
+- **Developer Console**: Offers insights into load times and other relevant debugging information via the browser's developer console.
+- **Scrollbars**: Custom-styled scrollbars for a more modern look and feel.
 
 
 
@@ -37,6 +41,11 @@
 
 ## Usage
 You can use the online version of MeOS by visiting [meos.lima.zone](https://meos.lima.zone/).
+
+
+
+## Contributing
+Don't contribute to this project, it's a personal project, and I don't want to maintain it.
 
 
 
