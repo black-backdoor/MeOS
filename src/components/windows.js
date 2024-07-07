@@ -268,8 +268,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // DRAGGING WINDOWS (MOUSE) / (TOUCH)
         const windowHead = windowElement.shadowRoot.querySelector('header');
         const windowControls = windowElement.shadowRoot.querySelector('.controls');
-        windowHead.addEventListener('mousedown', startDragging);
-        windowHead.addEventListener('touchstart', startDragging);
+        windowHead.addEventListener('mousedown', startDragging, { passive: true });
+        windowHead.addEventListener('touchstart', startDragging, { passive: true });
 
         function startDragging(e) {
             if(e.type === 'mousedown' && e.button !== 0) return;  // only allow primary mouse button (0) to drag the window
@@ -347,10 +347,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Attach the event listeners
-            document.addEventListener('mousemove', moveWindow);
-            document.addEventListener('mouseup', stopMoving);
-            document.addEventListener('touchmove', moveWindow);
-            document.addEventListener('touchend', stopMoving);
+            document.addEventListener('mousemove', moveWindow, { passive: true });
+            document.addEventListener('mouseup', stopMoving, { passive: true });
+            document.addEventListener('touchmove', moveWindow, { passive: true });
+            document.addEventListener('touchend', stopMoving, { passive: true });
         }
     });
 });
