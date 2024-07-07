@@ -34,7 +34,9 @@
 
     
     <!-- SCRIPTS -->
+    <link rel="preload" href="/assets/weather/data.json" as="fetch" crossorigin="anonymous">
     <script src="/js/taskbar/weather.js"></script>
+    <link rel="preload" href="/assets/connection/no-wifi.svg" as="image">
     <script src="/js/taskbar/internet-connection.js"></script>
     <script src="/js/taskbar/sound.js"></script>
     <script src="/js/taskbar/clock.js" rel="preload"></script>
@@ -166,6 +168,7 @@
                     src-1="/assets/sound/speaker-1.svg"
                     src-2="/assets/sound/speaker-2.svg"
                     src-3="/assets/sound/speaker-3.svg"
+                    src-error="/assets/sound/speaker.svg"
                     speaker-levels="3"
                 >
                 <!-- if the number of src-n values are changed, the `speaker-levels` attribute must be changed
