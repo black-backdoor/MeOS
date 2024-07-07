@@ -47,7 +47,8 @@
 
 
     <!-- PWA -->
-    <script src="/pwa/register.js"></script>
+    <link rel="preload" href="/serviceWorker.js" as="script">
+    <script src="/pwa/register.js" async></script>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
