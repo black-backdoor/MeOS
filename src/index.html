@@ -16,6 +16,9 @@
 
     <!-- COMPONENTS -->
 
+    <!-- widgets -->
+    <script src="/components/calendar.js" rel="preload" type="module"></script>
+
     <!-- windows -->
     <script src="/components/windows.js" rel="preload" type="module"></script>
     <link rel="stylesheet" href="/css/window-defaults.css">
@@ -25,19 +28,28 @@
     <link rel="stylesheet" href="/css/push-notifications.css">
     <script src="/js/notifications.js"></script>
 
-    <!-- calendar widget -->
-    <script src="/components/calendar.js" rel="preload" type="module"></script>
-
     <!-- taskbar apps -->
     <script src="/components/taskbar-app.js" rel="preload" type="module"></script>
     <script src="/js/taskbar-apps.js"></script>
 
+
+    <!-- CUSTOM PRELOAD -->
+    <script src="/js/idle-resources.js" defer></script>
+
     <!-- APPLETS -->
     <script src="/components/applet/wifi.js" type="module"></script>
+    <idle-resource src="/assets/connection/no-wifi.svg" type="image"></idle-resource>
     
     <!-- SCRIPTS -->
     <script src="/js/taskbar/weather.js"></script>
+
+    <idle-resource src="/assets/sound/speaker-muted.svg" type="image"></idle-resource>
+    <idle-resource src="/assets/sound/speaker-1.svg" type="image"></idle-resource>
+    <idle-resource src="/assets/sound/speaker-2.svg" type="image"></idle-resource>
+    <idle-resource src="/assets/sound/speaker-3.svg" type="image"></idle-resource>
+    <idle-resource src="/assets/sound/speaker.svg" type="image"></idle-resource>
     <script src="/js/taskbar/sound.js"></script>
+
     <script src="/js/taskbar/clock.js" rel="preload"></script>
     <script src="/js/taskbar/battery.js" defer></script>
     <link rel="stylesheet" href="/css/action-menu.css">
@@ -59,16 +71,6 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
-    <!-- CUSTOM PRELOAD -->
-    <script src="/js/idle-resources.js" defer></script>
-
-    <idle-resource src="/assets/connection/no-wifi.svg" type="image"></idle-resource>
-
-    <idle-resource src="/assets/sound/speaker-muted.svg" type="image"></idle-resource>
-    <idle-resource src="/assets/sound/speaker-1.svg" type="image"></idle-resource>
-    <idle-resource src="/assets/sound/speaker-2.svg" type="image"></idle-resource>
-    <idle-resource src="/assets/sound/speaker-3.svg" type="image"></idle-resource>
-    <idle-resource src="/assets/sound/speaker.svg" type="image"></idle-resource>
 
     <!-- META -->
     <meta name="title" content="MeOS - Online Operating System">
