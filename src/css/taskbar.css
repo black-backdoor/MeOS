@@ -93,25 +93,25 @@
 
 
 /* ############### TASKBAR MENU / ICONS ############### */
-#taskbar > .menu {
+#taskbar > .applets {
     display: flex;
 }
 
-#taskbar > .menu > .icon {
+#taskbar > .applets > .applet {
     height: 100%;
 }
 
-#taskbar > .menu > .icon img {
+#taskbar > .applets > .applet img {
     height: 100%;
 }
 
 /* SPEAKER */
-#taskbar > .menu > .speaker {
+#taskbar > .applets > .speaker {
     display: flex;
     align-items: center;
 }
 
-#taskbar > .menu > .speaker img {
+#taskbar > .applets > .speaker img {
     height: 80%;
 }
 
@@ -119,7 +119,7 @@
 
 /* SET DEFAULT FILLS = NONE */
 /*
-#taskbar > .menu > .battery > svg [class^="fill-"] {
+#taskbar > .applets > .battery > svg [class^="fill-"] {
     display: none;
 }
 */
