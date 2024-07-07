@@ -97,13 +97,10 @@
     display: flex;
 }
 
-#taskbar > .applets > .applet {
+#taskbar > .applets > * {
     height: 100%;
 }
 
-#taskbar > .applets > .applet img {
-    height: 100%;
-}
 
 /* SPEAKER */
 #taskbar > .applets > .speaker {

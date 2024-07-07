@@ -1,51 +1,73 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // initial check
-    setWifiStatus(navigator.onLine);
-    console.info("[Connection] Initial check: ", navigator.onLine);
-
-    // add event listeners
-    window.addEventListener('online', function() {
-        console.info("[Connection] Wifi is connected");
-        setWifiStatus(true);
-    });
-
-    window.addEventListener('offline', function() {
-        console.info("[Connection] Wifi is not connected");
-        setWifiStatus(false);
-    });
-    
-});
-
-
-
-
-/* CONNECTION */
-function setWifiStatus(status){
-    /*
-     * Set the wifi status on the taskbar
-     * @param {boolean} status - the wifi status
-     * @return {void}
-     */
-
-    
-    if(typeof status !== 'boolean'){ console.warn("[setWifiStatus] Status should be a boolean  | input", typeof status); return; }
-
-    const wifi = document.querySelector("#taskbar .applets .internet-access");
-    const wifiIcon = document.querySelector("#taskbar .applets .internet-access img");
-    const yes_src = wifiIcon.getAttribute("src-online");
-    const no_src = wifiIcon.getAttribute("src-offline");
-
-    const onlineTitle = wifi.getAttribute("title-online");
-    const offlineTitle = wifi.getAttribute("title-offline");
-
-    if(status) {
-        wifiIcon.src = yes_src;
-        wifi.title = onlineTitle;
-        console.debug("[setWifiStatus] set Wifi to connected");
-    } else {
-        wifiIcon.src = no_src;
-        wifi.title = offlineTitle;
-        console.debug("[setWifiStatus] set Wifi to connected");
+class WifiApplet extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.onlineTitle = this.getAttribute('title-online') || 'WiFi-Name\nInternet access';
+        this.offlineTitle = this.getAttribute('title-offline') || 'No internet access\nNo connections available';
+        this.srcOnline = this.getAttribute('src-online') || '/assets/connection/wifi.svg';
+        this.srcOffline = this.getAttribute('src-offline') || '/assets/connection/no-wifi.svg';
+        this.preloadImages();
+        this.render();
     }
-    
+
+    connectedCallback() {
+        this.setWifiStatus(navigator.onLine);
+        window.addEventListener('online', () => this.setWifiStatus(true));
+        window.addEventListener('offline', () => this.setWifiStatus(false));
+    }
+
+    preloadImages() {
+        // Preload the offline image
+        console.log("[preloadImages] Preloading offline image");
+        const offlineImage = new Image();
+        offlineImage.src = this.srcOffline;
+    }
+
+    setWifiStatus(status) {
+        const wifiIcon = this.shadowRoot.querySelector('img');
+        
+        if (status) {
+            const onlineImage = new Image();
+            onlineImage.onload = () => {
+                wifiIcon.src = this.srcOnline;
+                this.setAttribute('title', this.onlineTitle);
+                console.debug("[setWifiStatus] set Wifi to connected");
+            };
+            onlineImage.src = this.srcOnline;
+        } else {
+            wifiIcon.onload = () => {
+                wifiIcon.src = this.srcOffline;
+                this.setAttribute('title', this.offlineTitle);
+                console.debug("[setWifiStatus] set Wifi to disconnected");
+            };
+            wifiIcon.src = this.srcOffline;
+        }
+    }
+
+    css() {
+        return `
+            :host {
+                display: inline-block;
+            }
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        `;
+    }
+
+    template() {
+        return `
+            <img alt="Wifi" src="${this.srcOnline}">
+        `;
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+            <style>${this.css()}</style>
+            ${this.template()}
+        `;
+    }
 }
+
+customElements.define('applet-wifi', WifiApplet);
