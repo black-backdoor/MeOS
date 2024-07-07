@@ -18,7 +18,7 @@ const limitCacheSize = (name, size) => {
     caches.open(name).then(cache => {
         cache.keys().then(keys => {
             if(keys.length > size) {
-                console.debug(`%cService Worker: %cCache Size ${keys.length} now removing, max ${size}`, "color: lightblue", "color: inherit");
+                console.debug(`%cService Worker: %cCache Size ${keys.length} now removing, max ${size}`, "color: DodgerBlue", "color: inherit");
                 cache.delete(keys[0]).then(limitCacheSize(name, size));
             }
         });
@@ -28,7 +28,7 @@ const limitCacheSize = (name, size) => {
 
 // Install service worker and cache static assets
 self.addEventListener('install', (event) => {
-    console.debug("%cService Worker: %cInstalled", "color: lightblue", "color: green");
+    console.debug("%cService Worker: %cInstalled", "color: DodgerBlue", "color: green");
 
     event.waitUntil(
         caches.open(CACHE_NAME_OFFLINE)
@@ -41,7 +41,7 @@ self.addEventListener('install', (event) => {
 
 // Activate service worker and clean up old caches
 self.addEventListener('activate', (event) => {
-    console.log("%cService Worker: %cActivated", "color: lightblue", "color: inherit");
+    console.log("%cService Worker: %cActivated", "color: DodgerBlue", "color: inherit");
 
     const cacheWhiteList = [CACHE_NAME_OFFLINE, CACHE_NAME_DYNAMIC];
     event.waitUntil(
@@ -49,7 +49,7 @@ self.addEventListener('activate', (event) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
                     if (!cacheWhiteList.includes(cacheName)) {
-                        console.debug(`%cService Worker: %cDeleting cache ${cacheName}`, "color: lightblue", "color: red");
+                        console.debug(`%cService Worker: %cDeleting cache ${cacheName}`, "color: DodgerBlue", "color: red");
                         return caches.delete(cacheName);
                     }
                 })
