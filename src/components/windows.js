@@ -135,6 +135,7 @@ class AppWindow extends HTMLElement {
                 left: 0px !important;
                 width: 100% !important;
                 height: calc(100vh - var(--taskbar-height)) !important;
+                border-radius: 0;
                 z-index: 3900;
             }
 
