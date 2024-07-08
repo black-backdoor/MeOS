@@ -95,14 +95,15 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if('sessionStorage' in window) {
         console.debug("Session storage is available");
-
-        /* 40% chance for a update */
+        
+        const seenUpdate = sessionStorage.getItem("seen-update", false);
         const rand = Math.random();
-        console.log(rand);
-        if (rand < 0.4) {
-            console.debug("Redirecting to /update");
+        
+        if ((rand < 0.4 && !seenUpdate) || rand < 0.1) {
+            console.debug("Redirecting to /update/", "has seen update:", seenUpdate);
             sessionStorage.setItem("update-duration", 5000);
-            window.location.href = "/update";
+            window.location.href = "/update/";
+            sessionStorage.setItem("seen-update", true);
         } else {
             console.debug("Redirecting to /");
             window.location.href = "/";
