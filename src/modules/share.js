@@ -6,20 +6,17 @@
  * @returns {Promise<void>} - A promise that resolves when the sharing process is complete.
  */
 
-async function share(onClipboard = () => {}, onSuccess = () => {}, onError = () => {}, description = "") {
-    /* check if Web Share API is supported */
+async function shareURL(onClipboard = () => {}, onSuccess = () => {}, onError = () => {}, description = "") {
     if (navigator.canShare) {
         console.debug('[Share] Web Share API is supported');
 
-        const shareData = {
-            title: window.document.title,
-            text: description,
-            url: window.location.href
-        };
-
-        console.log(shareData);
-
         try {
+            const shareData = {
+                title: window.document.title,
+                text: description,
+                url: window.location.href
+            };
+
             await navigator.share(shareData);
             console.debug('[Share] Successfully shared via Web Share API');
             onSuccess();
@@ -29,18 +26,14 @@ async function share(onClipboard = () => {}, onSuccess = () => {}, onError = () 
         }
     }
 
-    else  {
+    else {
         /* if doesn't browser supports Web Share API switch to Clipboard API */
         console.debug('[Share] Web Share API is not supported, Switching to Clipboard API');
 
         try {
-            onClipboard();
-
-            /* copy to clipboard */
             await navigator.clipboard.writeText(window.location.href);
-
             console.debug('[Share] Copied to clipboard');
-            onSuccess();
+            onClipboard();
         } catch (error) {
             console.debug('[Share] Clipboard API failed:', error);
             onError();
