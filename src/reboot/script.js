@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const seenUpdate = sessionStorage.getItem("seen-update", false);
         const rand = Math.random();
         
-        if ((rand < 0.4 && !seenUpdate) || rand < 0.1) {
+        if ((rand <= 0.5 && !seenUpdate) || rand < 0.1) {
             console.debug("Redirecting to /update/", "has seen update:", seenUpdate);
             sessionStorage.setItem("update-duration", 5000);
             window.location.href = "/update/";
