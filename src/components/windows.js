@@ -9,6 +9,7 @@ class AppWindow extends HTMLElement {
         return `
             :host {
                 --text-color: #fff;
+                --border-color: #e0e0e0;
                 --head-text-color: #000;
                 --body-text-color: #fff;
                 --head-bg-color: #fdfdfd;
@@ -24,6 +25,7 @@ class AppWindow extends HTMLElement {
             @media (prefers-color-scheme: dark) {
                 :host {
                     --head-color: #fff;
+                    --border-color: #3f3f3f;
                     --head-bg-color: #383838;
                     --body-bg-color: #2c2c2c;
                     --control-close: #ee3a30;
@@ -41,6 +43,8 @@ class AppWindow extends HTMLElement {
                 min-height: 120px;
                 display: flex;
                 flex-direction: column;
+                border: 1px var(--border-color) solid;
+                border-radius: 8px 8px 0 0;
             }
 
             header {
