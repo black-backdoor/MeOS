@@ -25,6 +25,71 @@ body {
 }
 
 
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container > #avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-color: white;
+
+    padding: 10px;
+}
+
+.container > #username {
+    /* username */
+    color: white;
+    font-size: 30px;
+    margin: 15px 0;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.container > #password {
+    padding: 0 6px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 200px;
+    height: 33px;
+    border-radius: 4px;
+}
+
+
+.container > #show-password {
+    position: relative;
+    top: -31.5px;
+    left: 83px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+}
+.container > #show-password:active {
+    background-color: rgba(86, 86, 86, 0.247);
+}
+
+.container > #show-password svg {
+    fill: white;
+    height: 100%;
+    width: 100%;
+    border-radius: 2px;
+}
+.container > #show-password:active svg {
+    fill: gray;
+}
+
+
+
 /* USERS */
 .users {
     position: absolute;
@@ -74,43 +139,3 @@ body {
     color: white;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
-
-
-
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.container > #avatar {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background-color: white;
-
-    padding: 10px;
-}
-
-.container > #username {
-    /* username */
-    color: white;
-    font-size: 30px;
-    margin: 15px 0;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-}
-
-.container > #password {
-    padding: 0 10px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.6);
-    width: 200px;
-    height: 33px;
-    border-radius: 20px;
-}
-
-

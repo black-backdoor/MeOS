@@ -46,4 +46,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-//  passwordSec.style.animation = 'shake 0.4s ease-in-out';
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('password');
+    
+    /* SHOW PASSWORD */
+    const showPasswordButton = document.getElementById('show-password');
+    const hidePassword = () => {
+        passwordInput.setAttribute('type', 'password');
+        passwordInput.setAttribute('autocomplete', 'current-password');
+    };
+    const showPassword = () => {
+        passwordInput.setAttribute('type', 'text');
+        passwordInput.setAttribute('autocomplete', 'off');
+    }
+
+    showPasswordButton.addEventListener('mousedown', showPassword);
+    showPasswordButton.addEventListener('mouseup', hidePassword);
+    showPasswordButton.addEventListener('mouseleave', hidePassword);
+
+    /* CHECK PASSWORD */
+    const password = 'meos';
+    function checkPassword() {
+        const passwordValue = passwordInput.value;
+        passwordInput.value = '';
+        if (passwordValue === password) {
+            alert('Correct Password!');
+        } else {
+            alert('Incorrect Password!');
+        }
+    }
+
+    passwordInput.addEventListener('input', () => {
+        const passwordValue = passwordInput.value;
+        if (passwordValue.length == password.length) {
+            /* add delay to wait until you can be sure the user has finished typing */
+            checkPassword();
+        }
+    });
+
+    passwordInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            checkPassword();
+        }
+    });
+});
