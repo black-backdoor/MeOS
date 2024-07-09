@@ -28,14 +28,14 @@ const limitCacheSize = (name, size) => {
 
 // Install service worker and cache static assets
 self.addEventListener('install', (event) => {
-    console.debug("%c[Service Worker]%c Installed", 'color: DodgerBlue', 'color: green');
+    console.log("%c[Service Worker]%c Installed", 'color: DodgerBlue', 'color: green');
     event.waitUntil(
         caches.open(CACHE_NAME_OFFLINE)
             .then((cache) => {
-                console.log('Opened cache');
                 return cache.addAll(urlsToCache);
             })
     );
+    console.debug(`%c[Service Worker]%c added ${urlsToCache.length} items to cache: ${CACHE_NAME_DYNAMIC}`, 'color: DodgerBlue', 'color: inherit');
 });
 
 // Activate service worker and clean up old caches
@@ -107,7 +107,6 @@ self.addEventListener('fetch', (event) => {
                         return response;
                     })
                     .catch(() => {
-                        // Offline fallback
                         return caches.open(CACHE_NAME_OFFLINE)
                             .then((cache) => {
                                 return cache.match('/fallback.html');
