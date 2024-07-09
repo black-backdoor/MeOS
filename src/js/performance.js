@@ -22,7 +22,7 @@ function logPageTimings() {
         }
     }
 
-    console.group("%c[PERFORMANCE]%c Page", 'color: orange', 'color: inherit');
+    console.group("%c[PERFORMANCE]%c Page (NOT WORKING)", 'color: orange', 'color: inherit');
     const page_load_time = performance.timing.loadEventEnd - performance.timing.fetchStart;
     const page_navigation_time = performance.timing.loadEventEnd - performance.timing.navigationStart;
     const dcl = performance.timing.domComplete - performance.timing.domInteractive;
@@ -34,9 +34,8 @@ function logPageTimings() {
     const paintObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         entries.forEach(entry => {    
-            // The time to first-paint took 509 milliseconds.
-            // The time to first-contentful-paint took 509 milliseconds.
-            console.log(`%c[PERFORMANCE]%c The time to ${entry.name} took ${Math.round(entry.startTime)} milliseconds.`, 'color: orange', 'color: inherit');
+            // EXAMPLE: The time to first-paint took 509 milliseconds.
+            console.log(`%c[PERFORMANCE]%c The time to ${entry.name} took %c${Math.round(entry.startTime)}%c milliseconds.`, 'color: orange', 'color: inherit', `color: ${calculateColor(Math.round(entry.startTime), 1500, 2500)}`, 'color: inherit');
         });
     });
     
