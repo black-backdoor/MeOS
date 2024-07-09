@@ -75,13 +75,4 @@
 /* CALENDAR */
 #action-menu .calendar {
     width: 100%;
-    --text-color: #fff;
-    --border-color: none;
-    --bg-color: #393939;
-
-    --header-bg-color: #292929;
-    --header-text-hover-color: #858585;
-
-    --body-bg-color: #292929;
-    --nav-button-color: #888888;
 }

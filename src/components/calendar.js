@@ -30,6 +30,21 @@ class CalendarWidget extends HTMLElement {
                 width: 280px;
                 user-select: none;
             }
+
+            @media (prefers-color-scheme: dark) {
+                :host {
+                        --text-color: #fff;
+                        --border-color: none;
+                        --bg-color: #393939;
+
+                        --header-bg-color: #292929;
+                        --header-text-hover-color: #858585;
+
+                        --body-bg-color: #292929;
+                        --nav-button-color: #888888;
+                }
+            }
+            
             .calendar {
                 display: flex;
                 flex-direction: column;
