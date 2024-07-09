@@ -11,17 +11,17 @@ class BatteryApplet extends HTMLElement {
 
     css() {
         return `
-            /* Add your CSS styling here */
+            svg {
+                width: 40px;
+                height: 40px;
+                fill: white;
+            }
         `;
-    }
-
-    css() {
-        return ``;
     }
 
     template() {
         return `
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="40" height="40" viewBox="0 0 2048 2048" fill="white" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;fill-rule:evenodd;clip-rule:evenodd">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 2048 2048" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;fill-rule:evenodd;clip-rule:evenodd">
                 <style>
                     [class^="fill-"] { display: none; }
                     .charging { display: none; }
@@ -75,7 +75,7 @@ class BatteryApplet extends HTMLElement {
     }
 
     updateBatteryStatus(battery) {
-        const text_percent = false;
+        const text_percent = true;
 
         function convertSecondsToTime(seconds) {
             if (seconds === Infinity) return '∞';
