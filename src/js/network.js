@@ -26,7 +26,7 @@ function printNetworkInfo() {
         const connection = navigator.connection;
         console.group('%c[NETWORK]%c Network Information', 'color: gold', 'color: inherit;');
         console.info(`Downlink: %c${connection.downlink}%c Mbps`, `color: ${calculateColor(connection.downlink, 0.3, 0.6, true)}`, 'color: inherit;');
-        console.info(`Save data mode: ${connection.saveData}`);
+        console.info(`Save data mode: %c${connection.saveData}`, `color: ${connection.saveData ? 'red' : 'green'}`);
         console.info(`RTT: %c${connection.rtt}%c ms`, `color: ${calculateColor(connection.rtt, 300, 800)}`, 'color: inherit;');
         console.groupEnd();
     } else {
