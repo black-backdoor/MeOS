@@ -168,6 +168,7 @@ class BatteryApplet extends HTMLElement {
             this.charging = false;
             this.fill = 0;
             this.text = 'X';
+            this.render();
         }
     }
 }
