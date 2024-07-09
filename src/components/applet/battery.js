@@ -145,7 +145,7 @@ class BatteryApplet extends HTMLElement {
             `color: ${charging ? 'green' : 'red'}`,
         );
 
-        console.groupCollapsed(`%c[Battery]`, 'color: green');
+        console.groupCollapsed(`%c[Battery]%c Info`, 'color: green', 'color: inherit');
         console.debug("IsCharging", charging);
         console.debug("Percentage", percent);
         console.debug("chargingTime", battery.chargingTime);
