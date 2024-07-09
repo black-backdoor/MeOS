@@ -39,7 +39,8 @@ body {
     height: 180px;
     border-radius: 50%;
     background-color: white;
-
+    user-select: none;
+    pointer-events: none;
     padding: 10px;
 }
 
@@ -48,6 +49,8 @@ body {
     color: white;
     font-size: 30px;
     margin: 15px 0;
+    user-select: none;
+    pointer-events: none;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
@@ -125,6 +128,8 @@ body {
     padding: 3px;
     border-radius: 50%;
     margin-right: 16px;
+    user-select: none;
+    pointer-events: none;
     background-color: white;
 }
 .user > p.avatar {
