@@ -16,7 +16,7 @@ function loadResource(src, type) {
 function loadIdleResources() {
     console.log('%c[idle-resource]%c Loading idle resources', 'color: magenta;', 'color: inherit;');
     const resources = document.querySelectorAll('idle-resource');
-    console.groupCollapsed(`%c[idle-resource]%c Found ${resources.length} resources`, 'color: magenta;', 'color: inherit;');
+    console.groupCollapsed(`%c[idle-resource]%c preloading ${resources.length} resources`, 'color: magenta;', 'color: inherit;');
     resources.forEach(
         function(resource) {
             const src = resource.getAttribute('src');
