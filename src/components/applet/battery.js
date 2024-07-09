@@ -164,7 +164,7 @@ class BatteryApplet extends HTMLElement {
                 this.updateBatteryStatus(battery);
             });
         } else {
-            console.info('%c[setBatteryStatus]%c battery status is not supported', 'color: red', 'color: inherit');
+            console.log('%c[setBatteryStatus]%c battery status is not supported', 'color: red', 'color: inherit');
             this.title = 'Battery API is not supported';
             this.charging = false;
             this.fill = 0;
