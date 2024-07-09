@@ -5,8 +5,8 @@
 */
 
 
-const CACHE_NAME_OFFLINE = 'site-offline-v0.2.0';
-const CACHE_NAME_DYNAMIC = 'site-dynamic-v0.2.0';
+const CACHE_NAME_OFFLINE = 'offline-v0.3.0';
+const CACHE_NAME_DYNAMIC = 'dynamic-v0.3.0';
 
 const urlsToCache = [
     '/fallback.html',
