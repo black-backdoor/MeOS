@@ -19,7 +19,7 @@ class CalendarWidget extends HTMLElement {
                 --bg-color: #fff;
                 --border-color: #ddd;
                 --header-bg-color: #f1f1f1;
-                --header-text-hover-color: #383838;
+                --header-text-hover-color: #808080;
                 --nav-button-color: #555;
                 --today-color: #007bff; /* Blue color for today's date */
                 font-family: Arial, sans-serif;
@@ -45,7 +45,7 @@ class CalendarWidget extends HTMLElement {
                 font-size: 18px;
                 border-bottom: 1px solid var(--border-color);
             }
-            .header:hover {
+            .header span:hover {
                 color: var(--header-text-hover-color);
             }
             .nav {
