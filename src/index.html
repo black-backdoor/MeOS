@@ -11,14 +11,26 @@
     <link rel="stylesheet" rel="preload" href="/css/taskbar.css">
 
     <!-- MODULES -->
+    <script src="/js/idle-resources.js" defer></script>
     <script src="/modules/share.js"></script>
 
 
-    <!-- COMPONENTS -->
+    <!-- METRICS -->
+    <script src="/js/network.js" defer></script>
+    <script src="/js/performance.js" defer></script>
 
-    <!-- widgets -->
+
+    <!-- APPLETS -->
+    <idle-resource src="/assets/connection/no-wifi.svg" type="image"></idle-resource>
+    <script src="/components/applet/wifi.js" type="module"></script>
+    <script src="/components/applet/battery.js" type="module"></script>
+
+
+    <!-- WIDGETS -->
     <script src="/components/calendar.js" rel="preload" type="module"></script>
 
+
+    <!-- COMPONENTS -->
     <!-- windows -->
     <script src="/components/windows.js" rel="preload" type="module"></script>
     <link rel="stylesheet" href="/css/window-defaults.css">
@@ -31,16 +43,8 @@
     <!-- taskbar apps -->
     <script src="/components/taskbar-app.js" rel="preload" type="module"></script>
     <script src="/js/taskbar-apps.js"></script>
+        
 
-
-    <!-- CUSTOM PRELOAD -->
-    <script src="/js/idle-resources.js" defer></script>
-
-    <!-- APPLETS -->
-    <idle-resource src="/assets/connection/no-wifi.svg" type="image"></idle-resource>
-    <script src="/components/applet/wifi.js" type="module"></script>
-    <script src="/components/applet/battery.js" type="module"></script>
-    
     <!-- SCRIPTS -->
     <script src="/js/taskbar/weather.js"></script>
 
@@ -113,15 +117,6 @@
         <app-window name="About" class="website">
             <iframe src="/about/" frameborder="0"></iframe>
         </app-window>
-        <app-window name="About" class="website">
-            <iframe src="/about/" frameborder="0"></iframe>
-        </app-window>
-        <app-window name="About" class="website">
-            <iframe src="/about/" frameborder="0"></iframe>
-        </app-window>
-        <app-window name="About" class="website">
-            <iframe src="/about/" frameborder="0"></iframe>
-        </app-window>
         <div id="push-notifications">
             <!-- Notifications will be added here -->
         </div>
@@ -135,7 +130,7 @@
                     <!-- Notifications will be added here -->
                 </div>
             </div>
-            <calendar-widget class="calendar"></calendar-widget>
+            <calendar-widget></calendar-widget>
         </div>
     </div>
 
@@ -185,80 +180,5 @@
             <!-- I chose this time and date because it was the exact time I started the WebOS project. -->
         </section>
     </div>
-
-    <script>
-        function checkLoadEventEnd() {
-            if (performance.timing.loadEventEnd !== 0) {
-                calculatePageLoadTime();
-            } else {
-                setTimeout(checkLoadEventEnd, 100);
-            }
-        }
-
-        function calculatePageLoadTime() {
-            // calculate console.log color based on value and thresholds
-            function calculateColor(value, middle, max) {
-                if (value < middle) {
-                    return `green`;
-                } else if (value >= middle && value < max) {
-                    return `orange`;
-                } else {
-                    return `red`;
-                }
-            }
-
-            const page_load_time = performance.timing.loadEventEnd - performance.timing.fetchStart;
-            const dcl = performance.timing.domComplete - performance.timing.domInteractive;
-
-            console.info(`%c[PERFORMANCE]%c Page load time is %c${page_load_time}%c ms`, "color: orange", "color: inherit", `color: ${calculateColor(page_load_time, 1000, 3000)};`, "color: inherit;");
-            console.info(`%c[PERFORMANCE]%c DOM Content Loaded (DCL): %c${dcl}%c ms`, "color: orange", "color: inherit", `color: ${calculateColor(dcl, 800, 1200)};`, "color: inherit;");
-        }
-
-        window.addEventListener("load", checkLoadEventEnd, false);
-    </script>
-    <script>
-        function printNetworkInfo() {
-            // Function to calculate console.log color based on value and thresholds
-            function calculateColor(value, middle, max) {
-                if (value < middle) {
-                    return 'green';
-                } else if (value >= middle && value < max) {
-                    return 'orange';
-                } else {
-                    return 'red';
-                }
-            }
-    
-            // Function to calculate console.log color based on another condition
-            function calculateColor1(value, middle, max) {
-                if (value > middle) {
-                    return 'green';
-                } else if (value <= middle && value > max) {
-                    return 'orange';
-                } else {
-                    return 'red';
-                }
-            }
-    
-            if ('connection' in navigator) {
-                const connection = navigator.connection;
-                console.info(`%c[NETWORK]%c Downlink: %c${connection.downlink}%c Mbps`, 'color: gold', 'color: inherit', `color: ${calculateColor1(connection.downlink, 0.3, 0.6)}`, 'color: inherit;');
-                console.info(`%c[NETWORK]%c Save data mode: %c${connection.saveData}`, 'color: gold', 'color: inherit', 'color: inherit;');
-                console.info(`%c[NETWORK]%c RTT: %c${connection.rtt}%c ms`, 'color: gold', 'color: inherit', `color: ${calculateColor(connection.rtt, 300, 800)}`, 'color: inherit;');
-            } else {
-                console.log(`%c[NETWORK]%c Network Information API not supported`, 'color: gold', 'color: inherit');
-            }
-        }
-    
-        document.addEventListener('DOMContentLoaded', function() {    
-            if ('requestIdleCallback' in window) {
-                console.debug('%c[NETWORK]%c Using requestIdleCallback', 'color: gold;', 'color: inherit;');
-                requestIdleCallback(printNetworkInfo);
-            } else {
-                console.debug('%c[NETWORK]%c Using setTimeout', 'color: gold;', 'color: inherit;');
-                setTimeout(printNetworkInfo, 5000);
-            }
-        });
-    </script>    
 </body>
 </html>
