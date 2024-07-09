@@ -18,7 +18,7 @@ const limitCacheSize = (name, size) => {
     caches.open(name).then(cache => {
         cache.keys().then(keys => {
             if(keys.length > size) {
-                console.debug(`%cService Worker: %cCache Size ${keys.length} now removing, max ${size}`, "color: DodgerBlue", "color: inherit");
+                console.debug(`%c[Service Worker]%c Cache Size ${keys.length} now removing, max ${size}`, 'color: DodgerBlue', 'color: inherit');
                 cache.delete(keys[0]).then(limitCacheSize(name, size));
             }
         });
@@ -28,28 +28,41 @@ const limitCacheSize = (name, size) => {
 
 // Install service worker and cache static assets
 self.addEventListener('install', (event) => {
-    console.debug("%cService Worker: %cInstalled", "color: DodgerBlue", "color: green");
-
+    console.log("%c[Service Worker]%c Installed", 'color: DodgerBlue', 'color: green');
     event.waitUntil(
         caches.open(CACHE_NAME_OFFLINE)
             .then((cache) => {
-                console.log('Opened cache');
                 return cache.addAll(urlsToCache);
             })
     );
+    console.debug(`%c[Service Worker]%c added ${urlsToCache.length} items to cache: ${CACHE_NAME_DYNAMIC}`, 'color: DodgerBlue', 'color: inherit');
 });
 
 // Activate service worker and clean up old caches
 self.addEventListener('activate', (event) => {
-    console.log("%cService Worker: %cActivated", "color: DodgerBlue", "color: inherit");
+    console.log("%c[Service Worker]%c Activated", 'color: DodgerBlue', 'color: inherit');
+
+    event.waitUntil(
+        (async () => {
+            const cacheNames = await caches.keys();
+            console.debug(`%c[Service Worker]%c Number of current caches: ${cacheNames.length}`, 'color: DodgerBlue', 'color: inherit');
+            for (const cacheName of cacheNames) {
+                const cache = await caches.open(cacheName);
+                const requests = await cache.keys();
+                console.debug(`%c[Service Worker]%c Cache: ${cacheName}, Number of entries: ${requests.length}`, 'color: DodgerBlue', 'color: inherit');
+            }
+        })()
+    );
 
     const cacheWhiteList = [CACHE_NAME_OFFLINE, CACHE_NAME_DYNAMIC];
+    console.debug(`%c[Service Worker]%c Allowed Caches: ${cacheWhiteList.join(', ')}`, 'color: DodgerBlue', 'color: inherit');
+
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
                     if (!cacheWhiteList.includes(cacheName)) {
-                        console.debug(`%cService Worker: %cDeleting cache ${cacheName}`, "color: DodgerBlue", "color: red");
+                        console.log(`%c[Service Worker]%c Deleting cache ${cacheName}`, 'color: DodgerBlue', 'color: red');
                         return caches.delete(cacheName);
                     }
                 })
@@ -94,7 +107,6 @@ self.addEventListener('fetch', (event) => {
                         return response;
                     })
                     .catch(() => {
-                        // Offline fallback
                         return caches.open(CACHE_NAME_OFFLINE)
                             .then((cache) => {
                                 return cache.match('/fallback.html');
