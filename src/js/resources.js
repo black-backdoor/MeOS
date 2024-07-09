@@ -13,7 +13,7 @@ function logResourceTimings(resourceType) {
 
 function logPageTimings() {
     let timing = window.performance.timing;
-    console.group("Page");
+    console.group("%c[PERFORMANCE]%c Page", "color: orange", "color: inherit");
     console.debug("DNS Time: " + (timing.domainLookupEnd - timing.domainLookupStart));
     console.debug("Connection Time: " + (timing.connectEnd - timing.connectStart));
     console.debug("Request Time: " + (timing.responseEnd - timing.requestStart));
