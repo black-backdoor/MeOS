@@ -73,6 +73,6 @@
 
 
 /* CALENDAR */
-#action-menu .calendar {
+#action-menu calendar-widget {
     width: 100%;
 }

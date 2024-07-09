@@ -11,14 +11,21 @@
     <link rel="stylesheet" rel="preload" href="/css/taskbar.css">
 
     <!-- MODULES -->
+    <script src="/js/idle-resources.js" defer></script>
     <script src="/modules/share.js"></script>
 
 
-    <!-- COMPONENTS -->
+    <!-- APPLETS -->
+    <idle-resource src="/assets/connection/no-wifi.svg" type="image"></idle-resource>
+    <script src="/components/applet/wifi.js" type="module"></script>
+    <script src="/components/applet/battery.js" type="module"></script>
 
-    <!-- widgets -->
+
+    <!-- WIDGETS -->
     <script src="/components/calendar.js" rel="preload" type="module"></script>
 
+
+    <!-- COMPONENTS -->
     <!-- windows -->
     <script src="/components/windows.js" rel="preload" type="module"></script>
     <link rel="stylesheet" href="/css/window-defaults.css">
@@ -31,16 +38,8 @@
     <!-- taskbar apps -->
     <script src="/components/taskbar-app.js" rel="preload" type="module"></script>
     <script src="/js/taskbar-apps.js"></script>
+        
 
-
-    <!-- CUSTOM PRELOAD -->
-    <script src="/js/idle-resources.js" defer></script>
-
-    <!-- APPLETS -->
-    <idle-resource src="/assets/connection/no-wifi.svg" type="image"></idle-resource>
-    <script src="/components/applet/wifi.js" type="module"></script>
-    <script src="/components/applet/battery.js" type="module"></script>
-    
     <!-- SCRIPTS -->
     <script src="/js/taskbar/weather.js"></script>
 
@@ -113,15 +112,6 @@
         <app-window name="About" class="website">
             <iframe src="/about/" frameborder="0"></iframe>
         </app-window>
-        <app-window name="About" class="website">
-            <iframe src="/about/" frameborder="0"></iframe>
-        </app-window>
-        <app-window name="About" class="website">
-            <iframe src="/about/" frameborder="0"></iframe>
-        </app-window>
-        <app-window name="About" class="website">
-            <iframe src="/about/" frameborder="0"></iframe>
-        </app-window>
         <div id="push-notifications">
             <!-- Notifications will be added here -->
         </div>
@@ -135,7 +125,7 @@
                     <!-- Notifications will be added here -->
                 </div>
             </div>
-            <calendar-widget class="calendar"></calendar-widget>
+            <calendar-widget></calendar-widget>
         </div>
     </div>
 
