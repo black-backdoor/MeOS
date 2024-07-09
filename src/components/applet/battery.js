@@ -137,7 +137,7 @@ class BatteryApplet extends HTMLElement {
 
         console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: green', 'color: inherit');
         console.info(
-            `%c[setBatteryStatus]%c battery level: %c${percent}% %cand battery is %c${charging ? 'charging' : 'discharging'}`,
+            `%c[Battery]%c battery level: %c${percent}% %cand battery is %c${charging ? 'charging' : 'discharging'}`,
             'color: green',
             'color: inherit',
             `color: ${percent <= 20 ? 'red' : percent <= 50 ? 'orange' : 'green'}`,
@@ -145,10 +145,12 @@ class BatteryApplet extends HTMLElement {
             `color: ${charging ? 'green' : 'red'}`,
         );
 
+        console.groupCollapsed(`%c[Battery]%c Info`, 'color: green', 'color: inherit');
         console.debug("IsCharging", charging);
         console.debug("Percentage", percent);
         console.debug("chargingTime", battery.chargingTime);
         console.debug("dischargingTime", battery.dischargingTime);
+        console.groupEnd();
     }
 
     init() {

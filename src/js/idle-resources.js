@@ -6,7 +6,7 @@ function loadResource(src, type) {
     
     switch (type) {
         case 'image':
-            console.debug(`%c[idle-resource]%c Loading image: ${src}`, 'color: magenta;', 'color: inherit;');
+            console.debug(`Loading image: ${src}`);
             const img = new Image();
             img.src = src;
             break;
@@ -16,6 +16,7 @@ function loadResource(src, type) {
 function loadIdleResources() {
     console.log('%c[idle-resource]%c Loading idle resources', 'color: magenta;', 'color: inherit;');
     const resources = document.querySelectorAll('idle-resource');
+    console.group(`%c[idle-resource]%c preloading ${resources.length} resources`, 'color: magenta;', 'color: inherit;');
     resources.forEach(
         function(resource) {
             const src = resource.getAttribute('src');
@@ -23,6 +24,7 @@ function loadIdleResources() {
             loadResource(src, type);
         }
     );
+    console.groupEnd();
 }
 
 // Use requestIdleCallback if available, otherwise fall back to setTimeout

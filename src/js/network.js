@@ -23,9 +23,11 @@ function printNetworkInfo() {
 
     if ('connection' in navigator) {
         const connection = navigator.connection;
-        console.info(`%c[NETWORK]%c Downlink: %c${connection.downlink}%c Mbps`, 'color: gold', 'color: inherit', `color: ${calculateColor1(connection.downlink, 0.3, 0.6)}`, 'color: inherit;');
-        console.info(`%c[NETWORK]%c Save data mode: %c${connection.saveData}`, 'color: gold', 'color: inherit', 'color: inherit;');
-        console.info(`%c[NETWORK]%c RTT: %c${connection.rtt}%c ms`, 'color: gold', 'color: inherit', `color: ${calculateColor(connection.rtt, 300, 800)}`, 'color: inherit;');
+        console.group('%c[NETWORK]%c Network Information', 'color: gold', 'color: inherit;');
+        console.info(`Downlink: %c${connection.downlink}%c Mbps`, `color: ${calculateColor1(connection.downlink, 0.3, 0.6)}`, 'color: inherit;');
+        console.info(`Save data mode: ${connection.saveData}`);
+        console.info(`RTT: %c${connection.rtt}%c ms`, `color: ${calculateColor(connection.rtt, 300, 800)}`, 'color: inherit;');
+        console.groupEnd();
     } else {
         console.log(`%c[NETWORK]%c Network Information API not supported`, 'color: gold', 'color: inherit');
     }
