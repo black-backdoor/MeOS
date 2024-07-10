@@ -1,4 +1,5 @@
 const lockScreen = document.getElementById('lock-screen');
+const passwordInput = document.getElementById('password');
 
 document.addEventListener('keypress', function(event) {
     if (lockScreen.classList.contains('hidden')) {
@@ -7,5 +8,6 @@ document.addEventListener('keypress', function(event) {
 
     if (event.code === 'Space') {
         lockScreen.classList.add('hidden');
+        passwordInput.focus();
     }
 });
