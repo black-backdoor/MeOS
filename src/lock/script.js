@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     userElements.forEach(userElement => {
         userElement.addEventListener('click', () => {
             const selectedUser = userElement.querySelector('.username').innerText;
-            window.location.href = `/login-screen?username=${selectedUser}`;
+            window.location.href = `/lock?username=${selectedUser}`;
         });
     });
 });
