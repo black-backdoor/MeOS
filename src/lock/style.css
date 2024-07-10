@@ -176,3 +176,10 @@ body {
     color: white;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
+
+/* ONLY DISPLAY USERS ON DESKTOP */
+@media (pointer: coarse) {
+    .users {
+        display: none;
+    }
+}
