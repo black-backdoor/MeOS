@@ -26,33 +26,7 @@ body {
 
 
 
-/* LOCKSCREEN */
-#lockscreen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
-    background: linear-gradient(to right, purple, rgb(35, 192, 204));
-}
 
-.clock {
-    position: absolute;
-    text-align: center;
-    user-select: none;
-    pointer-events: none;
-    top: 20vh;
-    width: 100%;
-}
-.clock .time {
-    font-size: 80px;
-    margin: 0;
-}
-.clock .date {
-    font-size: 20px;
-    margin: 0;
-}
 
 
 /* MENUBAR */
