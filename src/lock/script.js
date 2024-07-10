@@ -86,19 +86,30 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordInput.value = '';
         passwordShow.style.animation = 'shake 0.5s';
         passwordInput.style.animation = 'shake 0.5s';
+        passwordShow.disabled = true;
+        passwordInput.disabled = true;
+
         setTimeout(
             function() {
+                passwordShow.style.animation = '';
                 passwordInput.style.animation = '';
-                passwordShow.style.animation = '';    
-            }, 500);
-        passwordInput.focus();
+                passwordShow.disabled = false;
+                passwordInput.disabled = false;
+                passwordInput.focus();
+            },
+        500);
     }
 
     function tryLogin(username, password) {
+        passwordShow.disabled = true;
+        passwordInput.disabled = true;
+
         console.debug(`%c[LOGIN]%c Attempting to login as: %c${username}`, 'color: orange', 'color: inherit', 'color: DodgerBlue');
         if (users[username] === password) {
             console.debug(`%c[LOGIN]%c Login successful!`, 'color: orange', 'color: lightgreen');
-            window.location.href = '/';
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
         } else {
             console.debug(`%c[LOGIN]%c Login failed!`, 'color: orange', 'color: red');
             wrongPassword();
