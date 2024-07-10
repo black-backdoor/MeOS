@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const rand = Math.random();
     if (rand <= 0.3) {
         console.debug("Redirecting to /update/");
-        if ('sessionStorage' in window) { sessionStorage.setItem("updateDuration", 5000); }
+        // if ('sessionStorage' in window) { sessionStorage.setItem("updateDuration", 5000); }
         window.location.href = "/update/";
     } else {
         console.debug("Redirecting to /");
