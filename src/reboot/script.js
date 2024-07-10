@@ -93,21 +93,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    if('sessionStorage' in window) {
-        console.debug("Session storage is available");
-        
-        const seenUpdate = sessionStorage.getItem("seen-update", false);
-        const rand = Math.random();
-        
-        if ((rand <= 0.5 && !seenUpdate) || rand < 0.1) {
-            console.debug("Redirecting to /update/", "has seen update:", seenUpdate);
-            sessionStorage.setItem("update-duration", 5000);
-            window.location.href = "/update/";
-            sessionStorage.setItem("seen-update", true);
-        } else {
-            console.debug("Redirecting to /");
-            window.location.href = "/";
-        }
+    const rand = Math.random();
+    if (rand <= 0.3) {
+        console.debug("Redirecting to /update/");
+        if ('sessionStorage' in window) { sessionStorage.setItem("updateDuration", 5000); }
+        window.location.href = "/update/";
     } else {
         console.debug("Redirecting to /");
         window.location.href = "/";
