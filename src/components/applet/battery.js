@@ -28,6 +28,10 @@ class BatteryApplet extends HTMLElement {
 
     css() {
         return `
+            :host {
+                user-select: none;
+                pointer-events: none;
+            }
             svg {
                 height: 100%;
                 fill: white;

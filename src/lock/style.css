@@ -27,6 +27,29 @@ body {
 
 
 
+
+
+/* MENUBAR */
+.menubar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    
+    position: absolute;
+    padding-right: 10px;
+    top: 0;
+    right: 0;
+    height: 35px;
+}
+
+.menubar > * {
+    height: 100%;
+}
+
+
+
+
 .container {
     display: flex;
     justify-content: center;
@@ -91,6 +114,15 @@ body {
     fill: gray;
 }
 
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+
 
 
 /* USERS */
@@ -143,4 +175,11 @@ body {
     font-size: 20px;
     color: white;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+/* ONLY DISPLAY USERS ON DESKTOP */
+@media (pointer: coarse) {
+    .users {
+        display: none;
+    }
 }
