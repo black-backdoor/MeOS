@@ -10,6 +10,12 @@
     <script src="/lock/script.js"></script>
 
 
+    <!--  COMPONENTS -->
+    <script src="/components/applet/clock.js" type="module"></script>
+    <script src="/components/applet/wifi.js" type="module"></script>
+    <script src="/components/applet/battery.js" type="module"></script>
+
+
     <!-- PWA -->
     <script src="/pwa/register.js"></script>
 
@@ -33,6 +39,11 @@
 </head>
 
 <body>
+    <div class="menubar">
+        <applet-clock></applet-clock>
+        <applet-wifi></applet-wifi>
+        <applet-battery content="fill"></applet-battery>
+    </div>
     <div class="container">
         <img id="avatar" src="/lock/user.svg" alt="user">
         <h1 id="username">MeOS</h1>
