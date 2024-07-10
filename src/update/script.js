@@ -1,10 +1,10 @@
 /*
- * Redirects to the home page after a certain amount of time.
- * The time is set by the updateDuration variable.
- * If sessionStorage is available, the updateDuration is read from there.
- */
+    Redirects to the home page after a certain amount of time.
+    The duration of the update is set by the 'updateDuration' variable. DEFAULT: 5000ms
+*/
+
 document.addEventListener("DOMContentLoaded", async () => {
-    let updateDuration = 8000;  // 8 seconds
+    let updateDuration = 5000;
 
     // if sessionStorage is available, use the stored value for updateDuration
     if ('sessionStorage' in window) {
