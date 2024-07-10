@@ -1,3 +1,12 @@
+/*
+    **SETTINGS**
+    content attribute: fill | percent (default: fill)
+     - fill will show the battery level in 10 steps
+     - percent will show a text with the battery level in percent
+*/
+
+
+
 class BatteryApplet extends HTMLElement {
     constructor() {
         super();
@@ -7,6 +16,7 @@ class BatteryApplet extends HTMLElement {
         this.charging = false;
         this.fill = 0;
         this.text = '?';
+        this.content = this.getAttribute('content') || 'fill';
 
         this.render();
         this.init();
@@ -95,8 +105,6 @@ class BatteryApplet extends HTMLElement {
     }
 
     updateBatteryStatus(battery) {
-        const text_percent = false;
-
         function convertSecondsToTime(seconds) {
             if (seconds === Infinity) return '∞';
             const hours = Math.floor(seconds / 3600);
@@ -125,7 +133,7 @@ class BatteryApplet extends HTMLElement {
         this.title = message;
         this.charging = charging;
 
-        if (text_percent) {
+        if (this.content === 'percent') {
             this.fill = 0;
             this.text = percent;
         } else {
@@ -170,6 +178,21 @@ class BatteryApplet extends HTMLElement {
             this.fill = 0;
             this.text = 'X';
             this.render();
+        }
+    }
+
+    static get observedAttributes() {
+        return ['content'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'content') {
+            if (newValue === 'fill' || newValue === 'percent') {
+                this.content = newValue;
+                console.debug(`BatteryApplet: content set to '${newValue}', value will be updated on next battery status change`);
+            } else {
+                console.warn(`BatteryApplet: Invalid attribute for '${name}', value: '${newValue}'`);
+            }
         }
     }
 }
