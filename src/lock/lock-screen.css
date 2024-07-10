@@ -1,3 +1,27 @@
+body {
+    overflow: hidden;
+}
+
+/*
+    .hidden => hide
+    .appear => fade in
+*/
+
+body.hidden > * { display: none;}
+body.hidden #lock-screen { display: block; }
+#lock-screen.hidden { display: none; }
+
+body.appear > * { animation: appear 0.5s ease-out; animation-fill-mode: forwards; }
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
 #lock-screen {
     position: absolute;
     top: 0;
@@ -5,13 +29,13 @@
     width: 100vw;
     height: 100vh;
     z-index: 9999;
-    background: linear-gradient(to right, purple, rgb(35, 192, 204));
+    /* background: linear-gradient(to right, purple, rgb(35, 192, 204)); */
 }
-#lock-screen.hidden {
+
+#lock-screen.top {
     animation: slideToTop 0.5s ease-out;
     animation-fill-mode: forwards;
 }
-
 @keyframes slideToTop {
     0% {
         transform: translateY(0);
@@ -20,6 +44,7 @@
         transform: translateY(-100vh);
     }
 }
+
 
 #lock-screen .clock {
     position: absolute;
