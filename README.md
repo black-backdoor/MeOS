@@ -23,7 +23,7 @@
 ## Features
 - **Static**: Built entirely with client-side technologies—JavaScript, HTML, and CSS without external dependencies.
 - **Progressive Web App (PWA)**: Installable on devices and functions offline, leveraging service workers for caching.
-- **Cross-Platform**: Optimized for both mobile and desktop environments, supporting touch and mouse inputs seamlessly.
+<!-- - **Cross-Platform**: Optimized for both mobile and desktop environments, supporting touch and mouse inputs seamlessly. -->
 - **Adaptive**: Adjusts features dynamically based on browser capabilities and supported APIs.
 - **Battery Status**: Displays real-time battery information conveniently in the taskbar.
 - **Network Status**: visibility into the current network connection status via the taskbar
