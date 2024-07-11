@@ -16,6 +16,14 @@ document.addEventListener('keypress', function(event) {
         passwordInput.focus();
     }
 });
+lockScreen.addEventListener('click', function(event) {
+    lockScreen.classList.add('top');
+    document.body.classList.remove('hidden');
+    document.body.classList.add('appear');
+    setTimeout(() => { lockScreen.classList.add('hidden'); }, 500);
+    passwordInput.focus();
+}, { once: true });
+
 
 
 

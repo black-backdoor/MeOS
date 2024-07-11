@@ -47,6 +47,24 @@ body {
     height: 100%;
 }
 
+/* APPLETS */
+.applets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    height: 35px;
+    gap: 1px;
+}
+
+.applets > * {
+    height: 100%;
+    width: fit-content;
+}
+
 
 
 
