@@ -1,4 +1,5 @@
 :root {
+    --text-color: white;
     --background: linear-gradient(to right, purple, rgb(35, 192, 204));
 }
 
@@ -12,6 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     
+    color: var(--text-color);
     background: var(--background);
 }
 
