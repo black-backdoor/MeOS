@@ -2,23 +2,6 @@
     --background: linear-gradient(to right, purple, rgb(35, 192, 204));
 }
 
-
-
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-
-html {
-    font: inherit;
-    color: white;
-}
-
-
 body {
     width: 100vw;
     height: 100vh;
@@ -32,50 +15,16 @@ body {
     background: var(--background);
 }
 
-
-
-
-
-
-/* MENUBAR */
-.menubar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row-reverse;
-    
-    position: absolute;
-    padding-right: 10px;
-    top: 0;
-    right: 0;
-    height: 35px;
-}
-
-.menubar > * {
-    height: 100%;
-}
-
-/* APPLETS */
-.applets {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    position: absolute;
-    right: 16px;
-    bottom: 16px;
-    height: 35px;
-    gap: 1px;
-}
-
-.applets > * {
-    height: 100%;
-    width: fit-content;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 
 
-
+/* LOGIN CONTAINER */
 .container {
     display: flex;
     justify-content: center;
@@ -203,9 +152,59 @@ body {
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
+
+
+/* MENUBAR */
+.menubar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    
+    position: absolute;
+    padding-right: 10px;
+    top: 0;
+    right: 0;
+    height: 35px;
+}
+
+.menubar > * {
+    height: 100%;
+}
+
+/* APPLETS */
+.applets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    height: 35px;
+    gap: 1px;
+}
+
+.applets > * {
+    height: 100%;
+    width: fit-content;
+}
+
+
+
 /* ONLY DISPLAY USERS ON DESKTOP */
 @media (pointer: coarse) {
     .users {
+        display: none;
+    }
+    .applets {
+        display: none;
+    }
+}
+
+/* ONLY DISPLAY APPLETS ON MENUBAR */
+@media (pointer: fine) {
+    .menubar {
         display: none;
     }
 }
