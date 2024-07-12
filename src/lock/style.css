@@ -1,3 +1,11 @@
+:root {
+    --background: linear-gradient(to right, purple, rgb(35, 192, 204));
+}
+
+
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -21,7 +29,7 @@ body {
     justify-content: center;
     align-items: center;
     
-    background: linear-gradient(to right, purple, rgb(35, 192, 204));
+    background: var(--background);
 }
 
 
