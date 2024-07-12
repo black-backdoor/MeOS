@@ -1,5 +1,5 @@
 /**
- * Share a link to the WebOS module.
+ * Share the current page using the Web Share API or the Clipboard API
  * @param {Function} onClipboard - Function to run when the link is copied to the clipboard.
  * @param {Function} onSuccess - Function to run when the share process is successful.
  * @param {Function} onError - Function to run when the share process fails.

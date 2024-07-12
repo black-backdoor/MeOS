@@ -1,1 +1,1 @@
-Please bevor you open an blank issue, please check there exists a [issue template](https://github.com/black-backdoor/WebOS/issues/new/choose) for your issue.
+Please bevor you open an blank issue, please check there exists a [issue template](https://github.com/black-backdoor/MeOS/issues/new/choose) for your issue.
