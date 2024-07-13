@@ -99,8 +99,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         // if ('sessionStorage' in window) { sessionStorage.setItem("updateDuration", 5000); }
         window.location.href = "/update/";
     } else {
-        console.debug("Redirecting to /");
-        window.location.href = "/";
+        const locked = localStorage.getItem("lock");
+        console.debug("Lock status: " + locked);
+
+        if (locked === "true") {
+            console.debug("Redirecting to /lock/");
+            window.location.href = "/lock/";
+        } else {
+            console.debug("Redirecting to /");
+            window.location.href = "/";
+        }
     }
 });
 
