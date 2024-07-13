@@ -1,3 +1,6 @@
+localStorage.setItem('lock', 'true');
+
+
 const users = {
     'MeOS': 'meos',
     'Admin': 'admin',
@@ -107,6 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
         console.debug(`%c[LOGIN]%c Attempting to login as: %c${username}`, 'color: orange', 'color: inherit', 'color: DodgerBlue');
         if (users[username] === password) {
             console.debug(`%c[LOGIN]%c Login successful!`, 'color: orange', 'color: lightgreen');
+            localStorage.setItem('lock', 'false');
+            localStorage.setItem('user', username);
+
             setTimeout(() => {
                 window.location.href = '/';
             }, 1000);

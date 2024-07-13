@@ -49,8 +49,8 @@ class WifiApplet extends HTMLElement {
             :host {
                 display: inline-block;
                 user-select: none;
-                pointer-events: none;
             }
+
             img {
                 height: 100%;
                 width: 100%;
