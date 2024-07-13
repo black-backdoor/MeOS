@@ -14,7 +14,7 @@ class PowerApplet extends HTMLElement {
                 user-select: none;
             }
 
-            button {
+            #powerButton {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -28,11 +28,11 @@ class PowerApplet extends HTMLElement {
                 background-color: transparent;
             }
 
-            button:hover {
+            #powerButton:hover {
                 background-color: rgba(255, 255, 255, 0.2);
             }
 
-            button:active {
+            #powerButton:active {
                 background-color: rgba(255, 255, 255, 0.4);
             }
 
@@ -52,14 +52,23 @@ class PowerApplet extends HTMLElement {
                 overflow: hidden;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 z-index: 1;
-                min-width: 120px;
+                min-width: 140px;
             }
 
             .menu.active {
                 display: block;
             }
 
+            button.menu-item {
+                border: none;
+                background: none;
+            }
+            
             .menu-item {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                width: 100%;
                 padding: 10px;
                 color: white;
                 cursor: pointer;
@@ -77,10 +86,10 @@ class PowerApplet extends HTMLElement {
                 <svg data-name="Layer 3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path d="M84.94 36.631a2.11 2.11 0 1 0-2.365 3.5 33.226 33.226 0 1 1-37.822.462 2.111 2.111 0 1 0-2.453-3.442 37.453 37.453 0 1 0 42.636-.52z"/><path d="M66.111 66.21V24.979a2.111 2.111 0 0 0-4.222 0V66.21a2.111 2.111 0 0 0 4.222 0z"/></svg>
             </button>
             <div class="menu" id="powerMenu">
-                <div class="menu-item" id="lock">Lock</div>
-                <div class="menu-item" id="hibernate">Hibernate</div>
-                <div class="menu-item" id="shutdown">Shutdown</div>
-                <div class="menu-item" id="reboot">Reboot</div>
+                <button class="menu-item" id="lock">Lock</button>
+                <button class="menu-item" id="hibernate">Hibernate</button>
+                <button class="menu-item" id="shutdown">Shutdown</button>
+                <button class="menu-item" id="reboot">Reboot</button>
             </div>
         `;
     }
