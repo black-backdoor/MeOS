@@ -4,9 +4,9 @@
     Cache is limited to 100 items.
 */
 
-
 const CACHE_NAME_OFFLINE = 'offline-v0.3.0';
 const CACHE_NAME_DYNAMIC = 'dynamic-v0.3.0';
+const DYNAMIC_CACHE_SIZE = 100;
 
 const urlsToCache = [
     '/fallback.html',
@@ -18,7 +18,7 @@ const limitCacheSize = (name, size) => {
     caches.open(name).then(cache => {
         cache.keys().then(keys => {
             if(keys.length > size) {
-                console.debug(`%c[Service Worker]%c Cache Size ${keys.length} now removing, max ${size}`, 'color: DodgerBlue', 'color: inherit');
+                console.debug(`%c[Service Worker]%c ${name} Cache Size ${keys.length} now removing, max ${size}`, 'color: DodgerBlue', 'color: inherit');
                 cache.delete(keys[0]).then(limitCacheSize(name, size));
             }
         });
@@ -103,7 +103,7 @@ self.addEventListener('fetch', (event) => {
                             });
 
                         // Limit the cache size
-                        limitCacheSize(CACHE_NAME_DYNAMIC, 100);
+                        limitCacheSize(CACHE_NAME_DYNAMIC, DYNAMIC_CACHE_SIZE);
                         return response;
                     })
                     .catch(() => {
