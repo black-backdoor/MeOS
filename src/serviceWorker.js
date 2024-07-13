@@ -38,6 +38,7 @@ self.addEventListener('install', (event) => {
     console.debug(`%c[Service Worker]%c added ${urlsToCache.length} items to cache: ${CACHE_NAME_DYNAMIC}`, 'color: DodgerBlue', 'color: inherit');
 });
 
+
 // Activate service worker and clean up old caches
 self.addEventListener('activate', (event) => {
     console.log("%c[Service Worker]%c Activated", 'color: DodgerBlue', 'color: inherit');
@@ -73,23 +74,22 @@ self.addEventListener('activate', (event) => {
 
 // Fetch event: Serve from cache or fetch from network
 self.addEventListener('fetch', (event) => {
+    if(event.request.url.includes('serviceWorker.js')) { return; }  // Do not cache service worker
+    if(event.request.url.includes('chrome-extension')) { return; }  // Do not cache chrome extensions
+
     event.respondWith(
         caches.match(event.request)
             .then((response) => {
-                // Cache hit - return response
                 if (response) {
+                    // Cache hit - return response
                     return response;
                 }
 
-                // Do not cache service worker
-                if(event.request.url.includes('serviceWorker.js')) { return; }
-
-                // Clone the request for fetch and cache separately
+                // clone the request
                 const fetchRequest = event.request.clone();
 
                 return fetch(fetchRequest)
                     .then((response) => {
-                        // Check if valid response received
                         if (!response || response.status !== 200 || response.type !== 'basic') {
                             return response;
                         }
@@ -101,8 +101,7 @@ self.addEventListener('fetch', (event) => {
                             .then((cache) => {
                                 cache.put(event.request, responseToCache);
                             });
-
-                        // Limit the cache size
+                        
                         limitCacheSize(CACHE_NAME_DYNAMIC, DYNAMIC_CACHE_SIZE);
                         return response;
                     })
