@@ -1,7 +1,10 @@
 {
     "name": "MeOS",
     "short_name": "MeOS",
-    "start_url": "/",
+    "description": "MeOS is an online operating system accessible from any device. Built with Progressive Web App (PWA) technology, it offers offline functionality, cross-platform support, and displays real-time device information.",
+    "id": "/?source=pwa",
+    "start_url": "/?source=pwa",
+    "scope": "/",
     "lang": "en",
     "display": "standalone",
     "dir": "ltr",
@@ -17,6 +20,45 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff"
+    "shortcuts": [
+        {
+            "name": "MeOS",
+            "short_name": "MeOS",
+            "url": "/?source=pwa",
+            "icons": [
+                {
+                    "src": "/android-chrome-192x192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "About | MeOS",
+            "short_name": "About",
+            "url": "/about?source=pwa"
+        },
+        {
+            "name": "Device Selector | MeOS",
+            "short_name": "Devices",
+            "url": "/devices?source=pwa"
+        },
+        {
+            "name": "Login | MeOS",
+            "short_name": "Login",
+            "url": "/lock?source=pwa"
+        },
+        {
+            "name": "Reboot | MeOS",
+            "short_name": "Reboot",
+            "url": "/reboot?source=pwa"
+        },
+        {
+            "name": "Update | MeOS",
+            "short_name": "Update",
+            "url": "/update?source=pwa"
+        }
+    ],
+    "theme_color": "#1f1e25",
+    "background_color": "#000"
 }
