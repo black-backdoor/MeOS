@@ -11,6 +11,7 @@ class PowerApplet extends HTMLElement {
                 display: block;
                 width: 100px;
                 height: 100px;
+                user-select: none;
             }
 
             button {
@@ -48,6 +49,7 @@ class PowerApplet extends HTMLElement {
                 left: 0;
                 background: #333;
                 border-radius: 5px;
+                overflow: hidden;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 z-index: 1;
                 min-width: 120px;
@@ -75,9 +77,10 @@ class PowerApplet extends HTMLElement {
                 <svg data-name="Layer 3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path d="M84.94 36.631a2.11 2.11 0 1 0-2.365 3.5 33.226 33.226 0 1 1-37.822.462 2.111 2.111 0 1 0-2.453-3.442 37.453 37.453 0 1 0 42.636-.52z"/><path d="M66.111 66.21V24.979a2.111 2.111 0 0 0-4.222 0V66.21a2.111 2.111 0 0 0 4.222 0z"/></svg>
             </button>
             <div class="menu" id="powerMenu">
+                <div class="menu-item" id="lock">Lock</div>
+                <div class="menu-item" id="hibernate">Hibernate</div>
                 <div class="menu-item" id="shutdown">Shutdown</div>
                 <div class="menu-item" id="reboot">Reboot</div>
-                <div class="menu-item" id="lock">Lock</div>
             </div>
         `;
     }
@@ -91,6 +94,8 @@ class PowerApplet extends HTMLElement {
 
         const button = this.shadowRoot.getElementById('powerButton');
         const menu = this.shadowRoot.getElementById('powerMenu');
+
+        const hibernate = this.shadowRoot.getElementById('hibernate');
         const shutdown = this.shadowRoot.getElementById('shutdown');
         const reboot = this.shadowRoot.getElementById('reboot');
         const lock = this.shadowRoot.getElementById('lock');
@@ -104,6 +109,12 @@ class PowerApplet extends HTMLElement {
             if (!this.contains(event.target)) {
                 menu.classList.remove('active');
             }
+        });
+
+
+        hibernate.addEventListener('click', () => {
+            console.log('Hibernate clicked');
+            // Add hibernate functionality here
         });
 
         shutdown.addEventListener('click', () => {
