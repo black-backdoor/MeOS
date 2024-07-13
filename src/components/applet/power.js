@@ -56,6 +56,7 @@ class PowerApplet extends HTMLElement {
             <style>${this.css()}</style>
             ${this.template()}
         `;
+        this.setAttribute('title', 'Power');
     }
 }
 
