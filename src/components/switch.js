@@ -7,6 +7,14 @@ class UISwitch extends HTMLElement {
 
     css() {
         return `
+            :host {
+                --on-color: #2196F3;
+                --off-color: #ccc;
+                --button-color: #fff;
+                display: block;
+                font-family: Arial, sans-serif;
+            }
+            
             .switch {
                 position: relative;
                 display: block;
@@ -27,7 +35,7 @@ class UISwitch extends HTMLElement {
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background-color: #ccc;
+                background-color: var(--off-color);
                 transition: .4s;
                 border-radius: 34px;
             }
@@ -39,13 +47,13 @@ class UISwitch extends HTMLElement {
                 width: 26px;
                 left: 4px;
                 bottom: 4px;
-                background-color: white;
+                background-color: var(--button-color);
                 transition: .4s;
                 border-radius: 50%;
             }
     
             input:checked + .slider {
-                background-color: #2196F3;
+                background-color: var(--on-color);
             }
     
             input:checked + .slider:before {
