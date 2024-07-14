@@ -11,8 +11,18 @@ class UISwitch extends HTMLElement {
                 --on-color: #2196F3;
                 --off-color: #ccc;
                 --button-color: #fff;
-                display: block;
-                font-family: Arial, sans-serif;
+
+                --disabled-on-color: #2196F3;
+                --disabled-off-color: #ccc;
+                --disabled-button-color: #fff;
+            }
+
+            :host([disabled]) {
+                cursor: not-allowed;
+
+                --on-color: var(--disabled-on-color);
+                --off-color: var(--disabled-off-color);
+                --button-color: var(--disabled-button-color);
             }
             
             .switch {
@@ -80,6 +90,11 @@ class UISwitch extends HTMLElement {
 
     connectedCallback() {
         this.render();
+
+        if (this.disabled) {
+            this.shadowRoot.querySelector('input').setAttribute('disabled', '');
+        }
+
         this.shadowRoot.querySelector('input').addEventListener('change', this._toggle.bind(this));
     }
 
