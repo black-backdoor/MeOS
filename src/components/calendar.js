@@ -5,6 +5,7 @@ class CalendarWidget extends HTMLElement {
 
         this.date = new Date(); // Initialize with current date
         this.disablePickers;
+        this.noInput;
 
         this.render();
     }
@@ -86,10 +87,6 @@ class CalendarWidget extends HTMLElement {
                 padding: 10px;
             }
             
-            :host([no-input]) .nav {
-                display: none;
-            }
-            
             :host([no-today]) .nav {
                 background-color: var(--header-bg-color);
             }
@@ -102,6 +99,9 @@ class CalendarWidget extends HTMLElement {
                 font-size: 1em;
                 padding: 5px 5px;
                 outline: none;
+            }
+            :host([no-input]) .nav-button {
+                display: none;
             }
 
 
@@ -249,6 +249,7 @@ class CalendarWidget extends HTMLElement {
         this.shadowRoot.getElementById('open-pickers').addEventListener('click', () => this.togglePickers());
 
         if (this.disablePickers) { this.shadowRoot.getElementById('open-pickers').disabled = true; }
+        if (this.noInput) { this.shadowRoot.getElementById('open-pickers').disabled = true; }
     }
 
     prevMonth() {
@@ -274,13 +275,11 @@ class CalendarWidget extends HTMLElement {
 
 
     static get observedAttributes() {
-        return ['disablePickers'];
+        return ['disablePickers', 'no-input', 'no-today'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (newValue !== oldValue) {
-            this.render();
-        }
+        this.render();
     }
 
     set disablePickers(value) {
@@ -293,6 +292,18 @@ class CalendarWidget extends HTMLElement {
 
     get disablePickers() {
         return this.hasAttribute('disablePickers');
+    }
+
+
+    set noInput(value) {
+        if (value) {
+            this.setAttribute('no-input', '');
+        } else {
+            this.removeAttribute('no-input');
+        }
+    }
+    get noInput() {
+        return this.hasAttribute('no-input');
     }
 }
 
