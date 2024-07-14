@@ -2,6 +2,9 @@ class UISwitch extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+
+        this.disabled = this.hasAttribute('disabled');
+
         this.render();
     }
 
@@ -86,10 +89,6 @@ class UISwitch extends HTMLElement {
             <style>${this.css()}</style>
             ${this.template()}
         `;
-    }
-
-    connectedCallback() {
-        this.render();
 
         if (this.disabled) {
             this.shadowRoot.querySelector('input').setAttribute('disabled', '');
@@ -98,8 +97,36 @@ class UISwitch extends HTMLElement {
         this.shadowRoot.querySelector('input').addEventListener('change', this._toggle.bind(this));
     }
 
-    disconnectedCallback() {
-        this.shadowRoot.querySelector('input').removeEventListener('change', this._toggle.bind(this));
+    connectedCallback() {
+        this.render();
+    }
+
+    static get observedAttributes() {
+        return ['disabled'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue !== newValue) {
+            if (name === 'disabled') {
+                this.disabled = this.hasAttribute('disabled');
+                console.log("attributeChangedCallback", name, this.disabled);
+            }
+            this.render();
+        }
+    }
+    
+    set disabled(value) {
+        console.log("set disabled", value);
+
+        if (value) {
+            this.setAttribute('disabled', '');
+        } else {
+            this.removeAttribute('disabled');
+        }
+    }
+
+    get disabled() {
+        return this.hasAttribute('disabled');
     }
 
     _toggle(event) {
