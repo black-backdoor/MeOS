@@ -80,8 +80,13 @@ class CalendarWidget extends HTMLElement {
                 padding: 10px;
                 box-sizing: border-box;
             }
+            
             :host([no-input]) .nav {
                 display: none;
+            }
+            
+            :host([no-header]) .nav {
+                background-color: var(--header-bg-color);
             }
 
             .nav-button {
@@ -135,7 +140,7 @@ class CalendarWidget extends HTMLElement {
                     <div>${this.getMonthYear()}</div>
                     <div class="buttons">
                         <button class="nav-button" id="prevMonth">&lt;</button>
-                        <button class="nav-button" id="today">Today</button>
+                        <button class="nav-button" id="today">●</button>
                         <button class="nav-button" id="nextMonth">&gt;</button>
                     </div>
                 </div>
