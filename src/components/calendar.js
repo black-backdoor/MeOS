@@ -4,6 +4,10 @@ class CalendarWidget extends HTMLElement {
 
         this.attachShadow({ mode: 'open' });
         this.date = new Date(); // Initialize with current date
+
+        this.no_input = this.hasAttribute('no-input');
+        this.no_header = this.hasAttribute('no-header');
+
         this.render();
     }
 
@@ -22,13 +26,6 @@ class CalendarWidget extends HTMLElement {
                 --header-text-hover-color: #808080;
                 --nav-button-color: #555;
                 --today-color: #007bff; /* Blue color for today's date */
-                font-family: Arial, sans-serif;
-                display: inline-block;
-                border: 1px solid var(--border-color);
-                border-radius: 8px;
-                overflow: hidden;
-                width: 280px;
-                user-select: none;
             }
 
             @media (prefers-color-scheme: dark) {
@@ -44,6 +41,22 @@ class CalendarWidget extends HTMLElement {
                         --nav-button-color: #888888;
                 }
             }
+
+            :host([no-input]) {
+                --header-text-hover-color: var(--text-color);
+            }
+            
+
+
+            :host {
+                font-family: Arial, sans-serif;
+                display: inline-block;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                overflow: hidden;
+                width: 280px;
+                user-select: none;
+            }
             
             .calendar {
                 display: flex;
@@ -51,7 +64,9 @@ class CalendarWidget extends HTMLElement {
                 align-items: center;
                 background-color: var(--bg-color);
                 color: var(--text-color);
-            }
+            }            
+
+            
             .header {
                 background-color: var(--header-bg-color);
                 width: 100%;
@@ -60,9 +75,15 @@ class CalendarWidget extends HTMLElement {
                 font-size: 18px;
                 border-bottom: 1px solid var(--border-color);
             }
+            :host([no-header]) .header {
+                display: none;
+            }
+
             .header span:hover {
                 color: var(--header-text-hover-color);
-            }
+            }                   
+
+
             .nav {
                 display: flex;
                 align-items: center;
@@ -71,6 +92,10 @@ class CalendarWidget extends HTMLElement {
                 padding: 10px;
                 box-sizing: border-box;
             }
+            :host([no-input]) .nav {
+                display: none;
+            }
+            
             .nav-button {
                 cursor: pointer;
                 background: none;
@@ -79,7 +104,9 @@ class CalendarWidget extends HTMLElement {
                 font-size: 1em;
                 padding: 5px 10px;
                 outline: none;
-            }
+            }            
+            
+
             .days {
                 display: flex;
                 flex-wrap: wrap;
@@ -87,6 +114,7 @@ class CalendarWidget extends HTMLElement {
                 justify-content: center;
                 height: 200px;
             }
+            
             .day-label {
                 width: calc(100% / 7);
                 text-align: center;
@@ -96,6 +124,7 @@ class CalendarWidget extends HTMLElement {
                 align-items: center;
                 justify-content: center;
             }
+            
             .day {
                 width: calc(100% / 7);
                 text-align: center;
@@ -110,6 +139,7 @@ class CalendarWidget extends HTMLElement {
             .day.next-month {
                 color: var(--old-text-color);
             }
+            
             .today {
                 color: var(--today-color);
                 font-weight: bold;
@@ -204,7 +234,6 @@ class CalendarWidget extends HTMLElement {
 
         this.shadowRoot.getElementById('prevMonth').addEventListener('click', () => this.prevMonth());
         this.shadowRoot.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
-
         this.shadowRoot.getElementById('todayDate').addEventListener('click', () => this.resetToCurrentMonth());
     }
 
@@ -216,6 +245,39 @@ class CalendarWidget extends HTMLElement {
     nextMonth() {
         this.date.setMonth(this.date.getMonth() + 1);
         this.render();
+    }
+
+
+
+    static get observedAttributes() {
+        return ['no-input', 'no-header'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue !== newValue) {
+            switch (name) {
+                case 'no-input':
+                    this.no_input = this.hasAttribute('no-input');
+                    break;
+                case 'no-header':
+                    this.no_header = this.hasAttribute('no-header');
+                    break;
+            }
+            this.render();
+        }
+    }
+    
+    /* DISABLED */
+    set disabled(value) {
+        if (value) {
+            this.setAttribute('disabled', '');
+        } else {
+            this.removeAttribute('disabled');
+        }
+    }
+
+    get disabled() {
+        return this.hasAttribute('disabled');
     }
 }
 
