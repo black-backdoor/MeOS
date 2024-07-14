@@ -175,7 +175,6 @@ class CalendarWidget extends HTMLElement {
     }
     
     resetToCurrentMonth() {
-        console.debug('resetToCurrentMonth');
         this.date = new Date(); // Reset to current date
         this.render();
     }
@@ -265,19 +264,6 @@ class CalendarWidget extends HTMLElement {
             }
             this.render();
         }
-    }
-    
-    /* DISABLED */
-    set disabled(value) {
-        if (value) {
-            this.setAttribute('disabled', '');
-        } else {
-            this.removeAttribute('disabled');
-        }
-    }
-
-    get disabled() {
-        return this.hasAttribute('disabled');
     }
 }
 
