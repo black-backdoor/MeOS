@@ -8,6 +8,10 @@ class UISwitch extends HTMLElement {
         this.render();
     }
 
+    connectedCallback() {
+        this.render();
+    }
+
     css() {
         return `
             :host {
@@ -99,31 +103,37 @@ class UISwitch extends HTMLElement {
             ${this.template()}
         `;
 
-        if (this.disabled) {
-            this.shadowRoot.querySelector('input').setAttribute('disabled', '');
-        }
+        if (this.disabled) { this.shadowRoot.querySelector('input').setAttribute('disabled', ''); }
 
         this.shadowRoot.querySelector('input').addEventListener('change', this._toggle.bind(this));
     }
 
-    connectedCallback() {
-        this.render();
+    _toggle(event) {
+        this.dispatchEvent(new CustomEvent('toggle', {
+            detail: { checked: event.target.checked }
+        }));
     }
 
+    
     static get observedAttributes() {
-        return ['disabled'];
+        return ['disabled', 'checked'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue !== newValue) {
-            if (name === 'disabled') {
-                this.disabled = this.hasAttribute('disabled');
-                console.log("attributeChangedCallback", name, this.disabled);
+            switch (name) {
+                case 'disabled':
+                    this.disabled = this.hasAttribute('disabled');
+                    break;
+                case 'checked':
+                    this.shadowRoot.querySelector('input').checked = this.hasAttribute('checked');
+                    break;
             }
             this.render();
         }
     }
     
+    /* DISABLED */
     set disabled(value) {
         console.log("set disabled", value);
 
@@ -138,10 +148,18 @@ class UISwitch extends HTMLElement {
         return this.hasAttribute('disabled');
     }
 
-    _toggle(event) {
-        this.dispatchEvent(new CustomEvent('toggle', {
-            detail: { checked: event.target.checked }
-        }));
+
+    /* CHECKED */
+    set checked(value) {
+        if (value) {
+            this.setAttribute('checked', '');
+        } else {
+            this.removeAttribute('checked');
+        }
+    }
+
+    get checked() {
+        return this.hasAttribute('checked');
     }
 }
 
