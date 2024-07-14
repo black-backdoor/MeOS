@@ -64,6 +64,11 @@ class CalendarWidget extends HTMLElement {
                 padding: 10px;
                 font-size: 18px;
                 border-bottom: 1px solid var(--border-color);
+                display: none;
+            }
+
+            :host([show-today]) .header {
+                display: block;
             }
 
             .header span:hover {
@@ -74,9 +79,7 @@ class CalendarWidget extends HTMLElement {
                 --header-text-hover-color: var(--text-color);
             }
 
-            :host([no-today]) .header {
-                display: none;
-            }
+            
 
             /* INPUTS */
             .nav {
@@ -85,10 +88,11 @@ class CalendarWidget extends HTMLElement {
                 justify-content: space-between;
                 width: 100%;
                 padding: 10px;
+                background-color: var(--header-bg-color);
             }
             
-            :host([no-today]) .nav {
-                background-color: var(--header-bg-color);
+            :host([show-today]) .nav {
+                background-color: var(--bg-color);
             }
 
             .nav-button {
@@ -275,7 +279,7 @@ class CalendarWidget extends HTMLElement {
 
 
     static get observedAttributes() {
-        return ['disablePickers', 'no-input', 'no-today'];
+        return ['disablePickers', 'no-input', 'show-today'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {

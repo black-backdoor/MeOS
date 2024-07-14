@@ -22,7 +22,7 @@
 
 
 ### Attributes
-- `no-today`: hides the header (todays date)
+- `show-today`: shows the header (todays date)
 - `no-input`: hides the next and previous month buttons 
 - `disablePickers`: disables the month and year pickers
 
