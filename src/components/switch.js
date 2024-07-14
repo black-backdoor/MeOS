@@ -4,6 +4,7 @@ class UISwitch extends HTMLElement {
         this.attachShadow({ mode: 'open' });
 
         this.disabled = this.hasAttribute('disabled');
+        this.checked = this.hasAttribute('checked');
 
         this.render();
     }
@@ -102,10 +103,22 @@ class UISwitch extends HTMLElement {
             <style>${this.css()}</style>
             ${this.template()}
         `;
-
-        if (this.disabled) { this.shadowRoot.querySelector('input').setAttribute('disabled', ''); }
-
         this.shadowRoot.querySelector('input').addEventListener('change', this._toggle.bind(this));
+        this.update();
+    }
+
+    update() {
+        if (this.disabled) { 
+            this.shadowRoot.querySelector('input').setAttribute('disabled', '');
+        } else {
+            this.shadowRoot.querySelector('input').removeAttribute('disabled');
+        }
+
+        if (this.checked) { 
+            this.shadowRoot.querySelector('input').setAttribute('checked', '');
+        } else {
+            this.shadowRoot.querySelector('input').removeAttribute('checked');
+        }
     }
 
     _toggle(event) {
@@ -126,17 +139,15 @@ class UISwitch extends HTMLElement {
                     this.disabled = this.hasAttribute('disabled');
                     break;
                 case 'checked':
-                    this.shadowRoot.querySelector('input').checked = this.hasAttribute('checked');
+                    this.checked = this.hasAttribute('checked');
                     break;
             }
-            this.render();
+            this.update();
         }
     }
     
     /* DISABLED */
     set disabled(value) {
-        console.log("set disabled", value);
-
         if (value) {
             this.setAttribute('disabled', '');
         } else {
