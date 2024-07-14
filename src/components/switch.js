@@ -127,20 +127,25 @@ class UISwitch extends HTMLElement {
             ${this.template()}
         `;
         this.shadowRoot.querySelector('input').addEventListener('change', this._toggle.bind(this));
+        this.shadowRoot.querySelector('input').addEventListener('change', this.change.bind(this));
         this.update();
+    }
+
+    change(event) {
+        this.checked = event.target.checked;
     }
 
     update() {
         if (this.disabled) { 
-            this.shadowRoot.querySelector('input').setAttribute('disabled', '');
+            this.shadowRoot.querySelector('input').disabled = true;
         } else {
-            this.shadowRoot.querySelector('input').removeAttribute('disabled');
+            this.shadowRoot.querySelector('input').disabled = false;
         }
 
         if (this.checked) { 
-            this.shadowRoot.querySelector('input').setAttribute('checked', '');
+            this.shadowRoot.querySelector('input').checked = true;
         } else {
-            this.shadowRoot.querySelector('input').removeAttribute('checked');
+            this.shadowRoot.querySelector('input').checked = false;
         }
     }
 
@@ -165,6 +170,7 @@ class UISwitch extends HTMLElement {
                     this.checked = this.hasAttribute('checked');
                     break;
             }
+            console.log('Attribute:', name, 'changed to:', newValue);
             this.update();
         }
     }
