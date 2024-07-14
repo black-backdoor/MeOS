@@ -1,26 +1,3 @@
-/*
-    <ui-switch></ui-switch>
-    --------------------------
-    Options:
-    - checked
-    - disabled 
-
-    Events:
-    - toggle
-
-    Functions:
-    - .disabled = true/false
-    - .checked = true/false
-
-    CSS Variants:
-    - blocky (add class blocky to the component)
-
-    CSS Variables:
-    take a look at the :host block
-*/
-
-
-
 class UISwitch extends HTMLElement {
     constructor() {
         super();
@@ -41,17 +18,17 @@ class UISwitch extends HTMLElement {
             :host {
                 --on-color: #2196F3;
                 --off-color: #ccc;
-                --button-color: #fff;
+                --knob-color: #fff;
 
                 --disabled-on-color: #2178BD;
                 --disabled-off-color: #9e9e9e;
-                --disabled-button-color: #fff;
+                --disabled-knob-color: #fff;
             }
 
             :host([disabled]) {
                 --on-color: var(--disabled-on-color);
                 --off-color: var(--disabled-off-color);
-                --button-color: var(--disabled-button-color);
+                --knob-color: var(--disabled-knob-color);
             }
             
             
@@ -90,7 +67,7 @@ class UISwitch extends HTMLElement {
                 width: 26px;
                 left: 4px;
                 bottom: 4px;
-                background-color: var(--button-color);
+                background-color: var(--knob-color);
                 transition: .4s;
                 border-radius: 50%;
             }
