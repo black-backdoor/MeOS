@@ -24,7 +24,8 @@
 ### Attributes
 - `no-header`: hides the header (todays date)
 - `no-input`: hides the next and previous month buttons 
+- `disablePickers`: disables the month and year pickers
 
 ```html
-<calendar-widget no-header no-input></calendar-widget>
+<calendar-widget no-header disablePickers></calendar-widget>
 ```

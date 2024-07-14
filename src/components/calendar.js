@@ -2,7 +2,10 @@ class CalendarWidget extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+
         this.date = new Date(); // Initialize with current date
+        this.disablePickers;
+
         this.render();
     }
 
@@ -244,6 +247,8 @@ class CalendarWidget extends HTMLElement {
         this.shadowRoot.getElementById('todayDate').addEventListener('click', () => this.resetToCurrentMonth());
         this.shadowRoot.getElementById('today').addEventListener('click', () => this.resetToCurrentMonth());
         this.shadowRoot.getElementById('open-pickers').addEventListener('click', () => this.togglePickers());
+
+        if (this.disablePickers) { this.shadowRoot.getElementById('open-pickers').disabled = true; }
     }
 
     prevMonth() {
@@ -257,11 +262,37 @@ class CalendarWidget extends HTMLElement {
     }
 
     togglePickers() {
+        if (this.disablePickers) { this.removeAttribute('show-pickers'); return; }
+
         if (this.hasAttribute('show-pickers')) {
             this.removeAttribute('show-pickers');
         } else {
             this.setAttribute('show-pickers', '');
         }
+    }
+
+
+
+    static get observedAttributes() {
+        return ['disablePickers'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (newValue !== oldValue) {
+            this.render();
+        }
+    }
+
+    set disablePickers(value) {
+        if (value) {
+            this.setAttribute('disablePickers', '');
+        } else {
+            this.removeAttribute('disablePickers');
+        }
+    }
+
+    get disablePickers() {
+        return this.hasAttribute('disablePickers');
     }
 }
 
