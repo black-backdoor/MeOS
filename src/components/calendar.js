@@ -5,9 +5,6 @@ class CalendarWidget extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.date = new Date(); // Initialize with current date
 
-        this.no_input = this.hasAttribute('no-input');
-        this.no_header = this.hasAttribute('no-header');
-
         this.render();
     }
 
@@ -244,26 +241,6 @@ class CalendarWidget extends HTMLElement {
     nextMonth() {
         this.date.setMonth(this.date.getMonth() + 1);
         this.render();
-    }
-
-
-
-    static get observedAttributes() {
-        return ['no-input', 'no-header'];
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (oldValue !== newValue) {
-            switch (name) {
-                case 'no-input':
-                    this.no_input = this.hasAttribute('no-input');
-                    break;
-                case 'no-header':
-                    this.no_header = this.hasAttribute('no-header');
-                    break;
-            }
-            this.render();
-        }
     }
 }
 
