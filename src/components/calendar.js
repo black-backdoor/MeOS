@@ -73,7 +73,7 @@ class CalendarWidget extends HTMLElement {
                 --header-text-hover-color: var(--text-color);
             }
 
-            :host([no-header]) .header {
+            :host([no-today]) .header {
                 display: none;
             }
 
@@ -90,7 +90,7 @@ class CalendarWidget extends HTMLElement {
                 display: none;
             }
             
-            :host([no-header]) .nav {
+            :host([no-today]) .nav {
                 background-color: var(--header-bg-color);
             }
 
