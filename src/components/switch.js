@@ -1,3 +1,26 @@
+/*
+    <ui-switch></ui-switch>
+    --------------------------
+    Options:
+    - checked
+    - disabled 
+
+    Events:
+    - toggle
+
+    Functions:
+    - .disabled = true/false
+    - .checked = true/false
+
+    CSS Variants:
+    - blocky (add class blocky to the component)
+
+    CSS Variables:
+    take a look at the :host block
+*/
+
+
+
 class UISwitch extends HTMLElement {
     constructor() {
         super();
