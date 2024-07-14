@@ -170,7 +170,6 @@ class UISwitch extends HTMLElement {
                     this.checked = this.hasAttribute('checked');
                     break;
             }
-            console.log('Attribute:', name, 'changed to:', newValue);
             this.update();
         }
     }
