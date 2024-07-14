@@ -15,8 +15,8 @@ class UISwitch extends HTMLElement {
                 --off-color: #ccc;
                 --button-color: #fff;
 
-                --disabled-on-color: #2196F3;
-                --disabled-off-color: #ccc;
+                --disabled-on-color: #2178BD;
+                --disabled-off-color: #9e9e9e;
                 --disabled-button-color: #fff;
             }
 
