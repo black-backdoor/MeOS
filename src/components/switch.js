@@ -21,12 +21,11 @@ class UISwitch extends HTMLElement {
             }
 
             :host([disabled]) {
-                cursor: not-allowed;
-
                 --on-color: var(--disabled-on-color);
                 --off-color: var(--disabled-off-color);
                 --button-color: var(--disabled-button-color);
             }
+            
             
             .switch {
                 position: relative;
@@ -52,6 +51,9 @@ class UISwitch extends HTMLElement {
                 transition: .4s;
                 border-radius: 34px;
             }
+            :host([disabled]) .slider {
+                cursor: not-allowed;
+            }
     
             .slider:before {
                 position: absolute;
@@ -63,6 +65,13 @@ class UISwitch extends HTMLElement {
                 background-color: var(--button-color);
                 transition: .4s;
                 border-radius: 50%;
+            }
+
+            :host(.blocky) .slider {
+                border-radius: 0px;
+            }
+            :host(.blocky) .slider:before {
+                border-radius: 0px;
             }
     
             input:checked + .slider {
