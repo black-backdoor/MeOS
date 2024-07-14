@@ -154,6 +154,7 @@ class CalendarWidget extends HTMLElement {
                     <div>${this.getMonthYear()}</div>
                     <div class="buttons">
                         <button class="nav-button" id="prevMonth">&lt;</button>
+                        <button class="nav-button" id="today">Today</button>
                         <button class="nav-button" id="nextMonth">&gt;</button>
                     </div>
                 </div>
@@ -231,6 +232,7 @@ class CalendarWidget extends HTMLElement {
         this.shadowRoot.getElementById('prevMonth').addEventListener('click', () => this.prevMonth());
         this.shadowRoot.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
         this.shadowRoot.getElementById('todayDate').addEventListener('click', () => this.resetToCurrentMonth());
+        this.shadowRoot.getElementById('today').addEventListener('click', () => this.resetToCurrentMonth());
     }
 
     prevMonth() {
