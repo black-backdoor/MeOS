@@ -124,23 +124,32 @@ class UIProgress extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'percent') {
-            newValue = Number(newValue);
-            if (isNaN(newValue)) { return; }
-            if (newValue === null) { return; }
-            if (newValue === oldValue) { return; }
-            if (newValue < 0) { newValue = 0; }
-            if (newValue > 100) { newValue = 100; }
+        if (newValue === oldValue) { return; }
+        this.update();
+    }
 
-            this.percent = newValue;
-            this.update();
-        }
+    
+    set percent(value) {
 
-        if (name === 'label') {
-            console.log('label', newValue);
-            this.label = newValue;
-            this.update();
-        }
+        value = Number(value);
+        if (isNaN(value)) { return; }
+        if (value === null) { return; }
+        value = Math.round(value);
+        if (value < 0) { value = 0; }
+        if (value > 100) { value = 100; }
+
+        this.setAttribute('percent', value);        
+    }
+    get percent() {
+        return Number(this.getAttribute('percent'));
+    }
+
+    
+    set label(value) {
+        this.setAttribute('label', value);
+    }
+    get label() {
+        return this.getAttribute('label');
     }
 }
 
