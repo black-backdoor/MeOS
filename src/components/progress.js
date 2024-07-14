@@ -5,6 +5,7 @@ class UIProgress extends HTMLElement {
         this.attachShadow({ mode: 'open' });
 
         this.percent = 0;
+        this.label;
 
         this.render();
     }
@@ -19,24 +20,28 @@ class UIProgress extends HTMLElement {
             :host {
                 --fill-color: #006fee;
                 --bg-color: #e9e9eb;
-                --text-color: #11181c;
+                --text-color: rgb(17, 24, 28);
             }
             
             :host {
                 height: 16px;
                 width: 200px;
                 display: flex;
-                align-items: center;
+                flex-direction: column;
             }
 
             .label {
                 color: var(--text-color);
+                height: 16px;
+                font-size: 16px;
+                margin-bottom: 4px;
             }
             
             .bar {
                 overflow: hidden;
                 width: 100%;
                 height: 100%;
+                max-height: 16px;
                 background-color: var(--bg-color);
             }
             
@@ -79,12 +84,20 @@ class UIProgress extends HTMLElement {
             :host([no-animation]) .fill {
                 transition-duration: 0s;
             }
+
+            /* LABEL */
+            .label {
+                display: none;
+            }
+            :host([label]) .label {
+                display: inherit;
+            }
         `;
     }
 
     template() {
         return `
-            <div class="label"></div>
+            <span class="label"></span>
             <div class="bar">
                 <div class="fill"></div>
             </div>
@@ -102,24 +115,30 @@ class UIProgress extends HTMLElement {
 
     update() {
         this.shadowRoot.querySelector('.fill').style.transform = `translateX(-${100 - this.percent}%)`;
+        this.shadowRoot.querySelector('.label').textContent = this.label;
     }
 
 
     static get observedAttributes() {
-        return ['percent'];
+        return ['percent', 'label'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === 'percent') {
             newValue = Number(newValue);
-            if(isNaN(newValue)) { return; }
-            if(newValue === null) { return; }
-            if(newValue === oldValue) { return; }
-            if(newValue < 0) { newValue = 0; }
-            if(newValue > 100) { newValue = 100; }
+            if (isNaN(newValue)) { return; }
+            if (newValue === null) { return; }
+            if (newValue === oldValue) { return; }
+            if (newValue < 0) { newValue = 0; }
+            if (newValue > 100) { newValue = 100; }
 
             this.percent = newValue;
-            console.log(this.percent);
+            this.update();
+        }
+
+        if (name === 'label') {
+            console.log('label', newValue);
+            this.label = newValue;
             this.update();
         }
     }
