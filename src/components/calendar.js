@@ -1,10 +1,8 @@
 class CalendarWidget extends HTMLElement {
     constructor() {
         super();
-
         this.attachShadow({ mode: 'open' });
         this.date = new Date(); // Initialize with current date
-
         this.render();
     }
 
@@ -22,30 +20,7 @@ class CalendarWidget extends HTMLElement {
                 --header-bg-color: #f1f1f1;
                 --header-text-hover-color: #808080;
                 --nav-button-color: #555;
-                --today-color: #007bff; /* Blue color for today's date */
-            }
-
-            @media (prefers-color-scheme: dark) {
-                :host {
-                        --text-color: #fff;
-                        --border-color: none;
-                        --bg-color: #393939;
-
-                        --header-bg-color: #292929;
-                        --header-text-hover-color: #858585;
-
-                        --body-bg-color: #292929;
-                        --nav-button-color: #888888;
-                }
-            }
-
-            :host([no-input]) {
-                --header-text-hover-color: var(--text-color);
-            }
-            
-
-
-            :host {
+                --today-color: #007bff;
                 font-family: Arial, sans-serif;
                 display: inline-block;
                 border: 1px solid var(--border-color);
@@ -54,16 +29,26 @@ class CalendarWidget extends HTMLElement {
                 width: 280px;
                 user-select: none;
             }
-            
+
+            @media (prefers-color-scheme: dark) {
+                :host {
+                    --text-color: #fff;
+                    --border-color: none;
+                    --bg-color: #393939;
+                    --header-bg-color: #292929;
+                    --header-text-hover-color: #858585;
+                    --nav-button-color: #888;
+                }
+            }
+
             .calendar {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 background-color: var(--bg-color);
                 color: var(--text-color);
-            }            
+            }
 
-            
             .header {
                 background-color: var(--header-bg-color);
                 width: 100%;
@@ -72,15 +57,21 @@ class CalendarWidget extends HTMLElement {
                 font-size: 18px;
                 border-bottom: 1px solid var(--border-color);
             }
+
+            .header span:hover {
+                color: var(--header-text-hover-color);
+            }
+            
+            :host([no-input]) {
+                --header-text-hover-color: var(--text-color);
+            }
+
             :host([no-header]) .header {
                 display: none;
             }
 
-            .header span:hover {
-                color: var(--header-text-hover-color);
-            }                   
 
-
+            /* INPUTS */
             .nav {
                 display: flex;
                 align-items: center;
@@ -92,18 +83,20 @@ class CalendarWidget extends HTMLElement {
             :host([no-input]) .nav {
                 display: none;
             }
-            
+
             .nav-button {
                 cursor: pointer;
                 background: none;
                 border: none;
                 color: var(--nav-button-color);
                 font-size: 1em;
-                padding: 5px 10px;
+                padding: 5px 5px;
                 outline: none;
-            }            
-            
+            }
 
+
+
+            /* DAYS */
             .days {
                 display: flex;
                 flex-wrap: wrap;
@@ -111,18 +104,8 @@ class CalendarWidget extends HTMLElement {
                 justify-content: center;
                 height: 200px;
             }
-            
-            .day-label {
-                width: calc(100% / 7);
-                text-align: center;
-                font-weight: bold;
-                color: var(--text-color);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .day {
+
+            .day-label, .day {
                 width: calc(100% / 7);
                 text-align: center;
                 box-sizing: border-box;
@@ -130,13 +113,11 @@ class CalendarWidget extends HTMLElement {
                 align-items: center;
                 justify-content: center;
             }
-            .day.prev-month {
+
+            .day.prev-month, .day.next-month {
                 color: var(--old-text-color);
             }
-            .day.next-month {
-                color: var(--old-text-color);
-            }
-            
+
             .today {
                 color: var(--today-color);
                 font-weight: bold;
@@ -159,19 +140,13 @@ class CalendarWidget extends HTMLElement {
                     </div>
                 </div>
                 <div class="days">
-                    <div class="day-label">Mo</div>
-                    <div class="day-label">Tu</div>
-                    <div class="day-label">We</div>
-                    <div class="day-label">Th</div>
-                    <div class="day-label">Fr</div>
-                    <div class="day-label">Sa</div>
-                    <div class="day-label">Su</div>
+                    ${this.renderWeekDays()}
                     ${this.renderDays()}
                 </div>
             </div>
         `;
     }
-    
+
     resetToCurrentMonth() {
         this.date = new Date(); // Reset to current date
         this.render();
@@ -179,8 +154,7 @@ class CalendarWidget extends HTMLElement {
 
     getToday() {
         const options = { weekday: 'long', month: 'long', day: 'numeric' };
-        const date = new Date();
-        return date.toLocaleDateString(undefined, options);
+        return new Date().toLocaleDateString(undefined, options);
     }
 
     getMonthYear() {
@@ -189,15 +163,18 @@ class CalendarWidget extends HTMLElement {
         return `${month} ${year}`;
     }
 
+
+    renderWeekDays() {
+        return ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map(day => `<div class="day-label">${day}</div>`).join('');
+    }
+
     renderDays() {
         const today = new Date();
-        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         const firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
         const lastDate = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
-
         const prevMonthLastDate = new Date(this.date.getFullYear(), this.date.getMonth(), 0).getDate();
         const daysToShowBefore = firstDay === 0 ? 6 : firstDay - 1;
-        const daysToShowAfter = 42 - daysToShowBefore - lastDate;  // 42 = 6 rows * 7 days
+        const daysToShowAfter = 42 - daysToShowBefore - lastDate; // 42 = 6 rows * 7 days
 
         let dayCells = '';
 
