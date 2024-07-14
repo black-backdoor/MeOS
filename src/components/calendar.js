@@ -28,6 +28,7 @@ class CalendarWidget extends HTMLElement {
                 overflow: hidden;
                 width: 280px;
                 user-select: none;
+                position: relative; /* Ensure relative positioning for absolute children */
             }
 
             @media (prefers-color-scheme: dark) {
@@ -41,19 +42,22 @@ class CalendarWidget extends HTMLElement {
                 }
             }
 
+            :host * { box-sizing: border-box; }
+
             .calendar {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 background-color: var(--bg-color);
                 color: var(--text-color);
+                position: relative; /* Ensure relative positioning for absolute children */
+                z-index: 1; /* Ensure the calendar is above the pickers */
             }
 
             .header {
                 background-color: var(--header-bg-color);
                 width: 100%;
                 padding: 10px;
-                box-sizing: border-box;
                 font-size: 18px;
                 border-bottom: 1px solid var(--border-color);
             }
@@ -70,7 +74,6 @@ class CalendarWidget extends HTMLElement {
                 display: none;
             }
 
-
             /* INPUTS */
             .nav {
                 display: flex;
@@ -78,7 +81,6 @@ class CalendarWidget extends HTMLElement {
                 justify-content: space-between;
                 width: 100%;
                 padding: 10px;
-                box-sizing: border-box;
             }
             
             :host([no-input]) .nav {
@@ -100,7 +102,6 @@ class CalendarWidget extends HTMLElement {
             }
 
 
-
             /* DAYS */
             .days {
                 display: flex;
@@ -108,12 +109,13 @@ class CalendarWidget extends HTMLElement {
                 padding: 10px;
                 justify-content: center;
                 height: 200px;
+                position: relative; /* Ensure relative positioning for absolute children */
+                z-index: 1; /* Ensure the days are above the pickers */
             }
 
             .day-label, .day {
                 width: calc(100% / 7);
                 text-align: center;
-                box-sizing: border-box;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -127,6 +129,32 @@ class CalendarWidget extends HTMLElement {
                 color: var(--today-color);
                 font-weight: bold;
             }
+
+            /* PICKERS */
+            .pickers {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                padding: 10px;
+                width: 100%;
+                height: 200px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                z-index: 2;
+                background-color: var(--bg-color);
+            }
+
+            :host .pickers { display: none; }
+            :host([no-input]) .pickers { display: none; }
+            :host([show-pickers]) .pickers { display: flex; }
+
+            #open-pickers {
+                color: var(--text-color);
+                font-size: 16px;
+                border: none;
+                background: inherit;
+            }
         `;
     }
 
@@ -137,7 +165,7 @@ class CalendarWidget extends HTMLElement {
                     <span id="todayDate">${this.getToday()}</span>
                 </div>
                 <div class="nav">
-                    <div>${this.getMonthYear()}</div>
+                    <button id="open-pickers">${this.getMonthYear()}</button>
                     <div class="buttons">
                         <button class="nav-button" id="prevMonth">&lt;</button>
                         <button class="nav-button" id="today">●</button>
@@ -148,6 +176,7 @@ class CalendarWidget extends HTMLElement {
                     ${this.renderWeekDays()}
                     ${this.renderDays()}
                 </div>
+                <div class="pickers"></div>
             </div>
         `;
     }
@@ -167,7 +196,6 @@ class CalendarWidget extends HTMLElement {
         const year = this.date.getFullYear();
         return `${month} ${year}`;
     }
-
 
     renderWeekDays() {
         return ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map(day => `<div class="day-label">${day}</div>`).join('');
@@ -215,6 +243,7 @@ class CalendarWidget extends HTMLElement {
         this.shadowRoot.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
         this.shadowRoot.getElementById('todayDate').addEventListener('click', () => this.resetToCurrentMonth());
         this.shadowRoot.getElementById('today').addEventListener('click', () => this.resetToCurrentMonth());
+        this.shadowRoot.getElementById('open-pickers').addEventListener('click', () => this.togglePickers());
     }
 
     prevMonth() {
@@ -225,6 +254,14 @@ class CalendarWidget extends HTMLElement {
     nextMonth() {
         this.date.setMonth(this.date.getMonth() + 1);
         this.render();
+    }
+
+    togglePickers() {
+        if (this.hasAttribute('show-pickers')) {
+            this.removeAttribute('show-pickers');
+        } else {
+            this.setAttribute('show-pickers', '');
+        }
     }
 }
 
