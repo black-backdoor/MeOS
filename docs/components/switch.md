@@ -8,10 +8,13 @@
 <script src="/components/switch.js" type="module"></script>
 ```
 
+
 ### Body
 ```html
 <ui-switch></ui-switch>
 ```
+
+
 
 ## Properties
 
@@ -23,6 +26,7 @@
 * `--disabled-off-color`: Color of the switch when unchecked and disabled
 * `--disabled-knob-color`: Color of the knob when disabled
 
+
 ### Attributes
 - `disabled`: If the switch is disabled
 - `checked`: If the switch is checked
@@ -32,7 +36,7 @@
 ```
 
 
-### Variables
+### Properties (JavaScript)
 - `.disabled`: If the switch is disabled
 - `.checked`: If the switch is checked
 
