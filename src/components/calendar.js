@@ -166,6 +166,7 @@ class CalendarWidget extends HTMLElement {
             #picker {
                 border: none;
                 background: none;
+                color: var(--text-color);
             }
         `;
     }
