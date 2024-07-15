@@ -30,6 +30,7 @@
 ### Attributes
 - `disabled`: If the switch is disabled
 - `checked`: If the switch is checked
+- `no-animation`: If the switch should not animate
 
 ```html
 <ui-switch disabled checked></ui-switch>
