@@ -162,6 +162,11 @@ class CalendarWidget extends HTMLElement {
                 border: none;
                 background: inherit;
             }
+
+            #picker {
+                border: none;
+                background: none;
+            }
         `;
     }
 
@@ -183,10 +188,13 @@ class CalendarWidget extends HTMLElement {
                     ${this.renderWeekDays()}
                     ${this.renderDays()}
                 </div>
-                <div class="pickers"></div>
+                <div class="pickers">
+                    <input type="date" class="month-picker" id="picker" value="${this.date.toISOString().split('T')[0]}">
+                </div>
             </div>
         `;
     }
+
 
     resetToCurrentMonth() {
         this.date = new Date(); // Reset to current date
@@ -251,6 +259,8 @@ class CalendarWidget extends HTMLElement {
         this.shadowRoot.getElementById('todayDate').addEventListener('click', () => this.resetToCurrentMonth());
         this.shadowRoot.getElementById('today').addEventListener('click', () => this.resetToCurrentMonth());
         this.shadowRoot.getElementById('open-pickers').addEventListener('click', () => this.togglePickers());
+
+        this.shadowRoot.getElementById('picker').addEventListener('change', (e) => { this.date = new Date(e.target.value); this.render(); });
 
         if (this.disablePickers) { this.shadowRoot.getElementById('open-pickers').disabled = true; }
         if (this.noInput) { this.shadowRoot.getElementById('open-pickers').disabled = true; }
