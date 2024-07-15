@@ -29,8 +29,7 @@ class UISwitch extends HTMLElement {
                 --on-color: var(--disabled-on-color);
                 --off-color: var(--disabled-off-color);
                 --knob-color: var(--disabled-knob-color);
-            }
-            
+            }            
             
             .switch {
                 position: relative;
@@ -85,6 +84,15 @@ class UISwitch extends HTMLElement {
     
             input:checked + .slider:before {
                 transform: translateX(26px);
+            }
+
+
+
+            @media (prefers-reduced-motion: reduce) {
+                .slider,
+                .slider:before {
+                    transition: none;
+                }
             }
         `;
     }
