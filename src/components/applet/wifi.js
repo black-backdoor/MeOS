@@ -23,24 +23,40 @@ class WifiApplet extends HTMLElement {
         offlineImage.src = this.srcOffline;
     }
 
+    checkLoadImage(url, callbackSuccess, callbackError) {
+        const img = new Image();
+        img.onload = callbackSuccess;
+        img.onerror = callbackError;
+        img.src = url;
+    }
+
     setWifiStatus(status) {
         const wifiIcon = this.shadowRoot.querySelector('img');
         
         if (status) {
-            const onlineImage = new Image();
-            onlineImage.onload = () => {
-                wifiIcon.src = this.srcOnline;
-                this.setAttribute('title', this.onlineTitle);
-                console.debug("[setWifiStatus] set Wifi to connected");
-            };
-            onlineImage.src = this.srcOnline;
+            this.checkLoadImage(
+                this.srcOnline,
+                () => {
+                    wifiIcon.src = this.srcOnline;
+                    this.setAttribute('title', this.onlineTitle);
+                    console.debug("[setWifiStatus] set Wifi to connected");
+                },
+                () => {
+                    console.error("[setWifiStatus] Error loading online image");
+                }
+            );
         } else {
-            wifiIcon.onload = () => {
-                wifiIcon.src = this.srcOffline;
-                this.setAttribute('title', this.offlineTitle);
-                console.debug("[setWifiStatus] set Wifi to disconnected");
-            };
-            wifiIcon.src = this.srcOffline;
+            this.checkLoadImage(
+                this.srcOffline,
+                () => {
+                    wifiIcon.src = this.srcOffline;
+                    this.setAttribute('title', this.offlineTitle);
+                    console.debug("[setWifiStatus] set Wifi to disconnected");
+                },
+                () => { 
+                    console.error("[setWifiStatus] Error loading offline image");
+                }
+            );
         }
     }
 
