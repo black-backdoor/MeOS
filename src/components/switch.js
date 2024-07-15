@@ -94,6 +94,10 @@ class UISwitch extends HTMLElement {
                     transition: none;
                 }
             }
+
+            :host([no-animation]) .slider, :host([no-animation]) .slider:before {
+                transition: none;
+            }
         `;
     }
 
