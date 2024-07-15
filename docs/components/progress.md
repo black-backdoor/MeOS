@@ -36,6 +36,6 @@
 ```
 
 
-### Properties (JavaScript) | PLANNED
+### Properties (JavaScript)
 - `percent`: Percentage of the progress bar
 - `label`: Label of the progress bar
