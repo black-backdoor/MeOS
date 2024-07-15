@@ -12,19 +12,17 @@ const urlsToCache = [
     '/fallback.html',
 ];
 
-
 /* ----------- LIMIT CACHE ----------- */
 const limitCacheSize = (name, size) => {
     caches.open(name).then(cache => {
         cache.keys().then(keys => {
-            if(keys.length > size) {
+            if (keys.length > size) {
                 console.debug(`%c[Service Worker]%c ${name} Cache Size ${keys.length} now removing, max ${size}`, 'color: DodgerBlue', 'color: inherit');
-                cache.delete(keys[0]).then(limitCacheSize(name, size));
+                cache.delete(keys[0]).then(() => limitCacheSize(name, size));
             }
         });
     });
 };
-
 
 // Install service worker and cache static assets
 self.addEventListener('install', (event) => {
@@ -37,7 +35,6 @@ self.addEventListener('install', (event) => {
     );
     console.debug(`%c[Service Worker]%c added ${urlsToCache.length} items to cache: ${CACHE_NAME_DYNAMIC}`, 'color: DodgerBlue', 'color: inherit');
 });
-
 
 // Activate service worker and clean up old caches
 self.addEventListener('activate', (event) => {
@@ -74,11 +71,21 @@ self.addEventListener('activate', (event) => {
 
 // Fetch event: Serve from cache or fetch from network
 self.addEventListener('fetch', (event) => {
-    if(event.request.url.includes('serviceWorker.js')) { return; }  // Do not cache service worker
-    if(event.request.url.includes('chrome-extension')) { return; }  // Do not cache chrome extensions
+    if(event.request.method !== 'GET') { return; }  // Do not cache non-GET requests
+
+    if (event.request.url.includes('serviceWorker.js')) { return; }  // Do not cache service worker
+    if (event.request.url.includes('chrome-extension')) { return; }  // Do not cache chrome extensions
+
+    // Normalize the request URL by removing specific query parameters
+    const url = new URL(event.request.url);
+    if (url.searchParams.has('source')) {
+        url.searchParams.delete('source');
+    }
+    
+    const normalizedUrl = url.toString();
 
     event.respondWith(
-        caches.match(event.request)
+        caches.match(normalizedUrl)
             .then((response) => {
                 if (response) {
                     // Cache hit - return response
@@ -99,9 +106,9 @@ self.addEventListener('fetch', (event) => {
 
                         caches.open(CACHE_NAME_DYNAMIC)
                             .then((cache) => {
-                                cache.put(event.request, responseToCache);
+                                cache.put(normalizedUrl, responseToCache);
                             });
-                        
+
                         limitCacheSize(CACHE_NAME_DYNAMIC, DYNAMIC_CACHE_SIZE);
                         return response;
                     })
