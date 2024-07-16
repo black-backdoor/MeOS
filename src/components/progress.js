@@ -4,7 +4,7 @@ class UIProgress extends HTMLElement {
 
         this.attachShadow({ mode: 'open' });
 
-        this.percent = 0;
+        this.percent;
         this.label;
 
         this.render();
@@ -130,7 +130,6 @@ class UIProgress extends HTMLElement {
 
     
     set percent(value) {
-
         value = Number(value);
         if (isNaN(value)) { return; }
         if (value === null) { return; }
