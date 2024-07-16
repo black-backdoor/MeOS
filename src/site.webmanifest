@@ -36,27 +36,27 @@
         {
             "name": "About | MeOS",
             "short_name": "About",
-            "url": "/about?source=pwa"
+            "url": "/about/?source=pwa"
         },
         {
             "name": "Device Selector | MeOS",
             "short_name": "Devices",
-            "url": "/devices?source=pwa"
+            "url": "/devices/?source=pwa"
         },
         {
             "name": "Login | MeOS",
             "short_name": "Login",
-            "url": "/lock?source=pwa"
+            "url": "/lock/?source=pwa"
         },
         {
             "name": "Reboot | MeOS",
             "short_name": "Reboot",
-            "url": "/reboot?source=pwa"
+            "url": "/reboot/?source=pwa"
         },
         {
             "name": "Update | MeOS",
             "short_name": "Update",
-            "url": "/update?source=pwa"
+            "url": "/update/?source=pwa"
         }
     ],
     "theme_color": "#1f1e25",
