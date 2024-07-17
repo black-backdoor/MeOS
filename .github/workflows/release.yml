@@ -1,0 +1,35 @@
+name: Zip src on release
+
+on:
+  release:
+    types: [published]
+
+defaults:
+  run:
+    working-directory: ./src
+
+jobs:
+  zip-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Zip src folder
+        run: zip -r src.zip .
+
+      - name: List files in the repository
+        run: |
+          ls -a
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: src/src.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+permissions:
+  contents: write
