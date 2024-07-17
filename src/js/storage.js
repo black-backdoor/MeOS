@@ -10,7 +10,7 @@ if ('storage' in navigator) {
     }
 
     navigator.storage.estimate().then((estimate) => {
-        const {quota, usage, usageDetails} = estimate;
+        const { quota, usage, usageDetails } = estimate;
 
         console.info(`%c[Storage]%c Using ${convertStorageUnit(usage)} of ${convertStorageUnit(quota)}`, 'color: DarkOrchid', 'color: inherit');
         console.groupCollapsed(`%c[Storage]%c Usage Details (${convertStorageUnit(usage)})`, 'color: DarkOrchid', 'color: inherit');
@@ -40,15 +40,17 @@ function calculateLocalStorageSize() {
     };
 
     const total = (totalSize / 1024).toFixed(2) + " KB";
-    console.info(`%c[Storage]%c Local Storage: ${total}`, "color: DarkOrchid", "color: inherit");
-    console.groupCollapsed(`%c[Storage]%c Local Storage (${total})`, "color: DarkOrchid", "color: inherit");
+    console.info(`%c[Storage]%c localStorage: ${total}`, "color: DarkOrchid", "color: inherit");
+    console.groupCollapsed(`%c[Storage]%c localStorage (${total})`, "color: DarkOrchid", "color: inherit");
     for (key in size) {
         console.debug(`${key} = ${(size[key] / 1024).toFixed(2)} KB`);
     }
     console.groupEnd();
 }
 
-calculateLocalStorageSize();
+if ('localStorage' in window) {
+    calculateLocalStorageSize();
+}
 
 
 
@@ -70,12 +72,14 @@ function calculateSessionStorageSize() {
     };
 
     const total = (totalSize / 1024).toFixed(2) + " KB";
-    console.info(`%c[Storage]%c Session Storage: ${total}`, "color: DarkOrchid", "color: inherit");
-    console.groupCollapsed(`%c[Storage]%c Session Storage (${total})`, "color: DarkOrchid", "color: inherit");
+    console.info(`%c[Storage]%c sessionStorage: ${total}`, "color: DarkOrchid", "color: inherit");
+    console.groupCollapsed(`%c[Storage]%c sessionStorage (${total})`, "color: DarkOrchid", "color: inherit");
     for (key in size) {
         console.debug(`${key} = ${(size[key] / 1024).toFixed(2)} KB`);
     }
     console.groupEnd();
 }
 
-calculateSessionStorageSize();
+if ('sessionStorage' in window) {
+    calculateSessionStorageSize();
+}
