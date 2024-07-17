@@ -49,3 +49,33 @@ function calculateLocalStorageSize() {
 }
 
 calculateLocalStorageSize();
+
+
+
+
+function calculateSessionStorageSize() {
+    let size = {};
+
+    let totalSize = 0,
+        keyLength, key;
+
+    for (key in sessionStorage) {
+        if (!sessionStorage.hasOwnProperty(key)) {
+            continue;
+        }
+        keyLength = ((sessionStorage[key].length + key.length) * 2);
+        totalSize += keyLength;
+
+        size[key] = keyLength;
+    };
+
+    const total = (totalSize / 1024).toFixed(2) + " KB";
+    console.info(`%c[Storage]%c Session Storage: ${total}`, "color: DarkOrchid", "color: inherit");
+    console.groupCollapsed(`%c[Storage]%c Session Storage (${total})`, "color: DarkOrchid", "color: inherit");
+    for (key in size) {
+        console.debug(`${key} = ${(size[key] / 1024).toFixed(2)} KB`);
+    }
+    console.groupEnd();
+}
+
+calculateSessionStorageSize();
