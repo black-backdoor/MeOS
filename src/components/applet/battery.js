@@ -147,28 +147,12 @@ class BatteryApplet extends HTMLElement {
 
         this.render();
 
-        console.debug(`%c[setBatteryStatus]%c battery title updated to: '${message}'`, 'color: green', 'color: inherit');
-        console.info(
-            `%c[Battery]%c battery level: %c${percent}% %cand battery is %c${charging ? 'charging' : 'discharging'}`,
-            'color: green',
-            'color: inherit',
-            `color: ${percent <= 20 ? 'red' : percent <= 50 ? 'orange' : 'green'}`,
-            'color: inherit',
-            `color: ${charging ? 'green' : 'red'}`,
-        );
-
-        console.groupCollapsed(`%c[Battery]%c Info`, 'color: green', 'color: inherit');
-        console.debug("IsCharging", charging);
-        console.debug("Percentage", percent);
-        console.debug("chargingTime", battery.chargingTime);
-        console.debug("dischargingTime", battery.dischargingTime);
-        console.groupEnd();
+        console.debug(`[setBatteryStatus] battery title updated to: '${message}'`);
     }
 
     init() {
         if ('getBattery' in navigator) {
             navigator.getBattery().then((battery) => {
-                console.info('%c[setBatteryStatus]%c battery status is supported', 'color: green', 'color: inherit');
                 battery.addEventListener('chargingchange', () => this.updateBatteryStatus(battery));
                 battery.addEventListener('chargingtimechange', () => this.updateBatteryStatus(battery));
                 battery.addEventListener('dischargingtimechange', () => this.updateBatteryStatus(battery));
@@ -176,7 +160,6 @@ class BatteryApplet extends HTMLElement {
                 this.updateBatteryStatus(battery);
             });
         } else {
-            console.log('%c[setBatteryStatus]%c battery status is not supported', 'color: red', 'color: inherit');
             this.title = 'Battery API is not supported';
             this.charging = false;
             this.fill = 0;
