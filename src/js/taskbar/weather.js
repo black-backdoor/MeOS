@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     */
 
     function preloadImage(url, successCallback) {
-        var img = new Image();
+        let img = new Image();
         img.onload = function() {
             successCallback();
         };
