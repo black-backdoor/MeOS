@@ -4,8 +4,8 @@
     Cache is limited to 100 items.
 */
 
-const CACHE_NAME_OFFLINE = 'offline-v0.4.0-beta';
-const CACHE_NAME_DYNAMIC = 'dynamic-v0.4.0-beta';
+const CACHE_NAME_OFFLINE = 'offline-v0.5.0-beta';
+const CACHE_NAME_DYNAMIC = 'dynamic-v0.5.0-beta';
 const DYNAMIC_CACHE_SIZE = 100;
 
 const urlsToCache = [
