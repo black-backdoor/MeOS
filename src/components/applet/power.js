@@ -9,8 +9,6 @@ class PowerApplet extends HTMLElement {
         return `
             :host {
                 display: block;
-                width: 100px;
-                height: 100px;
                 user-select: none;
             }
 
