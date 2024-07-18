@@ -3,3 +3,9 @@ ErrorDocument 402 /404/index.html
 ErrorDocument 403 /404/index.html
 ErrorDocument 404 /404/index.html
 Options -Indexes
+
+
+# Allow iframes only from the same domain
+<IfModule mod_headers.c>
+  Header set Content-Security-Policy "frame-ancestors 'self'"
+</IfModule>
