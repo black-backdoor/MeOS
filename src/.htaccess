@@ -1,11 +1,19 @@
+# Custom error documents
 ErrorDocument 401 /404/index.html
 ErrorDocument 402 /404/index.html
 ErrorDocument 403 /404/index.html
 ErrorDocument 404 /404/index.html
+
+# Disable directory listings
 Options -Indexes
 
-
-# Allow iframes only from the same domain
 <IfModule mod_headers.c>
+  # Protect against clickjacking by allowing frames only from the same origin
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Prevent MIME type sniffing | Interpreting files as other than their actual content type
+  Header set X-Content-Type-Options "nosniff"
+
+  # Allow iframes only from the same origin
   Header set Content-Security-Policy "frame-ancestors 'self'"
 </IfModule>
