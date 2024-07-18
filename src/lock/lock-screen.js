@@ -16,7 +16,7 @@ document.addEventListener('keypress', function(event) {
         passwordInput.focus();
     }
 });
-lockScreen.addEventListener('click', function(event) {
+lockScreen.addEventListener('click', function() {
     lockScreen.classList.add('top');
     document.body.classList.remove('hidden');
     document.body.classList.add('appear');
@@ -56,7 +56,7 @@ lockScreen.addEventListener('touchmove', (e) => {
     }
 });
 
-lockScreen.addEventListener('touchend', (e) => {
+lockScreen.addEventListener('touchend', () => {
     isSwiping = false;
 
     const diffX = endX - startX;

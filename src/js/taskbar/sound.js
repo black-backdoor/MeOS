@@ -88,5 +88,5 @@ function setSpeakerVolume (volume) {
     const speakerHolder = document.querySelector("#taskbar > .applets > .speaker");
     let percentage = volume * 100;
 
-    speakerHolder.title = `Speakers (RTalk(L) Audio): ${percentage}%`
+    speakerHolder.title = `Speakers (RTalk(L) Audio): ${percentage}%`;
 }

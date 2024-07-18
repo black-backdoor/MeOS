@@ -2,7 +2,7 @@ function logResourceTimings(resourceType) {
     console.groupCollapsed(`%c[PERFORMANCE]%c Network Resources: ${resourceType}`, 'color: gold', 'color: inherit;');
 
     const resourceList = window.performance.getEntriesByType("resource");
-    for (i = 0; i < resourceList.length; i++) {
+    for (let i = 0; i < resourceList.length; i++) {
         if (resourceList[i].initiatorType == resourceType) {
             console.debug(`Name: ${resourceList[i].name}, Duration: ${resourceList[i].duration.toFixed(1)} ms`);
         }

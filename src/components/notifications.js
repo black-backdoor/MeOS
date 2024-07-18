@@ -149,7 +149,7 @@ class Notification extends HTMLElement {
 
     close = () => {
         this.remove();
-    }
+    };
 }
 
 customElements.define('desktop-notification', Notification);
@@ -241,7 +241,7 @@ class NotificationsApp extends HTMLElement {
     template() {
         return `
             <header>
-                <div class="app">${this.icon !== undefined && this.icon !== "undefined" ? `<img src="${this.icon}">` : ''}<p>${this.name}</p></div>
+                <div class="app">${this.icon !== undefined && this.icon !== "undefined" ? `<img src="${this.icon}" alt="icon">` : ''}<p>${this.name}</p></div>
                 <button class="close" title="close">✖</button>
             </header>
             <slot></slot>
@@ -273,13 +273,13 @@ class NotificationsApp extends HTMLElement {
     /* METHODS */
     close = () => {
         this.remove();
-    }
+    };
 
     check_empty = () => {
         if (this.shadowRoot.querySelector("slot").assignedElements().length === 0) {
             this.remove();
         }
-    }
+    };
 }
 
 customElements.define('notifications-app', NotificationsApp);

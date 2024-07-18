@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const showPassword = () => {
         passwordInput.setAttribute('type', 'text');
         passwordInput.setAttribute('autocomplete', 'off');
-    }
+    };
 
     showPasswordButton.addEventListener('mousedown', showPassword);
     showPasswordButton.addEventListener('mouseup', hidePassword);
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 passwordInput.disabled = false;
                 passwordInput.focus();
             },
-        500);
+            500);
     }
 
     function tryLogin(username, password) {

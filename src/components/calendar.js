@@ -293,7 +293,7 @@ class CalendarWidget extends HTMLElement {
         return ['disablePickers', 'no-input', 'show-today'];
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
+    attributeChangedCallback() {
         this.render();
     }
 
