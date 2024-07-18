@@ -31,7 +31,7 @@ function setSpeakerVolume (volume) {
      */
 
     function preloadImage(url, successCallback, errorCallback) {
-        var img = new Image();
+        let img = new Image();
         img.onload = function() {
             successCallback();
         };
@@ -62,7 +62,7 @@ function setSpeakerVolume (volume) {
     // let speakerLevels = number of speaker levels or icons
     let speakerLevels = parseInt(speakerImg.getAttribute("speaker-levels"), 10) || 1;
    
-    var level = Math.ceil(volume * speakerLevels);
+    let level = Math.ceil(volume * speakerLevels);
 
     if (volume == 0) {
         const imgSrc = speakerImg.getAttribute("src-no");
