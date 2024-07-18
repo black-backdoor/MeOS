@@ -241,7 +241,7 @@ class NotificationsApp extends HTMLElement {
     template() {
         return `
             <header>
-                <div class="app">${this.icon !== undefined && this.icon !== "undefined" ? `<img src="${this.icon}">` : ''}<p>${this.name}</p></div>
+                <div class="app">${this.icon !== undefined && this.icon !== "undefined" ? `<img src="${this.icon}" alt="icon">` : ''}<p>${this.name}</p></div>
                 <button class="close" title="close">✖</button>
             </header>
             <slot></slot>

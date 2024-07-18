@@ -72,7 +72,7 @@ class taskbarApp extends HTMLElement {
 
     template() {
         return `
-            <img class="icon" src="${this.icon}">
+            <img class="icon" src="${this.icon}" alt="icon">
             <div class="underline"></div>
         `;
     }
