@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded" , function() { setInterval(saveNoti
 // save notifications on click (probably when close button is clicked)
 document.addEventListener("DOMContentLoaded", function() {
     const notifications = document.querySelector("#action-menu .notifications");
-    notifications.addEventListener("click", function(e) {
+    notifications.addEventListener("click", function() {
         saveNotifications();
     });
 });

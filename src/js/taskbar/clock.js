@@ -32,6 +32,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const date = `${day}.${month}.${year}`;
         dateElement.innerText = date;
 
-        timeTitleElement.title = `${dayName}, ${day}. ${monthName} ${year}`
+        timeTitleElement.title = `${dayName}, ${day}. ${monthName} ${year}`;
     }, 1000);
 });

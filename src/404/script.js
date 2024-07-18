@@ -6,7 +6,7 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     // Redirect to home page on any key press
-    document.addEventListener("keydown", function(event) {
+    document.addEventListener("keydown", function() {
         window.location.href = "/";
     });
 

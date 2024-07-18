@@ -149,7 +149,7 @@ class Notification extends HTMLElement {
 
     close = () => {
         this.remove();
-    }
+    };
 }
 
 customElements.define('desktop-notification', Notification);
@@ -273,13 +273,13 @@ class NotificationsApp extends HTMLElement {
     /* METHODS */
     close = () => {
         this.remove();
-    }
+    };
 
     check_empty = () => {
         if (this.shadowRoot.querySelector("slot").assignedElements().length === 0) {
             this.remove();
         }
-    }
+    };
 }
 
 customElements.define('notifications-app', NotificationsApp);

@@ -224,11 +224,11 @@ class AppWindow extends HTMLElement {
     /* METHODS */
     close = () => {
         this.remove();
-    }
+    };
 
     fullscreen = () => {
         this.classList.toggle("fullscreen");
-    }
+    };
 }
 
 customElements.define('app-window', AppWindow);
