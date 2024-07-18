@@ -3,6 +3,7 @@
  * @param {Function} onClipboard - Function to run when the link is copied to the clipboard.
  * @param {Function} onSuccess - Function to run when the share process is successful.
  * @param {Function} onError - Function to run when the share process fails.
+ * @param {string} description - The text to share along with the URL. (optional)
  * @returns {Promise<void>} - A promise that resolves when the sharing process is complete.
  */
 
@@ -40,3 +41,6 @@ async function shareURL(onClipboard = () => {}, onSuccess = () => {}, onError = 
         }
     }
 }
+
+
+window.shareURL = shareURL;
