@@ -40,3 +40,6 @@ async function shareURL(onClipboard = () => {}, onSuccess = () => {}, onError = 
         }
     }
 }
+
+
+window.shareURL = shareURL;

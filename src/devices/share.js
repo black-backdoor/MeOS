@@ -22,6 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
             shareButton.style.backgroundColor = 'red';
         };
 
-        await shareURL(clipboard, undefined, error, description);        
+        await window.shareURL(clipboard, undefined, error, description);        
     };
 });
