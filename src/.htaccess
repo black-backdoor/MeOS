@@ -17,3 +17,21 @@ Options -Indexes
   # Allow iframes only from the same origin
   Header set Content-Security-Policy "frame-ancestors 'self'"
 </IfModule>
+
+
+
+# cache-Control Headers
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    
+    # favicons
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Images
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+</IfModule>
