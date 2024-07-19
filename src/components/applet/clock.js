@@ -1,35 +1,51 @@
-class ClockDisplay extends HTMLElement {
+class AppletClock extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = `
-            <style>
-                :host {
-                    --text-color: white;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    color: var(--text-color);
-                    gap: 5px;
-                    user-select: none;
-                    pointer-events: none;
-                }
-                :host * {
-                    margin: 0;
-                    padding: 0;
-                }
-            </style>
-            <p id="time"></p>
-        `;
+        this.render();
     }
 
     connectedCallback() {
-        this.updateTime();
-        this.interval = setInterval(() => this.updateTime(), 1000);
+        this.render();
     }
 
     disconnectedCallback() {
         clearInterval(this.interval);
+    }
+
+    css() {
+        return `
+            :host {
+                --text-color: white;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                color: var(--text-color);
+                gap: 5px;
+                user-select: none;
+                pointer-events: none;
+            }
+            :host * {
+                margin: 0;
+                padding: 0;
+            }
+        `;
+    }
+
+    template() {
+        return `
+            <p id="time"></p>
+        `;
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+            <style>${this.css()}</style>
+            ${this.template()}
+        `;
+
+        this.updateTime();
+        this.interval = setInterval(() => this.updateTime(), 1000);
     }
 
     updateTime() {
@@ -40,4 +56,4 @@ class ClockDisplay extends HTMLElement {
     }
 }
 
-customElements.define('applet-clock', ClockDisplay);
+customElements.define('applet-clock', AppletClock);
