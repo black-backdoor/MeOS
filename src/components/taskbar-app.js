@@ -4,8 +4,8 @@ class taskbarApp extends HTMLElement {
 
         this.attachShadow({ mode: 'open' });
         
-        this.name = this.getAttribute('name') ?? 'App';
-        this.icon = this.getAttribute('icon') ?? '';
+        this.name;
+        this.icon;
     }
 
     connectedCallback() {
@@ -14,58 +14,15 @@ class taskbarApp extends HTMLElement {
 
     css() {
         return `
-            /* STATES
-            .open: when the app is open
-            .active: when the app is the current focused app
-            */
-
             :host {
+                display: block;
                 user-select: none;
                 cursor: pointer;
-                height: 40px;
-                width: 40px;
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                border-radius: 5px;
-                background-color: transparent;
-            }
-            :host(:hover) {
-                background-color: #292929;
-            }
-            :host(.active) {
-                background-color: #292929;
-            }
-            :host(.active:hover) {
-                background-color: #303030;
+                color: white;
             }
 
-            :host(:active) {
-                transform: scale(0.95);
-            }
-
-            .icon {
-                width: 32px;
-                height: 32px;
-            }
-
-            .underline {
-                position: relative;
-                bottom: 0;
-                width: 6px;
-                height: 3px;
-                border-radius: 2px;
-            }
-
-            :host(.open) .underline {
-                background-color: #9e9e9e;
-            }
-
-            :host(.active) .underline {
-                width: 12px;
-                background-color: #0078d4;
+            img {
+                height: 100%;
             }
         `;
     }
@@ -92,9 +49,15 @@ class taskbarApp extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue !== newValue) {
-            this[name] = newValue;
             this.render();
         }
+    }
+
+    get name() {
+        return this.getAttribute('name');
+    }
+    get icon() {
+        return this.getAttribute('icon');
     }
 }
 
