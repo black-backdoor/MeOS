@@ -53,6 +53,15 @@ class Popup extends HTMLElement {
                 width: 350px;
             }
 
+
+            :host([position]) {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            
+
             * { 
                 box-sizing: border-box;
                 text-align: center;
