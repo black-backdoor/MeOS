@@ -10,7 +10,13 @@
 
 ### Body
 ```html
-<ui-progress percent="42"></ui-progress>
+<desktop-popup
+    icon="/assets/popup/warning.svg"
+    message_title="Virus Alert"
+    message="Your computer is infected with a virus. Please click OK to remove the virus."
+    ok_text="Remove"
+    cancel_text="Keep"
+></desktop-popup>
 ```
 
 
@@ -34,6 +40,13 @@
 * `--ok-text-color`: Text color of the OK button
 * `--cancel-text-color`: Text color of the Cancel button
 
+
+## Attributes
+* `position`: positions the popup in the window center
+
+```html
+<desktop-popup position></desktop-popup>
+```
 
 
 # Child Components
