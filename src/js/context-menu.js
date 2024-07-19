@@ -90,6 +90,12 @@ function handleContextMenu (contextMenu, bindTarget) {
         scope.addEventListener('click', closeContextMenu);
     });
 
+    /* DISABLE CONTEXT MENU ON CONTEXT MENU */
+    contextMenu.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
     contextMenu.addEventListener('click', function(e) {
         if (contextMenu.contains(e.target) && e.target.tagName === "BUTTON") {
             console.debug("clicked on a button inside the context menu");
