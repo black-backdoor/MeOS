@@ -29,6 +29,7 @@ class BatteryApplet extends HTMLElement {
     css() {
         return `
             :host {
+                display: block;
                 user-select: none;
             }
             

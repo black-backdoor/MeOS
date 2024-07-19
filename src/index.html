@@ -48,22 +48,28 @@
     <link rel="stylesheet" href="/css/window-defaults.css">
     
     <!-- notifications -->
+    <!--
     <script src="/components/notifications.js" rel="preload" type="module"></script>
     <link rel="stylesheet" href="/css/push-notifications.css">
     <script src="/js/notifications.js"></script>
+    -->
 
     <!-- taskbar apps -->
+    <!--
     <script src="/components/taskbar-app.js" rel="preload" type="module"></script>
     <script src="/js/taskbar-apps.js"></script>
+    -->
         
 
     <!-- SCRIPTS -->
-    <script src="/js/taskbar/weather.js"></script>
-    <script src="/js/taskbar/sound.js"></script>
+    <!--<script src="/js/taskbar/weather.js"></script>-->
+    <!--<script src="/js/taskbar/sound.js"></script>-->
 
-    <script src="/js/taskbar/clock.js" rel="preload"></script>
+    <!--
     <link rel="stylesheet" href="/css/action-menu.css">
     <script src="/js/taskbar/action-menu.js"></script>
+    -->
+    
     <script src="/js/context-menu.js"></script>
     <link rel="stylesheet" href="/css/context-menu.css">
 
@@ -90,11 +96,13 @@
     <meta name="language" content="English">
 </head>
 <body>
-    <!-- Menu bar -->
+    <!-- MENU BAR -->
     <div id="menu-bar" class="float">
-        <div class="left">
-
-        </div>
+        <!--
+            Make sure to update the media query in the CSS file (menu-bar.css)
+            when adding or removing items from the menu bar.
+        -->
+        <div class="left"></div>
         <div class="middle">
             <div class="container clock">
                 <applet-date></applet-date>
@@ -122,11 +130,11 @@
             <iframe src="/about/"></iframe>
         </app-window>
 
-        <div id="push-notifications">
+        <div id="push-notifications" style="display: none;">
             <!-- Notifications will be added here -->
         </div>
 
-        <div id="action-menu">
+        <div id="action-menu" style="display: none;">
             <div class="notifications scrollbar-slim">
                 <header>
                     <h3>Notifications</h3>
@@ -162,48 +170,16 @@
     </div>
 
     <!-- Taskbar -->
-    <div id="taskbar">
-        <section class="weather" title="20°C Cloudy">
-            <!-- WEATHER -->
-            <img class="weather" src="/assets/weather/sunny-day.svg" alt="weather">
-            <div class="text">
-                <h2 class="temp">20°C</h2>
-                <p class="desc">Cloudy</p>
-            </div>
-        </section>
-
-        <section class="apps" style="width: 60vw;">
-            <!-- APPS -->
-            <taskbar-app name="About" icon="/assets/apps/about.svg" class="open" onclick="openApp(this); window.open('/about/')"></taskbar-app>
-        </section>
-
-        <section class="applets">
-            <!-- MENU -->
+    <div id="taskbar" class="">
+        <div class="apps">
+            <div class="separator"></div>
+        </div>
+        <div class="applets">
             <applet-wifi></applet-wifi>
-
-            <div class="speaker applet" title="Speakers (RTalk(L) Audio): 0%">
-                <img alt="speaker"
-                    src="/assets/sound/speaker.svg"
-                    src-no="/assets/sound/speaker-muted.svg"
-                    src-1="/assets/sound/speaker-1.svg"
-                    src-2="/assets/sound/speaker-2.svg"
-                    src-3="/assets/sound/speaker-3.svg"
-                    src-error="/assets/sound/speaker.svg"
-                    speaker-levels="3"
-                >
-                <!-- if the number of src-n values are changed, the `speaker-levels` attribute must be changed
-                     each src-n value is a different volume level -> currently 3 levels
-                 -->
-            </div>
-            
+            <!-- <applet-sound></applet-sound> -->
             <applet-battery></applet-battery>
-        </section>
-
-        <section class="time" title="Tuesday, 30. January 2024">
-            <!-- DISPLAY TIME -->
-            <div class="time">14:51</div>
-            <div class="date">30/01/2024</div>
-        </section>
+            <applet-power></applet-power>
+        </div>
     </div>
 </body>
 </html>
