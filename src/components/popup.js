@@ -17,18 +17,33 @@ class Popup extends HTMLElement {
 
     css() {
         return `
-            /* COLORS */
             :host {
                 --ok-color: #166fd1;
                 --cancel-color: #878181;
                 --text-color: white;
                 --bg-color: #484444;
 
+                --ok-text-color: var(--text-color);
+                --cancel-text-color: var(--text-color);
+            }
+
+            @media (prefers-color-scheme: light) {
+                :host {
+                    --ok-color: #60a844;
+                    --cancel-color: #cfcfcf;
+                    --bg-color: #e9e9e9;
+                    --text-color: #484848;
+                    --ok-text-color: var(--bg-color);
+                    border: 1px solid #b0b0b0;
+                }
+            }
+
+
+
+            :host {
                 color: var(--text-color);
                 background-color: var(--bg-color);
-                font: inherit;
                 padding: 20px;
-
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
@@ -57,7 +72,6 @@ class Popup extends HTMLElement {
             
             .icon-holder img {
                 height: 100%;
-                width: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -89,7 +103,6 @@ class Popup extends HTMLElement {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: var(--text-color);
                 border: none;
                 border-radius: 8px;
                 padding: 10px;
@@ -97,8 +110,8 @@ class Popup extends HTMLElement {
                 font-size: 16px;
             }
 
-            button.ok { background-color: var(--ok-color); }
-            button.cancel { background-color: var(--cancel-color); }
+            button.ok { background-color: var(--ok-color); color: var(--ok-text-color); }
+            button.cancel { background-color: var(--cancel-color); color: var(--cancel-text-color); }
         `;
     }
 
@@ -112,8 +125,8 @@ class Popup extends HTMLElement {
                 <p>${this.message}</p>
             </div>
             <div class="buttons">
-                <button class="cancel">Cancel</button>
-                <button class="ok">OK</button>
+                <button class="cancel">${this.cancel_text}</button>
+                <button class="ok">${this.ok_text}</button>
             </div>
         `;
     }
@@ -161,6 +174,7 @@ class Popup extends HTMLElement {
         this.setAttribute('icon', value);
     }
 
+
     get message_title() {
         return this.getAttribute('message_title') || 'Title';
     }
@@ -175,6 +189,65 @@ class Popup extends HTMLElement {
         this.setAttribute('message', value);
     }
 
+
+    get ok_text() {
+        return this.getAttribute('ok_text') || 'OK';
+    }
+    set ok_text(value) {
+        this.setAttribute('ok_text', value);
+    }
+
+    set cancel_text(value) {
+        this.setAttribute('cancel_text', value);
+    }
+    get cancel_text() {
+        return this.getAttribute('cancel_text') || 'Cancel';
+    }
+
 }
 
 customElements.define('desktop-popup', Popup);
+
+
+/* POPUP VARIANT */
+
+
+class PopupAskYesNo extends Popup {
+    constructor() {
+        super();
+
+        this.ok_text = 'Yes';
+        this.cancel_text = 'No';
+    }
+}
+customElements.define('desktop-popup_yes_no', PopupAskYesNo);
+
+
+
+class PopupInfo extends Popup {
+    constructor() {
+        super();
+        this.icon = '/assets/popup/info.svg';
+    }
+}
+customElements.define('desktop-popup_info', PopupInfo);
+
+
+
+class PopupWarning extends Popup {
+    constructor() {
+        super();
+        this.icon = '/assets/popup/warning.svg';
+    }
+}
+customElements.define('desktop-popup_warning', PopupWarning);
+
+
+
+class PopupError extends Popup {
+    constructor() {
+        super();
+        this.icon = '/assets/popup/error.svg';
+    }
+}
+customElements.define('desktop-popup_error', PopupError);
