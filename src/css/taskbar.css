@@ -2,7 +2,22 @@
     --taskbar-bg-color: #1c1c1c;
 }
 
-:root {
-    --taskbar-height: 50px;
+#taskbar {
+    height: 50px;
+    background-color: var(--taskbar-bg-color);
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 12px;
+
+    width: 200px;
 }
 
+
+#taskbar.float {
+    margin: 6px;
+    height: 55px;
+    border-radius: 12px;
+}
