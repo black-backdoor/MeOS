@@ -48,12 +48,12 @@ class AppletDate extends HTMLElement {
         this.interval = setInterval(this.updateDate, 1000);
     }
 
-    updateDate() {
+    updateDate = () => {
         const now = new Date();
         const day = now.getDay();
         const month = now.toLocaleString('default', { month: 'short' });
-
-        const text = `${day} ${month}`
+    
+        const text = `${day} ${month}`;
         this.shadowRoot.getElementById('date').textContent = text;
     }
 }
