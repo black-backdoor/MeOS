@@ -34,6 +34,7 @@ class BatteryApplet extends HTMLElement {
             }
             
             svg {
+                height: 100%;
                 fill: white;
             }
         `;
