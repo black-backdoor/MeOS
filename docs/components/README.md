@@ -16,6 +16,7 @@
 * `<applet-battery></applet-battery>` | battery.js
 * `<applet-clock></applet-clock>` | clock.js
 * `<applet-cpu></applet-cpu>` | cpu.js
+* `<applet-date></applet-date>` | date.js
 * `<applet-network_down></applet-network_down>` | network-down.js
 * `<applet-network_rtt></applet-network_rtt>` | network-rtt.js
 * `<applet-power></applet-power>` | power.js
