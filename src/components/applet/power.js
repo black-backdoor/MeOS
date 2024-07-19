@@ -47,7 +47,7 @@ class PowerApplet extends HTMLElement {
                 display: none;
                 position: absolute;
                 top: 110%;
-                left: 0;
+                right: 0;
                 background: #333;
                 border-radius: 5px;
                 overflow: hidden;
