@@ -69,3 +69,19 @@
 #menu-bar .container.actions {
     gap: 0px;
 }
+
+
+
+
+@media screen and (max-width: 1050px) {
+    #menu-bar .container.status applet-network_down,
+    #menu-bar .container.status applet-network_rtt {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #menu-bar .container.status {
+        display: none;
+    }
+}
