@@ -51,6 +51,7 @@ class Popup extends HTMLElement {
                 border-radius: 16px;
                 height: 290px;
                 width: 350px;
+                z-index: 6000;
             }
 
 
