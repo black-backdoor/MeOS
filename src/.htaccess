@@ -1,5 +1,37 @@
+# Custom error documents
 ErrorDocument 401 /404/index.html
 ErrorDocument 402 /404/index.html
 ErrorDocument 403 /404/index.html
 ErrorDocument 404 /404/index.html
+
+# Disable directory listings
 Options -Indexes
+
+<IfModule mod_headers.c>
+  # Protect against clickjacking by allowing frames only from the same origin
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Prevent MIME type sniffing | Interpreting files as other than their actual content type
+  Header set X-Content-Type-Options "nosniff"
+
+  # Allow iframes only from the same origin
+  Header set Content-Security-Policy "frame-ancestors 'self'"
+</IfModule>
+
+
+
+# cache-Control Headers
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    
+    # favicons
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Images
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+</IfModule>
