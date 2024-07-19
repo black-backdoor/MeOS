@@ -43,6 +43,8 @@
 
 
     <!-- COMPONENTS -->
+    <script src="/components/taskbar-app.js" rel="preload" type="module"></script>
+
     <!-- windows -->
     <script src="/components/windows.js" rel="preload" type="module"></script>
     <link rel="stylesheet" href="/css/window-defaults.css">
@@ -53,13 +55,6 @@
     <link rel="stylesheet" href="/css/push-notifications.css">
     <script src="/js/notifications.js"></script>
     -->
-
-    <!-- taskbar apps -->
-    <!--
-    <script src="/components/taskbar-app.js" rel="preload" type="module"></script>
-    <script src="/js/taskbar-apps.js"></script>
-    -->
-        
 
     <!-- SCRIPTS -->
     <!--<script src="/js/taskbar/weather.js"></script>-->
@@ -172,7 +167,9 @@
     <!-- Taskbar -->
     <div id="taskbar" class="">
         <div class="apps">
+            <taskbar-app name="App Menu" icon="/assets/app-menu.svg"></taskbar-app>
             <div class="separator"></div>
+            <taskbar-app name="About" icon="/assets/apps/about.svg" onclick="window.location.href='/about/';"></taskbar-app>
         </div>
         <div class="applets">
             <applet-wifi></applet-wifi>
