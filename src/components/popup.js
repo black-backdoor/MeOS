@@ -147,12 +147,12 @@ class Popup extends HTMLElement {
     }
 
     ok = () => {
-        this.dispatchEvent(new CustomEvent('ok'));
+        this.dispatchEvent(new CustomEvent('close', { detail: 'ok' }));
         this.close();
     }
 
     cancel = () => {
-        this.dispatchEvent(new CustomEvent('cancel'));
+        this.dispatchEvent(new CustomEvent('close', { detail: 'cancel' }));
         this.close();
     }
 
