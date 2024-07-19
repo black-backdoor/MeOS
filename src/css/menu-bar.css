@@ -1,0 +1,70 @@
+#menu-bar {
+    --bg-color: #212841;
+}
+#menu-bar .container {
+    --bg-color: #131b27;
+}
+
+#menu-bar {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 100vw;
+    z-index: 5000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: 0 10px;
+}
+
+#menu-bar.float {
+    margin: 6px;
+    height: 55px;
+    width: calc(100% - 12px);
+    border-radius: 12px;
+}
+
+#menu-bar > * {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+/* make sure middle is always centered */
+#menu-bar .middle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+#menu-bar .container {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-color);
+    border-radius: 30px;
+    height: 36px;
+    padding: 0 8px;
+}
+
+#menu-bar .container > * {
+    height: 80%;
+    --hover-color: none;
+    --active-color: none;
+}
+
+
+
+/* Clock */
+#menu-bar .container.clock {
+    padding: 0 10px;
+}
+
+/* Stats */
+#menu-bar .container.status {
+    gap: 10px;
+}

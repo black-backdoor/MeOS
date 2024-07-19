@@ -5,9 +5,11 @@ class ClockDisplay extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
+                    --text-color: white;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
+                    color: var(--text-color);
                     gap: 5px;
                     user-select: none;
                     pointer-events: none;

@@ -19,7 +19,7 @@ class NetworkRTT extends HTMLElement {
             :host {
                 --text-color: white;
                 --icon-color: white;
-                --space: 8px;
+                --space: 4px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -27,7 +27,7 @@ class NetworkRTT extends HTMLElement {
             }
             
             svg {
-                height: 100%;
+                height: 60%;
                 margin-right: var(--space);
             }
 
@@ -41,7 +41,6 @@ class NetworkRTT extends HTMLElement {
                 padding: 0;
                 height: 100%;
                 color: var(--text-color);
-                font-weight: bold;
                 text-align: center;
                 display: flex;
                 align-items: center;

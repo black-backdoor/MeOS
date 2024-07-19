@@ -7,6 +7,7 @@
     <title>MeOS</title>
     <link rel="stylesheet" rel="preload" href="/css/main.css">
     <link rel="stylesheet" href="/css/fix-scrollbar.css">
+    <link rel="stylesheet" rel="preload" href="/css/menu-bar.css">
     <link rel="stylesheet" rel="preload" href="/css/desktop.css">
     <link rel="stylesheet" rel="preload" href="/css/taskbar.css">
 
@@ -24,8 +25,16 @@
 
 
     <!-- APPLETS -->
+    <script src="/components/applet/clock.js" type="module"></script>
+
+    <script src="/components/applet/cpu.js" type="module"></script>
+    <script src="/components/applet/ram.js" type="module"></script>
+    <script src="/components/applet/network-down.js" type="module"></script>
+    <script src="/components/applet/network-rtt.js" type="module"></script>
+
     <script src="/components/applet/wifi.js" type="module"></script>
     <script src="/components/applet/battery.js" type="module"></script>
+    <script src="/components/applet/power.js" type="module"></script>
 
 
     <!-- WIDGETS -->
@@ -80,6 +89,31 @@
     <meta name="language" content="English">
 </head>
 <body>
+    <!-- Menu bar -->
+    <div id="menu-bar" class="float">
+        <div class="left">
+
+        </div>
+        <div class="middle">
+            <div class="container clock">
+                <applet-clock></applet-clock>
+            </div>
+        </div>
+        <div class="right">
+            <div class="container status">
+                <applet-cpu></applet-cpu>
+                <applet-ram></applet-ram>
+                <applet-network_down></applet-network_down>
+                <applet-network_rtt></applet-network_rtt>
+            </div>
+            <div class="container">
+                <applet-wifi></applet-wifi>
+                <applet-battery content="percent"></applet-battery>
+                <applet-power></applet-power>
+            </div>
+        </div>
+    </div>
+
     <!-- Desktop -->
     <div id="desktop">
         <app-window name="About" class="website">
