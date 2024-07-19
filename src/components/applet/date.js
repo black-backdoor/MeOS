@@ -1,4 +1,4 @@
-class AppletClock extends HTMLElement {
+class AppletDate extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -34,7 +34,7 @@ class AppletClock extends HTMLElement {
 
     template() {
         return `
-            <p id="time"></p>
+            <p id="date"></p>
         `;
     }
 
@@ -44,16 +44,18 @@ class AppletClock extends HTMLElement {
             ${this.template()}
         `;
 
-        this.updateTime();
-        this.interval = setInterval(() => this.updateTime(), 1000);
+        this.updateDate();
+        this.interval = setInterval(this.updateDate, 1000);
     }
 
-    updateTime() {
+    updateDate = () => {
         const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        this.shadowRoot.getElementById('time').textContent = `${hours}:${minutes}`;
+        const day = now.getDay();
+        const month = now.toLocaleString('default', { month: 'short' });
+    
+        const text = `${day} ${month}`;
+        this.shadowRoot.getElementById('date').textContent = text;
     }
 }
 
-customElements.define('applet-clock', AppletClock);
+customElements.define('applet-date', AppletDate);

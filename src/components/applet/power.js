@@ -10,6 +10,9 @@ class PowerApplet extends HTMLElement {
             :host {
                 display: block;
                 user-select: none;
+
+                --hover-color: rgba(255, 255, 255, 0.2);
+                --active-color: rgba(255, 255, 255, 0.4);
             }
 
             #powerButton {
@@ -27,11 +30,11 @@ class PowerApplet extends HTMLElement {
             }
 
             #powerButton:hover {
-                background-color: rgba(255, 255, 255, 0.2);
+                background-color: var(--hover-color);
             }
 
             #powerButton:active {
-                background-color: rgba(255, 255, 255, 0.4);
+                background-color: var(--active-color);
             }
 
             #powerButton svg {
@@ -44,7 +47,7 @@ class PowerApplet extends HTMLElement {
                 display: none;
                 position: absolute;
                 top: 110%;
-                left: 0;
+                right: 0;
                 background: #333;
                 border-radius: 5px;
                 overflow: hidden;
