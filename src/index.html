@@ -25,6 +25,7 @@
 
 
     <!-- APPLETS -->
+    <script src="/components/applet/date.js" type="module"></script>
     <script src="/components/applet/clock.js" type="module"></script>
 
     <script src="/components/applet/cpu.js" type="module"></script>
@@ -96,6 +97,7 @@
         </div>
         <div class="middle">
             <div class="container clock">
+                <applet-date></applet-date>
                 <applet-clock></applet-clock>
             </div>
         </div>
@@ -106,7 +108,7 @@
                 <applet-network_down></applet-network_down>
                 <applet-network_rtt></applet-network_rtt>
             </div>
-            <div class="container">
+            <div class="container actions">
                 <applet-wifi></applet-wifi>
                 <applet-battery content="percent"></applet-battery>
                 <applet-power></applet-power>
