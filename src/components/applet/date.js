@@ -50,7 +50,7 @@ class AppletDate extends HTMLElement {
 
     updateDate = () => {
         const now = new Date();
-        const day = now.getDay();
+        const day = now.getDate();
         const month = now.toLocaleString('default', { month: 'short' });
     
         const text = `${day} ${month}`;
