@@ -4,6 +4,7 @@
 <!-- KEEP ALPHABETICAL ORDER -->
 
 ### UI
+* [`<desktop-popup></desktop-popup>` | popup.js](popup.md)
 - [`<ui-progress></ui-progress>` | progress.js](progress.md)
 - [`<ui-switch></ui-switch>` | switch.js](switch.md)
 
