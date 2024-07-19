@@ -34,6 +34,10 @@
     width: 100%;
 }
 
+#taskbar .apps taskbar-app {
+    height: 100%;
+}
+
 #taskbar .apps .separator {
     height: 100%;
     width: 1px;
@@ -73,6 +77,12 @@
 #taskbar.right > * {
     width: 100%;
     height: unset;   
+}
+
+#taskbar.left .apps taskbar-app,
+#taskbar.right .apps taskbar-app {
+    width: 100%;
+    height: unset;
 }
 
 #taskbar.left .apps .separator,
