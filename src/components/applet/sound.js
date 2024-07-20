@@ -4,7 +4,7 @@ class SoundApplet extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         
         this.title = 'Sound';
-        this.volume;  // 0 - 100
+        this.volume = 40;  // 0 - 100
 
         this.render();
     }
@@ -16,12 +16,14 @@ class SoundApplet extends HTMLElement {
     css() {
         return `
             :host {
-                display: inline-block;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 user-select: none;
             }
 
             svg {
-                height: 100%;
+                height: 80%;
                 fill: white;
             }
         `;
@@ -49,13 +51,6 @@ class SoundApplet extends HTMLElement {
                 </g>
             </svg>
         `;
-    }
-
-    checkLoadImage(url, callbackSuccess, callbackError) {
-        const img = new Image();
-        img.onload = callbackSuccess;
-        img.onerror = callbackError;
-        img.src = url;
     }
 
     render() {
