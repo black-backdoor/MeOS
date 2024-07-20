@@ -59,7 +59,7 @@ class SoundApplet extends HTMLElement {
             ${this.template()}
         `;
 
-        this.title = `Speakers (RTalk(L) Audio): ${Math.round(this.volume * 100)}%`;
+        this.title = `Speakers (RTalk(L) Audio): ${this.volume}%`;
     }
 
 
