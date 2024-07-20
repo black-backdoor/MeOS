@@ -22,6 +22,7 @@
 * `<applet-network_rtt></applet-network_rtt>` | network-rtt.js
 * `<applet-power></applet-power>` | power.js
 * `<applet-ram></applet-ram>` | ram.js
+* `<applet-sound></applet-sound>` | sound.js
 * `<applet-wifi></applet-wifi>` | wifi.js
 
 
