@@ -2,3 +2,5 @@
 
 - [Components](components/README.md)
 - [Modules](modules/README.md)
+
+* [Taskbar](taskbar.md)
