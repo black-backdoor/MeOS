@@ -1,12 +1,3 @@
-/*
-    **SETTINGS**
-    content attribute: fill | percent (default: fill)
-     - fill will show the battery level in 10 steps
-     - percent will show a text with the battery level in percent
-*/
-
-
-
 class BatteryApplet extends HTMLElement {
     constructor() {
         super();
