@@ -4,3 +4,4 @@
 - [Modules](modules/README.md)
 
 * [Taskbar](taskbar.md)
+* [Menu Bar](menu-bar.md)
