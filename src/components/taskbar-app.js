@@ -1,3 +1,6 @@
+import { sendTaskbarOpen } from '/modules/app.js';
+
+
 class taskbarApp extends HTMLElement {
     constructor() {
         super();
@@ -10,6 +13,7 @@ class taskbarApp extends HTMLElement {
 
     connectedCallback() {
         this.render();
+        this.init();
     }
 
     css() {
@@ -41,6 +45,12 @@ class taskbarApp extends HTMLElement {
         `;
 
         this.title = this.name;
+    }
+
+    init() {
+        this.addEventListener('click', () => {
+            sendTaskbarOpen(this.name);
+        });
     }
 
     static get observedAttributes() {

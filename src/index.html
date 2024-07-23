@@ -68,6 +68,12 @@
     <script src="/js/context-menu.js"></script>
     <link rel="stylesheet" href="/css/context-menu.css">
 
+
+    <!-- APPS -->
+    <script src="/modules/app.js" type="module"></script>
+
+    <script src="/apps/about.js" type="module"></script>
+
     
     <!-- PWA -->
     <script src="/pwa/register.js" async></script>
@@ -169,7 +175,7 @@
         <div class="apps">
             <taskbar-app name="App Menu" icon="/assets/app-menu.svg"></taskbar-app>
             <div class="separator"></div>
-            <taskbar-app name="About" icon="/assets/apps/about.svg" onclick="window.location.href='/about/';"></taskbar-app>
+            <taskbar-app name="about" icon="/assets/apps/about.svg"></taskbar-app>
         </div>
         <div class="applets">
             <applet-wifi></applet-wifi>
