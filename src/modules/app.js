@@ -2,6 +2,8 @@
 /* TASKBAR */
 
 function listenTaskbarOpen(name, callback) {
+    console.debug('[app.js] adding listener for', name);
+
     document.addEventListener('taskbar:open', function(e) {
         if (e.detail.name === name) {
             callback();

@@ -72,7 +72,8 @@
     <!-- APPS -->
     <script src="/modules/app.js" type="module"></script>
 
-    <script src="/apps/about.js" type="module"></script>
+    <script src="/apps/about.js" type="module" defer></script>
+    <script src="/apps/fullscreen.js" type="module" defer></script>
 
     
     <!-- PWA -->
@@ -175,6 +176,7 @@
         <div class="apps">
             <taskbar-app name="App Menu" icon="/assets/app-menu.svg"></taskbar-app>
             <div class="separator"></div>
+            <taskbar-app name="fullscreen" icon="/assets/expand-arrows.svg"></taskbar-app>
             <taskbar-app name="about" icon="/assets/apps/about.svg"></taskbar-app>
         </div>
         <div class="applets">

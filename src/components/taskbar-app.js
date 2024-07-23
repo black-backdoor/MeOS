@@ -13,7 +13,7 @@ class taskbarApp extends HTMLElement {
 
     connectedCallback() {
         this.render();
-        this.init();
+        this.addEventListener('click', this.open);
     }
 
     css() {
@@ -47,11 +47,10 @@ class taskbarApp extends HTMLElement {
         this.title = this.name;
     }
 
-    init() {
-        this.addEventListener('click', () => {
-            sendTaskbarOpen(this.name);
-        });
+    open() {
+        sendTaskbarOpen(this.name);
     }
+
 
     static get observedAttributes() {
         return ['name', 'icon'];
@@ -68,6 +67,9 @@ class taskbarApp extends HTMLElement {
     }
     get icon() {
         return this.getAttribute('icon');
+    }
+    set icon(value) {
+        this.setAttribute('icon', value);
     }
 }
 
