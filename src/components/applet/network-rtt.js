@@ -3,8 +3,8 @@ class NetworkRTT extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
 
-        this.title = 'Network Down';
-        this.speed = 0;  // in Ms
+        this.title = 'Network RTT';
+        this.speed = '?';
 
         this.render();
         this.init();
@@ -54,12 +54,18 @@ class NetworkRTT extends HTMLElement {
             <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" viewBox="0 0 24 24">
                 <path style="stroke-miterlimit:10;" d="M6 2v21M11 7 6 2 1 7M18 22V1M13 17l5 5 5-5"/>
             </svg>
-            <p>${this.speed} ms</p>
+            ${ typeof(this.speed) === 'number' ? `<p>${this.speed} ms</p>` : `<p>${this.speed}</p>` }
         `;
     }
 
     render() {
-        this.title = `RTT: ${this.speed} ms`;
+        if (this.speed === 'NaN') {
+            this.title = 'RTT monitoring not supported.';
+        } else if (this.speed === '?') {
+            this.title = 'Fetching RTT...';
+        } else {
+            this.title = `RTT: ${this.speed} ms`;
+        }
 
         this.shadowRoot.innerHTML = `
             <style>${this.css()}</style>
@@ -77,6 +83,9 @@ class NetworkRTT extends HTMLElement {
 
             update();
             setInterval(update, 30000);
+        } else {
+            this.speed = 'NaN';
+            this.render();
         }
     }
 
