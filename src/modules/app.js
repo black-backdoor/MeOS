@@ -2,7 +2,7 @@
 /* TASKBAR */
 
 function listenTaskbarOpen(name, callback) {
-    console.debug('[app.js] adding listener for', name);
+    console.info(`%c[app.js]%c adding taskbar:open event listener for %c${name}`, 'color: red', 'color: inherit', 'color: DodgerBlue');
 
     document.addEventListener('taskbar:open', function(e) {
         if (e.detail.name === name) {
@@ -14,11 +14,17 @@ function listenTaskbarOpen(name, callback) {
 function sendTaskbarOpen(name) {
     const event = new CustomEvent('taskbar:open', { detail: { name } });
     document.dispatchEvent(event);
+    console.debug(`%c[app.js]%c sending taskbar:open event for %c${name}`, 'color: red', 'color: inherit', 'color: DodgerBlue');
 }
 
 
 
 
-export default function() {};
 
-export { listenTaskbarOpen, sendTaskbarOpen };
+
+// Apps
+export { listenTaskbarOpen };
+
+
+// Components
+export { sendTaskbarOpen };
