@@ -11,7 +11,7 @@ Made by @black-backdoor
 `
 );
 
-/*
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // WELCOME NOTIFICATION (PUSHED TO DESKTOP)
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("welcome-notification", true);
     }
 });
-*/
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
