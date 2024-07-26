@@ -1,3 +1,16 @@
+import sendNotification from "../modules/notification.js";
+
+sendNotification(
+    "Welcome to MeOS!",
+    "This is a simple operating system built with HTML, CSS, and JavaScript.",
+    undefined,
+    "MeOS",
+    "/favicon.ico",
+    true
+); 
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
     if (localStorage && localStorage.getItem("fullscreenPopup") === null) {
         const html = `
