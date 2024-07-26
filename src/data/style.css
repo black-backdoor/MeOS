@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+#storage-info {
+    margin-bottom: 20px;
+}
+
+.storage-entries {
+    margin-bottom: 20px;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
