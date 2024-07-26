@@ -11,10 +11,12 @@
     <script src="/data/script.js" defer></script>
 
 
+    <!-- UI -->
+    <script src="/components/progress.js" type="module"></script>
+    <script src="/components/popup.js" type="module"></script>
+
+
     <!-- METRICS -->
-    <script src="/js/network.js" defer></script>
-    <script src="/js/performance.js" defer></script>
-    <script src="/js/batteryLog.js"></script>
     <script src="/js/storage.js"></script>
 
 
@@ -41,19 +43,23 @@
 </head>
 <body>
     <h1>Storage Manager</h1>
-    <div id="storage-info">
-        <p id="localStorageSize">localStorage: 0 KB</p>
-        <p id="sessionStorageSize">sessionStorage: 0 KB</p>
+    
+    <h3>Storage Usage</h3>
+    <div class="box">
+        <ui-progress id="localStorageProgress" bar-style="round" isIndeterminate label="localStorage"></ui-progress>
+        <ui-progress id="sessionStorageProgress" bar-style="round" isIndeterminate label="sessionStorage"></ui-progress>
     </div>
-    <button onclick="clearAllStorage()">Delete All Data</button>
-    <button onclick="showStorageEntries()">Show Storage Entries</button>
-    <div class="storage-entries">
-        <h2>localStorage Entries:</h2>
-        <pre id="localStorageEntries"></pre>
-    </div>
-    <div class="storage-entries">
-        <h2>sessionStorage Entries:</h2>
-        <pre id="sessionStorageEntries"></pre>
-    </div>
+
+    <button id="deleteAll">Delete All</button>
+
+    <template id="popupTemplate">
+        <desktop-popup_yes_no
+            id="sureDeleteAll"
+            position
+            icon="/assets/trash.svg"
+            message_title="Delete All"
+            message="Are you sure you want to delete all data?"
+        ></desktop-popup_yes_no>
+    </template>
 </body>
 </html>
