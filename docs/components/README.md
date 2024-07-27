@@ -23,6 +23,7 @@
 * `<applet-power></applet-power>` | power.js
 * `<applet-ram></applet-ram>` | ram.js
 * `<applet-sound></applet-sound>` | sound.js
+* `<applet-weather></applet-weather>` | weather.js
 * `<applet-wifi></applet-wifi>` | wifi.js
 
 
