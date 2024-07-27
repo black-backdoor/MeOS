@@ -121,7 +121,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row-reverse;  /* temp */
+    flex-direction: row-reverse;  /* temp (position applets to right) */
     padding: 0 8px;
     height: 50px;
 }
@@ -129,19 +129,20 @@
 #taskbar[position="bottom"] > * {
     height: 80%;
 }
+#taskbar[position="bottom"] > * > * {
+    height: 100%;
+}
 
 #taskbar[position="bottom"] .apps {
     width: unset;
 }
 
-#taskbar[position="bottom"] .applets * {
-    height: 100%;
-}
 
 
 
-/* ? ## DESIGN: CENTER ## */
-#taskbar[position="bottom"] .apps {
+
+/* ## DESIGN: CENTER ## */
+#taskbar[position="bottom"][design="center"] .apps {
     /* center the apps in the middle of the taskbar (ignoring other elements) */
     position: absolute;
     left: 50%;

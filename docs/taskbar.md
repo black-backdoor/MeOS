@@ -37,3 +37,4 @@ The taskbar can be designed by setting the `design` property in the HTML.
 #### Values
 * `None` (connected to the screen edge)
 * `float`
+* `center` + `position: bottom` (taskbar with apps in the center of the screen)
