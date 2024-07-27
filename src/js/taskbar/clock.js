@@ -2,9 +2,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     const showSeconds = false;
 
-    const dateElement = document.querySelector("#taskbar > .time > .date");
-    const timeElement = document.querySelector("#taskbar > .time > .time");
-    const timeTitleElement = document.querySelector("#taskbar > .time");
+    const dateElement = document.querySelector("#taskbar > .time-date > .date");
+    const timeElement = document.querySelector("#taskbar > .time-date > .time");
+    const timeTitleElement = document.querySelector("#taskbar > .time-date");
 
     setInterval(function () {
         const now = new Date();
