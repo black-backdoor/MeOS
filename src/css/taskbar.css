@@ -52,6 +52,11 @@
     display: none;
 }
 
+/* TIME & DATE */
+#taskbar .time-date {
+    display: none;
+}
+
 
 /* ##### FLOAT Variant ##### */
 #taskbar[design="float"] {
@@ -161,5 +166,9 @@
 
 
 #taskbar[position="bottom"][design="center"] .weather {
+    display: unset;
+}
+
+#taskbar[position="bottom"][design="center"] .time-date {
     display: unset;
 }
