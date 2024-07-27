@@ -42,7 +42,7 @@
 
 
 #taskbar .applets {
-    display: none;
+    display: flex;
 }
 
 
@@ -53,6 +53,10 @@
     width: unset;
     left: 50%;
     transform: translateX(-50%);
+}
+
+#taskbar[position="bottom"][design="float"] .applets {
+    display: none;
 }
 
 
@@ -107,4 +111,39 @@
 #taskbar[position="right"] .applets * {
     width: 100%;
     height: block;
+}
+
+
+
+
+/* ### BOTTOM Variant ### */
+#taskbar[position="bottom"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;  /* temp */
+    padding: 0 8px;
+    height: 50px;
+}
+
+#taskbar[position="bottom"] > * {
+    height: 80%;
+}
+
+#taskbar[position="bottom"] .apps {
+    width: unset;
+}
+
+#taskbar[position="bottom"] .applets * {
+    height: 100%;
+}
+
+
+
+/* ? ## DESIGN: CENTER ## */
+#taskbar[position="bottom"] .apps {
+    /* center the apps in the middle of the taskbar (ignoring other elements) */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
