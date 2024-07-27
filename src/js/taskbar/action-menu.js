@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const taskbarTime = document.querySelector('#taskbar section.time');
+    const taskbarTime = document.querySelector('#taskbar .time-date');
     const actionMenu = document.querySelector('#action-menu');
 
     taskbarTime.addEventListener('click', function() {
