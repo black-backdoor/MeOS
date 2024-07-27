@@ -1,7 +1,7 @@
 /*
-    Variants (add class to #menu-bar):
-    .float - floating menu bar
-    .minimal - minimal menu bar
+    Variants (design="float"):
+    float - floating menu bar
+    minimal - minimal menu bar
 */
 
 
@@ -77,14 +77,14 @@
 /* ##### Variants ##### */
 
 /* Float */
-#menu-bar.float {
+#menu-bar[design="float"] {
     margin: 6px;
     width: calc(100vw - 12px);
     border-radius: 12px;
 }
 
 /* Minimal */
-#menu-bar.minimal {
+#menu-bar[design="minimal"] {
     margin: 0;
     height: 36px;
     width: 100vw;
@@ -93,19 +93,19 @@
 }
 
 @media (prefers-color-scheme: light) {
-    #menu-bar.minimal {
+    #menu-bar[design="minimal"] {
         background-color: rgba(255, 255, 255, 10%);
     }
 }
 
 
-#menu-bar.minimal .container {
+#menu-bar[design="minimal"] .container {
     height: 100%;
     padding: 0;
     background-color: transparent;
 }
 
-#menu-bar.minimal .container.status {
+#menu-bar[design="minimal"] .container.status {
     display: none;
 }
 

@@ -10,6 +10,7 @@ class PowerApplet extends HTMLElement {
             :host {
                 display: block;
                 user-select: none;
+                position: relative;
 
                 --hover-color: rgba(255, 255, 255, 0.2);
                 --active-color: rgba(255, 255, 255, 0.4);
@@ -46,14 +47,14 @@ class PowerApplet extends HTMLElement {
             .menu {
                 display: none;
                 position: absolute;
-                top: 110%;
-                right: 0;
                 background: #333;
                 border-radius: 5px;
                 overflow: hidden;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 z-index: 1;
                 min-width: 140px;
+                top: 100%;
+                left: 0;
             }
 
             .menu.active {
@@ -118,7 +119,7 @@ class PowerApplet extends HTMLElement {
 
         button.addEventListener('click', () => {
             menu.classList.toggle('active');
-            this.adjustMenuPosition(menu);
+            this.adjustMenuPosition(menu, button);
         });
 
         window.addEventListener('click', (event) => {
@@ -126,7 +127,6 @@ class PowerApplet extends HTMLElement {
                 menu.classList.remove('active');
             }
         });
-
 
         hibernate.addEventListener('click', () => {
             console.log('Hibernate clicked');
@@ -147,17 +147,17 @@ class PowerApplet extends HTMLElement {
         });
     }
 
-    adjustMenuPosition(menu) {
+    adjustMenuPosition(menu, button) {
         const rect = menu.getBoundingClientRect();
         const viewWidth = window.innerWidth;
         const viewHeight = window.innerHeight;
 
         if (rect.right > viewWidth) {
-            menu.style.left = `${viewWidth - rect.right - 10}px`;
+            menu.style.left = `${viewWidth - rect.right - (button.clientWidth / 2)}px`;
         }
 
         if (rect.bottom > viewHeight) {
-            menu.style.top = `${viewHeight - rect.bottom - 10}px`;
+            menu.style.top = `${viewHeight - rect.bottom - (button.clientHeight / 2)}px`;
         }
     }
 }

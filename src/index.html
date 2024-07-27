@@ -43,6 +43,7 @@
 
 
     <!-- COMPONENTS -->
+    <script src="/components/popup.js" type="module"></script>
     <script src="/components/taskbar-app.js" rel="preload" type="module"></script>
 
     <!-- windows -->
@@ -88,7 +89,7 @@
 </head>
 <body>
     <!-- MENU BAR -->
-    <div id="menu-bar" class="float">
+    <div id="menu-bar" design="float">
         <!--
             Make sure to update the media query in the CSS file (menu-bar.css)
             when adding or removing items from the menu bar.
@@ -161,7 +162,7 @@
     </div>
 
     <!-- Taskbar -->
-    <div id="taskbar" class="">
+    <div id="taskbar" position="bottom" design="float">
         <div class="apps">
             <taskbar-app name="App Menu" icon="/assets/app-menu.svg"></taskbar-app>
             <div class="separator"></div>

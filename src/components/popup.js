@@ -38,15 +38,12 @@ class Popup extends HTMLElement {
                 }
             }
 
-
-
             :host {
                 color: var(--text-color);
                 background-color: var(--bg-color);
                 padding: 20px;
                 display: flex;
                 justify-content: center;
-                flex-wrap: wrap;
                 flex-direction: column;
                 border-radius: 16px;
                 height: 290px;
@@ -54,14 +51,12 @@ class Popup extends HTMLElement {
                 z-index: 6000;
             }
 
-
             :host([position]) {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
-            
 
             * { 
                 box-sizing: border-box;
@@ -69,24 +64,20 @@ class Popup extends HTMLElement {
                 margin: 0;
             }
 
-
             /* ICON */
             .icon-holder {
-                flex: 1;
-                user-select: none;
-                pointer-events: none;
+                flex-grow: 1;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                overflow: hidden;
             }
             
             .icon-holder img {
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                max-height: 100%;
+                max-width: 100%;
+                display: block;
             }
-
 
             /* TEXT */
             .text {
@@ -97,7 +88,6 @@ class Popup extends HTMLElement {
             h3 { font-size: 20px; margin-bottom: 10px; }
             p { font-size: 16px; }
             h3, p { width: 100%; }
-
 
             /* BUTTONS */
             .buttons {
@@ -122,6 +112,14 @@ class Popup extends HTMLElement {
 
             button.ok { background-color: var(--ok-color); color: var(--ok-text-color); }
             button.cancel { background-color: var(--cancel-color); color: var(--cancel-text-color); }
+
+
+            ${
+                this.icon ? '' : `
+                    .icon-holder { display: none; }
+                    :host { height: unset; }
+                `
+            }
         `;
     }
 
@@ -151,7 +149,6 @@ class Popup extends HTMLElement {
         this.shadowRoot.querySelector('.cancel').addEventListener('click', this.cancel);
     }
 
-
     close = () => {
         this.remove();
     }
@@ -166,7 +163,6 @@ class Popup extends HTMLElement {
         this.close();
     }
 
-    
     static get observedAttributes() {
         return ['icon', 'message_title', 'message'];
     }
@@ -175,15 +171,12 @@ class Popup extends HTMLElement {
         this.render();
     }
 
-
-
     get icon() {
         return this.getAttribute('icon');
     }
     set icon(value) {
         this.setAttribute('icon', value);
     }
-
 
     get message_title() {
         return this.getAttribute('message_title') || 'Title';
@@ -199,7 +192,6 @@ class Popup extends HTMLElement {
         this.setAttribute('message', value);
     }
 
-
     get ok_text() {
         return this.getAttribute('ok_text') || 'OK';
     }
@@ -213,14 +205,11 @@ class Popup extends HTMLElement {
     get cancel_text() {
         return this.getAttribute('cancel_text') || 'Cancel';
     }
-
 }
 
 customElements.define('desktop-popup', Popup);
 
-
 /* POPUP VARIANT */
-
 
 class PopupAskYesNo extends Popup {
     constructor() {
@@ -232,8 +221,6 @@ class PopupAskYesNo extends Popup {
 }
 customElements.define('desktop-popup_yes_no', PopupAskYesNo);
 
-
-
 class PopupInfo extends Popup {
     constructor() {
         super();
@@ -242,8 +229,6 @@ class PopupInfo extends Popup {
 }
 customElements.define('desktop-popup_info', PopupInfo);
 
-
-
 class PopupWarning extends Popup {
     constructor() {
         super();
@@ -251,8 +236,6 @@ class PopupWarning extends Popup {
     }
 }
 customElements.define('desktop-popup_warning', PopupWarning);
-
-
 
 class PopupError extends Popup {
     constructor() {

@@ -13,8 +13,8 @@
 - [`<chart-square></chart-square>` | chart-square.js](chart-square.md)
 
 
-### Applets `/components/applets`
-* `<applet-battery></applet-battery>` | battery.js
+### Applets `/components/applet`
+* [`<applet-battery></applet-battery>` | battery.js](applet/battery.md)
 * `<applet-clock></applet-clock>` | clock.js
 * `<applet-cpu></applet-cpu>` | cpu.js
 * `<applet-date></applet-date>` | date.js
@@ -22,6 +22,7 @@
 * `<applet-network_rtt></applet-network_rtt>` | network-rtt.js
 * `<applet-power></applet-power>` | power.js
 * `<applet-ram></applet-ram>` | ram.js
+* `<applet-sound></applet-sound>` | sound.js
 * `<applet-weather></applet-weather>` | weather.js
 * `<applet-wifi></applet-wifi>` | wifi.js
 
