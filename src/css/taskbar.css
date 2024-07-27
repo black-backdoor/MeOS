@@ -41,8 +41,15 @@
 }
 
 
+/* APPLETS */
 #taskbar .applets {
     display: flex;
+}
+
+
+/* WEATHER APPLET */
+#taskbar .weather {
+    display: none;
 }
 
 
@@ -121,7 +128,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row-reverse;  /* temp (position applets to right) */
     padding: 0 8px;
     height: 50px;
 }
@@ -138,6 +144,10 @@
 }
 
 
+/* hide power button */
+#taskbar[position="bottom"] .applets applet-power {
+    display: none;
+}
 
 
 
@@ -147,4 +157,9 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+
+
+#taskbar[position="bottom"][design="center"] .weather {
+    display: unset;
 }

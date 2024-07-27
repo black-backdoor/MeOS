@@ -38,6 +38,9 @@
     <script src="/components/applet/power.js" type="module"></script>
 
 
+    <script src="/components/applet/weather.js" type="module"></script>
+
+
     <!-- WIDGETS -->
     <script src="/components/calendar.js" rel="preload" type="module"></script>
 
@@ -162,7 +165,10 @@
     </div>
 
     <!-- Taskbar -->
-    <div id="taskbar" position="bottom" design="float">
+    <div id="taskbar" position="bottom" design="center">
+        <div class="weather">
+            <applet-weather></applet-weather>
+        </div>
         <div class="apps">
             <taskbar-app name="App Menu" icon="/assets/app-menu.svg"></taskbar-app>
             <div class="separator"></div>
