@@ -144,9 +144,15 @@
     height: 100%;
 }
 
+
 #taskbar[position="bottom"] .apps {
+    /* center the apps in the middle of the taskbar (ignoring other elements) */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     width: unset;
 }
+
 
 
 /* hide power button */
@@ -156,32 +162,22 @@
 
 
 
-/* ## DESIGN: CENTER ## */
-#taskbar[position="bottom"][design="center"] .apps {
-    /* center the apps in the middle of the taskbar (ignoring other elements) */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
 
-
-#taskbar[position="bottom"][design="center"] .weather {
+#taskbar[position="bottom"] .weather {
     display: unset;
 }
-
-#taskbar[position="bottom"][design="center"] .time-date {
-    display: unset;
-}
-
 
 
 /* ## TASKBAR TIME ## */
+#taskbar[position="bottom"] .time-date {
+    display: flex;
+}
+
 #taskbar .time-date {
     color: white;
     text-align: right;
     font-size: 14px;
 
-    display: flex !important;
     justify-content: center;
     flex-direction: column;
 

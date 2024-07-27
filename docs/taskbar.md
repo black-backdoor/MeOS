@@ -21,7 +21,7 @@ The taskbar can be positioned by setting the `position` property in the HTML.
 ```
 
 #### Values
-* `None` (bottom)
+* `bottom`
 * `left`
 * `right`
 
@@ -37,4 +37,3 @@ The taskbar can be designed by setting the `design` property in the HTML.
 #### Values
 * `None` (connected to the screen edge)
 * `float`
-* `center` + `position: bottom` (taskbar with apps in the center of the screen)
