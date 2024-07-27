@@ -23,7 +23,6 @@ class AppletDate extends HTMLElement {
                 color: var(--text-color);
                 gap: 5px;
                 user-select: none;
-                pointer-events: none;
             }
             :host * {
                 margin: 0;
@@ -55,6 +54,7 @@ class AppletDate extends HTMLElement {
     
         const text = `${day} ${month}`;
         this.shadowRoot.getElementById('date').textContent = text;
+        this.title = now.toLocaleString('default', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     }
 }
 
