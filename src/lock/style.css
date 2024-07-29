@@ -161,7 +161,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row-reverse;
+    flex-direction: row;
     
     position: absolute;
     padding-right: 10px;
