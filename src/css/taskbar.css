@@ -147,10 +147,17 @@
 
 #taskbar[position="bottom"] .apps {
     /* center the apps in the middle of the taskbar (ignoring other elements) */
+    /*
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     width: unset;
+    */
+
+    /* TEMP */
+    width: 60vw;
+    display: flex;
+    justify-content: center;
 }
 
 
