@@ -81,18 +81,18 @@
 
 
 
-/* VERTICAL MENU */
-.context-menu .vertical-section {
+/* HORIZONTAL SECTION */
+.context-menu .horizontal-section {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-.context-menu .vertical-section button {
+.context-menu .horizontal-section button {
     justify-content: center;
     width: 25%;
 }
-.context-menu .vertical-section button svg {
+.context-menu .horizontal-section button svg {
     width: 80%;
 }
 
