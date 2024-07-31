@@ -4,7 +4,7 @@ class NetworkDown extends HTMLElement {
         this.attachShadow({ mode: 'open' });
 
         this.title = 'Network Down';
-        this.speed = 0;  // in Mbps
+        this.speed = '?';
 
         this.render();
         this.init();
@@ -54,12 +54,19 @@ class NetworkDown extends HTMLElement {
             <svg xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" viewBox="0 0 24 24">
                 <path style="stroke-miterlimit:10;" d="M12 18.67V.5M4.35 11.02 12 18.67l7.65-7.65M4.35 22.5h15.3"/>
             </svg>
-            <p>${this.speed} Mbps</p>
+            ${ typeof(this.speed) === 'number' ? `<p>${this.speed} Mbps</p>` : `<p>${this.speed}</p>` }
         `;
     }
 
     render() {
-        this.title = `Down: ${this.speed} Mbps`;
+        if (this.speed === 'NaN') {
+            this.title = 'Download speed monitoring not supported.';
+        }
+        else if (this.speed === '?') {
+            this.title = 'Fetching download speed...';
+        } else {
+            this.title = `Down: ${this.speed} Mbps`;
+        }
 
         this.shadowRoot.innerHTML = `
             <style>${this.css()}</style>
@@ -77,6 +84,9 @@ class NetworkDown extends HTMLElement {
 
             update();
             setInterval(update, 30000);
+        } else {
+            this.speed = 'NaN';
+            this.render();
         }
     }
 
