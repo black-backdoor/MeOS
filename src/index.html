@@ -11,7 +11,9 @@
     <link rel="stylesheet" rel="preload" href="/css/desktop.css">
     <link rel="stylesheet" rel="preload" href="/css/taskbar.css">
 
-    <script src="/js/welcome.js"></script>
+    <script src="/js/console.js"></script>
+
+    <script src="/js/welcome.js" type="module"></script>
 
     <!-- MODULES -->
     <script src="/modules/share.js"></script>
@@ -52,11 +54,8 @@
     <link rel="stylesheet" href="/css/window-defaults.css">
     
     <!-- notifications -->
-    <!--
     <script src="/components/notifications.js" rel="preload" type="module"></script>
     <link rel="stylesheet" href="/css/push-notifications.css">
-    <script src="/js/notifications.js"></script>
-    -->
 
     <!--
     <link rel="stylesheet" href="/css/action-menu.css">
@@ -130,7 +129,7 @@
             <iframe src="/about/"></iframe>
         </app-window>
 
-        <div id="push-notifications" style="display: none;">
+        <div id="push-notifications">
             <!-- Notifications will be added here -->
         </div>
 

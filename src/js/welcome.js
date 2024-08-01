@@ -1,35 +1,17 @@
-console.log(
-`
- _____     _____ _____ 
-|     |___|     |   __|
-| | | | -_|  |  |__   |
-|_|_|_|___|_____|_____| 
+import sendNotification from "../modules/notification.js";
 
-Version: 3.18.3 
-Made by @black-backdoor
+if (localStorage && localStorage.getItem("welcome") === null) {
+    localStorage.setItem("welcome", true);
 
-`
-);
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    // WELCOME NOTIFICATION (PUSHED TO DESKTOP)
-    if (sessionStorage && sessionStorage.getItem("welcome-notification") === null) {
-        
-        sendNotification(
-            "Welcome to MeOS!",
-            "This is a simple operating system built with HTML, CSS, and JavaScript.",
-            undefined,
-            "MeOS",
-            "/favicon.ico",
-            true
-        ); 
-
-        sessionStorage.setItem("welcome-notification", true);
-    }
-});
-
+    sendNotification(
+        "Welcome to MeOS!",
+        "This is a simple operating system built with HTML, CSS, and JavaScript.",
+        undefined,
+        "MeOS",
+        "/favicon.ico",
+        true
+    ); 
+}    
 
 
 document.addEventListener("DOMContentLoaded", () => {
