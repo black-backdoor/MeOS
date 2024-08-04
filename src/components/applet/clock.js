@@ -23,7 +23,6 @@ class AppletClock extends HTMLElement {
                 color: var(--text-color);
                 gap: 5px;
                 user-select: none;
-                pointer-events: none;
             }
             :host * {
                 margin: 0;
@@ -53,6 +52,7 @@ class AppletClock extends HTMLElement {
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         this.shadowRoot.getElementById('time').textContent = `${hours}:${minutes}`;
+        this.title = `${hours}:${minutes}`;
     }
 }
 

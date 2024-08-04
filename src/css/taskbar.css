@@ -41,7 +41,19 @@
 }
 
 
+/* APPLETS */
 #taskbar .applets {
+    display: flex;
+}
+
+
+/* WEATHER APPLET */
+#taskbar .weather {
+    display: none;
+}
+
+/* TIME & DATE */
+#taskbar .time-date {
     display: none;
 }
 
@@ -53,6 +65,10 @@
     width: unset;
     left: 50%;
     transform: translateX(-50%);
+}
+
+#taskbar[position="bottom"][design="float"] .applets {
+    display: none;
 }
 
 
@@ -107,4 +123,74 @@
 #taskbar[position="right"] .applets * {
     width: 100%;
     height: block;
+}
+
+
+
+
+/* ### BOTTOM Variant ### */
+#taskbar[position="bottom"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 50px;
+}
+
+#taskbar[position="bottom"] > * {
+    height: 80%;
+}
+#taskbar[position="bottom"] > * > * {
+    height: 100%;
+}
+
+
+#taskbar[position="bottom"] .apps {
+    /* center the apps in the middle of the taskbar (ignoring other elements) */
+    /*
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: unset;
+    */
+
+    /* TEMP */
+    width: 60vw;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* hide power button */
+#taskbar[position="bottom"] .applets applet-power {
+    display: none;
+}
+
+
+
+
+#taskbar[position="bottom"] .weather {
+    display: unset;
+}
+
+
+/* ## TASKBAR TIME ## */
+#taskbar[position="bottom"] .time-date {
+    display: flex;
+}
+
+#taskbar .time-date {
+    color: white;
+    text-align: right;
+    font-size: 14px;
+
+    justify-content: center;
+    flex-direction: column;
+
+    user-select: none;
+}
+
+#taskbar .time-date * {
+    height: unset;
 }

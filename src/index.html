@@ -41,6 +41,11 @@
     <script src="/components/applet/power.js" type="module"></script>
 
 
+    <script src="/components/applet/weather.js" type="module"></script>
+
+    <script src="/js/taskbar/clock.js"></script>
+
+
     <!-- WIDGETS -->
     <script src="/components/calendar.js" rel="preload" type="module"></script>
 
@@ -57,10 +62,8 @@
     <script src="/components/notifications.js" rel="preload" type="module"></script>
     <link rel="stylesheet" href="/css/push-notifications.css">
 
-    <!--
     <link rel="stylesheet" href="/css/action-menu.css">
     <script src="/js/taskbar/action-menu.js"></script>
-    -->
     
     <script src="/js/context-menu.js"></script>
     <link rel="stylesheet" href="/css/context-menu.css">
@@ -133,7 +136,7 @@
             <!-- Notifications will be added here -->
         </div>
 
-        <div id="action-menu" style="display: none;">
+        <div id="action-menu">
             <div class="notifications scrollbar-slim">
                 <header>
                     <h3>Notifications</h3>
@@ -169,7 +172,10 @@
     </div>
 
     <!-- Taskbar -->
-    <div id="taskbar" position="bottom" design="float">
+    <div id="taskbar" position="bottom" design="center">
+        <div class="weather">
+            <applet-weather></applet-weather>
+        </div>
         <div class="apps">
             <taskbar-app name="App Menu" icon="/assets/app-menu.svg"></taskbar-app>
             <div class="separator"></div>
@@ -181,6 +187,11 @@
             <applet-sound></applet-sound>
             <applet-battery></applet-battery>
             <applet-power></applet-power>
+        </div>
+        <div class="time-date">
+            <!-- DISPLAY TIME -->
+            <div class="time">12:00</div>
+            <div class="date">20.01.2021</div>
         </div>
     </div>
 </body>

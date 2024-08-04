@@ -21,7 +21,7 @@ The taskbar can be positioned by setting the `position` property in the HTML.
 ```
 
 #### Values
-* `None` (bottom)
+* `bottom`
 * `left`
 * `right`
 
