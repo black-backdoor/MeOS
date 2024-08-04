@@ -34,27 +34,39 @@
             ]
         },
         {
-            "name": "About | MeOS",
+            "name": "MeOS - Data Dashboard",
+            "short_name": "Data",
+            "url": "/data/?source=pwa",
+            "icons": [
+                {
+                    "src": "/pwa/data.png",
+                    "sizes": "128x128",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "About",
             "short_name": "About",
             "url": "/about/?source=pwa"
         },
         {
-            "name": "Device Selector | MeOS",
+            "name": "Device Selector",
             "short_name": "Devices",
             "url": "/devices/?source=pwa"
         },
         {
-            "name": "Login | MeOS",
+            "name": "Login",
             "short_name": "Login",
             "url": "/lock/?source=pwa"
         },
         {
-            "name": "Reboot | MeOS",
+            "name": "Reboot",
             "short_name": "Reboot",
             "url": "/reboot/?source=pwa"
         },
         {
-            "name": "Update | MeOS",
+            "name": "Update",
             "short_name": "Update",
             "url": "/update/?source=pwa"
         }
