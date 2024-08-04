@@ -85,12 +85,31 @@ class PowerApplet extends HTMLElement {
                 padding-right: 5px;
                 fill: white;
             }
+
+
+
+            .updateDot {
+                display: none;
+                position: absolute;
+                top: 0;
+                /* right: 0; */
+                right: 4px;
+                width: 8px;
+                height: 8px;
+                background-color: #ff9b00;
+                border-radius: 50%;
+            }
+
+            :host(.updateAvailable) .updateDot {
+                display: block;
+            }
         `;
     }
 
     template() {
         return `
             <button id="powerButton" title="Power">
+                <div class="updateDot" title="Update available"></div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path d="M84.94 36.631a2.11 2.11 0 1 0-2.365 3.5 33.226 33.226 0 1 1-37.822.462 2.111 2.111 0 1 0-2.453-3.442 37.453 37.453 0 1 0 42.636-.52z"/><path d="M66.111 66.21V24.979a2.111 2.111 0 0 0-4.222 0V66.21a2.111 2.111 0 0 0 4.222 0z"/></svg>
             </button>
             <div class="menu" id="powerMenu">
@@ -144,6 +163,11 @@ class PowerApplet extends HTMLElement {
 
         lock.addEventListener('click', () => {
             window.location.href = '/lock/';
+        });
+
+        document.addEventListener('serviceWorkerUpdate', () => {
+            this.classList.add('updateAvailable');
+            console.debug('applet-power: Service Worker Update Available');
         });
     }
 
