@@ -87,9 +87,23 @@ class NetworkDown extends HTMLElement {
         } else {
             this.speed = 'NaN';
             this.render();
+            if(this.removeWhenUnsupported === true) {
+                this.remove();
+            }
         }
     }
 
+
+    set removeWhenUnsupported(value) {
+        if (value) {
+            this.setAttribute('remove-when-unsupported', '');
+        } else {
+            this.removeAttribute('remove-when-unsupported');
+        }
+    }
+    get removeWhenUnsupported() {
+        return this.hasAttribute('remove-when-unsupported');
+    }
 }
 
 customElements.define('applet-network_down', NetworkDown);
