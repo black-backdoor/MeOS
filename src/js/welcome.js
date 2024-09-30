@@ -10,7 +10,53 @@ if (localStorage && localStorage.getItem("welcome") === null) {
         "MeOS",
         "/favicon.ico",
         true
-    ); 
+    );
+
+
+    /* PLAYGROUND NOTIFICATIONS */    
+    setTimeout(() => {
+        sendNotification(
+            "example@admin.com received 2 new emails",
+            "Maintanance Report, Maintenance Invoice",
+            undefined,
+            "Mail",
+            undefined,
+            true
+        );
+    }, 2000);
+
+    setTimeout(() => {
+        sendNotification(
+            "New Version Available",
+            "New version of MeOS is available.",
+            undefined,
+            "MeOS",
+            "/favicon.ico",
+            true
+        );
+    }, 5000);
+
+    setTimeout(() => {
+        sendNotification(
+            "New Version Available",
+            "New version of Files is available.",
+            undefined,
+            "Files",
+            "/assets/apps/files.svg",
+            true
+        );
+    }, 6000);
+
+    setTimeout(() => {
+        sendNotification(
+            "Backup Completed",
+            "Your files have successfully been backed up to Google Drive.",
+            "/assets/apps/files-backup.svg",
+            "Files",
+            "/assets/apps/files.svg",
+            true
+        );
+    }, 15000);
 }    
 
 
