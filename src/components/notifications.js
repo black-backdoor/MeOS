@@ -182,7 +182,7 @@ class NotificationsApp extends HTMLElement {
 
             :host {
                 width: 100%;
-                padding: 10px 0;
+                /* padding: 10px 0; */
                 border-radius: 5px;
                 background-color: transparent;
 
@@ -310,6 +310,12 @@ class NotificationsPanel extends HTMLElement {
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
+
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
             }
 
             desktop-notification {
@@ -325,6 +331,12 @@ class NotificationsPanel extends HTMLElement {
 
 
     presetNotification(name, content, icon, app_name, app_icon) {
+        if (name === undefined) { name = 'Notification'; }
+        if (content === undefined) { content = 'This is a notification component'; }
+        if (icon === undefined) { icon = ''; }
+        if (app_name === undefined) { app_name = ''; }
+        if (app_icon === undefined) { app_icon = ''; }
+
         return `
             <desktop-notification 
                 name="${name}"
@@ -350,6 +362,8 @@ class NotificationsPanel extends HTMLElement {
         const apps = notifications.map(notification => notification.app_name);
         const uniqueApps = [...new Set(apps)];
 
+        console.log(uniqueApps);
+
         let html = ``;
 
         uniqueApps.forEach(app => {
@@ -358,6 +372,11 @@ class NotificationsPanel extends HTMLElement {
             appNotifications.forEach(notification => {
                 notificationHTML += this.presetNotification(notification.app_name, notification.content, notification.icon, notification.app_name, notification.app_icon);
             });
+
+            if (app === undefined) {
+                html += notificationHTML;
+                return;
+            }
 
             html += this.presetGroup(notificationHTML, app, appNotifications[0].app_icon);
         });
