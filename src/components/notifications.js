@@ -182,7 +182,7 @@ class NotificationsApp extends HTMLElement {
 
             :host {
                 width: 100%;
-                padding: 10px 0;
+                /* padding: 10px 0; */
                 border-radius: 5px;
                 background-color: transparent;
 
@@ -283,3 +283,113 @@ class NotificationsApp extends HTMLElement {
 }
 
 customElements.define('notifications-app', NotificationsApp);
+
+
+
+import { getNotifications } from "../modules/notification.js";
+
+class NotificationsPanel extends HTMLElement {
+    constructor() {
+        super();
+
+        this.attachShadow({ mode: 'open' });
+
+        this.name = this.getAttribute('name') ?? 'Notification';
+        this.icon = this.getAttribute('icon') ?? undefined;
+
+        this.render();
+    }
+
+    connectedCallback() {
+        this.render();
+    }
+
+    css() {
+        return `
+            :host {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
+            }
+
+            desktop-notification {
+                --bg-color: #393939;
+            }
+
+            notifications-app {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        `;
+    }
+
+
+    presetNotification(name, content, icon, app_name, app_icon) {
+        if (name === undefined) { name = 'Notification'; }
+        if (content === undefined) { content = 'This is a notification component'; }
+        if (icon === undefined) { icon = ''; }
+        if (app_name === undefined) { app_name = ''; }
+        if (app_icon === undefined) { app_icon = ''; }
+
+        return `
+            <desktop-notification 
+                name="${name}"
+                content="${content}"
+                icon="${icon ?? ''}"
+                app-name="${app_name}"
+                app-icon="${app_icon}"
+            ></desktop-notification>
+        `;
+    }
+
+    presetGroup(innerHTML, name, icon) {
+        return `
+            <notifications-app
+                name="${name}"
+                icon="${icon}"
+            >${innerHTML}</notifications-app>
+        `;        
+    }
+
+    content() {
+        const notifications = getNotifications();
+        const apps = notifications.map(notification => notification.app_name);
+        const uniqueApps = [...new Set(apps)];
+
+        console.log(uniqueApps);
+
+        let html = ``;
+
+        uniqueApps.forEach(app => {
+            const appNotifications = notifications.filter(notification => notification.app_name === app);            
+            let notificationHTML = '';
+            appNotifications.forEach(notification => {
+                notificationHTML += this.presetNotification(notification.app_name, notification.content, notification.icon, notification.app_name, notification.app_icon);
+            });
+
+            if (app === undefined) {
+                html += notificationHTML;
+                return;
+            }
+
+            html += this.presetGroup(notificationHTML, app, appNotifications[0].app_icon);
+        });
+
+        return html;
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+            <style>${this.css().trim()}</style>
+            ${this.content().trim()}
+        `;
+    }
+}
+
+customElements.define('notifications-panel', NotificationsPanel);
