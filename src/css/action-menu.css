@@ -52,25 +52,6 @@
 }
 
 
-/* LIST */
-#action-menu .notifications .list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* notification style */
-#action-menu .notifications desktop-notification {
-    --bg-color: #393939;
-}
-
-#action-menu .notifications .notification-list > desktop-notification {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-
-
 
 /* CALENDAR */
 #action-menu calendar-widget {

@@ -305,7 +305,22 @@ class NotificationsPanel extends HTMLElement {
     }
 
     css() {
-        return ``;
+        return `
+            :host {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            desktop-notification {
+                --bg-color: #393939;
+            }
+
+            notifications-app {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        `;
     }
 
 
