@@ -61,7 +61,6 @@ function saveNotification (data) {
     const notifications = getNotifications();
     notifications.push(data);
     setNotifications(notifications);
-    console.debug("Notification saved", data);
 }
 
 export { getNotifications };

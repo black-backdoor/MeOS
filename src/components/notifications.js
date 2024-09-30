@@ -298,6 +298,9 @@ class NotificationsPanel extends HTMLElement {
         this.icon = this.getAttribute('icon') ?? undefined;
 
         this.render();
+        setInterval(() => {
+            this.render();
+        }, 3000);
     }
 
     connectedCallback() {
@@ -361,9 +364,7 @@ class NotificationsPanel extends HTMLElement {
         const notifications = getNotifications();
         const apps = notifications.map(notification => notification.app_name);
         const uniqueApps = [...new Set(apps)];
-
-        console.log(uniqueApps);
-
+        
         let html = ``;
 
         uniqueApps.forEach(app => {
